@@ -1,0 +1,27 @@
+.body{
+    background-color: #a0ce4e;
+   
+}
+.header{
+    background-color: #7bb902;
+    height: 50px;
+}
+hr {
+    height: 10px;
+    background-color: white;
+    border-color: white;
+ 
+  }
+.bot{
+    background-color: #7bb902;
+    
+    flex:flex-end;
+    height: 50px;
+}
+footer{
+    background-color: #7bb902;
+    height:50px;
+}
+svg{
+    width: 50px;
+}
