@@ -9,19 +9,18 @@
 hr {
     height: 10px;
     background-color: white;
-    border-color: white;
- 
+    border-style: none;
   }
-.bot{
-    background-color: #7bb902;
-    
-    flex:flex-end;
-    height: 50px;
-}
+
 footer{
     background-color: #7bb902;
-    height:50px;
+    height:51px;
+    display: flex;
+    justify-content: space-around;
 }
 svg{
-    width: 50px;
+    fill:white;
+}
+svg:hover{
+    fill:black;
 }
