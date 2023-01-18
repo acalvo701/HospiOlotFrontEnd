@@ -10,6 +10,7 @@ import { CalendariComponent } from './projecte/components/calendari/calendari.co
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { HistorialComponent } from './projecte/components/historial/historial.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     DiaComponent,
     MesComponent,
     CalendariComponent,
+    HistorialComponent,
   ],
   imports: [
     BrowserModule,

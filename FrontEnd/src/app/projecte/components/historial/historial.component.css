@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.body{
+    background-color: #a0ce4e;
+   
+}
+.header{
+    background-color: #7bb902;
+    height: 50px;
+}
+hr {
+    height: 10px;
+    background-color: white;
+    border-style: none;
+  }
+
+footer{
+    background-color: #7bb902;
+    height:51px;
+    display: flex;
+    justify-content: space-around;
+}
+svg{
+    fill:white;
+}
+svg:hover{
+    fill:black;
+}
+
+.titol {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 5px;
+}
+
+.guardies {
+    display: grid;
+    justify-content: space-around;
+    align-items: center;
+    grid-template-columns: 32% 14% 24% 26%;
+    margin: 2%;
+    border-radius: 15px;
+    background-color: white;
+
+}
+.estat, .torn, .unitat, .dia {
+    text-align: center;
+}
+
+.mati {
+    display: flex;
+    justify-content: center;
+    background-color: yellow;
+    border: yellow solid;
+    border-radius: 15px;
+    width: 100%;
+    height: 40px;
+}
+
+.urgencies {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(233, 93, 93);
+    border: rgb(233, 93, 93) solid;
+    border-radius: 15px;
+    width: 100%;
+    height: 40px;
+}
+h1 {
+    font-size: 20px;
+}
+
+i {
+    color: green;
+    font-size: 30px;
+}
+
+.separador {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    height: 40%;
+    width: 96%;
+    margin: 2%;
+    border-radius: 15px;
+    background-color: grey;
+}
