@@ -1,0 +1,26 @@
+.body{
+    background-color: #a0ce4e;
+   
+}
+.header{
+    background-color: #7bb902;
+    height: 50px;
+}
+hr {
+    height: 10px;
+    background-color: white;
+    border-style: none;
+  }
+
+footer{
+    background-color: #7bb902;
+    height:51px;
+    display: flex;
+    justify-content: space-around;
+}
+svg{
+    fill:white;
+}
+svg:hover{
+    fill:black;
+}
