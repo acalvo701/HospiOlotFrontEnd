@@ -3,28 +3,50 @@
         
     </div>
     <hr>
-        <h1 class="titol">HISTORIAL DE GUÀRDIES</h1>
-        <div class="guardies">
-            <div class="dia">
-                <h1>21/10/2022</h1>
-            </div>
-            <div class="estat">
-                <h1>Feta:</h1>
-                <i class="fa-solid fa-check"></i>
-            </div>
-            <div class="torn">
-                <h1>Torns:</h1>
-                <div class="mati">
-                    <h2>Matí</h2>
+        <div class="cos">
+            <h1 class="titol">HISTORIAL DE GUÀRDIES</h1>
+            <div class="fons">
+                <div *ngFor="let guardia of guardies" class="guardies">
+                    <div class="diaCat">
+                        <h1><b>{{guardia.data}}</b></h1>
+                        <h2>{{guardia.categoria}}</h2>
+                    </div>
+                    <div class="dades">
+                        <div>
+                            <h1>Estat:</h1>
+                            <div class="estat">
+                                <h2 class="{{guardia.status}}">{{guardia.status}}</h2>
+                            </div>
+                        </div>
+                        <div class="torn">
+                            <h1>Torns:</h1>
+                            <div class="torn">
+                                <h2 class="{{guardia.torn}}">{{guardia.torn}}</h2>
+                            </div>
+                        </div>
+                        <div class="unitat">
+                            <h1>Unitat:</h1>
+                            <div *ngIf="guardia.unitat == 'ucies'" class="ucies">
+                                <h2>Ucies</h2>
+                            </div>
+                            <div *ngIf="guardia.unitat == 'unitat1'" class="unitat1">
+                                <h2>Unitat 1</h2>
+                            </div>
+                            <div *ngIf="guardia.unitat == 'unitat2'" class="unitat2">
+                                <h2>Unitat 2</h2>
+                            </div>
+                            <div *ngIf="guardia.unitat == 'unitat3'" class="unitat3">
+                                <h2>Unitat 3</h2>
+                            </div>
+                            <div *ngIf="guardia.unitat == 'unitat4'" class="unitat4">
+                                <h2>Unitat 4</h2>
+                            </div>
+                        </div>
+                        <hr class="separador">
+                        <br>
+                    </div>
                 </div>
             </div>
-            <div class="unitat">
-                <h1>Unitat:</h1>
-                <div class="urgencies">
-                    <h2>Urgències</h2>
-                </div>
-            </div>
-            <hr class="separador">
         </div>
     <hr>
     <footer>
