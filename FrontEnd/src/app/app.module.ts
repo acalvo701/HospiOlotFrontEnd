@@ -1,35 +1,34 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
+import {MaterialExampleModule} from '../material.module';
+
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatNativeDateModule} from '@angular/material/core';
+import {HttpClientModule} from '@angular/common/http';
+
 import { AppComponent } from './app.component';
-import { DiaComponent } from './projecte/components/dia/dia.component';
-import { MesComponent } from './projecte/components/mes/mes.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendariComponent } from './projecte/components/calendari/calendari.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MesComponent } from './projecte/components/mes/mes.component';
+import { DiaComponent } from './projecte/components/dia/dia.component';
 import { HistorialComponent } from './projecte/components/historial/historial.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DiaComponent,
-    MesComponent,
-    CalendariComponent,
-    HistorialComponent,
-  ],
+  declarations: [AppComponent, MesComponent, CalendariComponent, DiaComponent, HistorialComponent],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MatCardModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MaterialExampleModule,
+    ReactiveFormsModule
+    
+    
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

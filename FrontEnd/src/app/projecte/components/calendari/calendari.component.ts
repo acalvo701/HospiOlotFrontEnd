@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatCard } from '@angular/material/card';
 
 @Component({
   selector: 'app-calendari',
   templateUrl: './calendari.component.html',
   styleUrls: ['./calendari.component.css']
 })
-export class CalendariComponent implements OnInit {
+export class CalendariComponent {
   selected!: Date | null;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
