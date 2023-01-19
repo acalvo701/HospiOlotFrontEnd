@@ -9,7 +9,7 @@
                 <div *ngFor="let guardia of guardies" class="guardies">
                     <div class="diaCat">
                         <h1><b>{{guardia.data}}</b></h1>
-                        <h2>{{guardia.categoria}}</h2>
+                        <h2><b>{{guardia.categoria}}</b></h2>
                     </div>
                     <div class="dades">
                         <div>
@@ -18,28 +18,16 @@
                                 <h2 class="{{guardia.status}}">{{guardia.status}}</h2>
                             </div>
                         </div>
-                        <div class="torn">
+                        <div>
                             <h1>Torns:</h1>
                             <div class="torn">
                                 <h2 class="{{guardia.torn}}">{{guardia.torn}}</h2>
                             </div>
                         </div>
-                        <div class="unitat">
+                        <div>
                             <h1>Unitat:</h1>
-                            <div *ngIf="guardia.unitat == 'ucies'" class="ucies">
-                                <h2>Ucies</h2>
-                            </div>
-                            <div *ngIf="guardia.unitat == 'unitat1'" class="unitat1">
-                                <h2>Unitat 1</h2>
-                            </div>
-                            <div *ngIf="guardia.unitat == 'unitat2'" class="unitat2">
-                                <h2>Unitat 2</h2>
-                            </div>
-                            <div *ngIf="guardia.unitat == 'unitat3'" class="unitat3">
-                                <h2>Unitat 3</h2>
-                            </div>
-                            <div *ngIf="guardia.unitat == 'unitat4'" class="unitat4">
-                                <h2>Unitat 4</h2>
+                            <div class="unitat">
+                            <h2 class="{{guardia.unitat}}">{{guardia.unitat}}</h2>
                             </div>
                         </div>
                         <hr class="separador">

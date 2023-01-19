@@ -44,7 +44,7 @@ svg:hover {
     justify-content: center;
     color: white;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 26px;
     margin: 2%;
 }
 
@@ -65,7 +65,7 @@ h2 {
     display: grid;
     justify-content: space-around;
     text-align: center;
-    grid-template-columns: 30% 33% 33%;
+    grid-template-columns: 30% 28% 28%;
 
 }
 
@@ -73,7 +73,9 @@ h2 {
 .torn,
 .unitat,
 .diaCat {
+    justify-content: center;
     text-align: center;
+    align-items: center;
 }
 
 .pendent {
@@ -83,7 +85,8 @@ h2 {
     border: rgb(250, 213, 30) solid;
     border-radius: 15px;
     width: 100%;
-    height: 40px;
+    height: 30px;
+    padding-top: 5px;
 }
 
 .assignada {
@@ -93,7 +96,13 @@ h2 {
     border: rgba(87, 218, 69, 0.718) solid;
     border-radius: 15px;
     width: 100%;
-    height: 40px;
+    height: 30px;
+    padding-top: 5px;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: normal;
 }
 
 .estat h2 {
@@ -106,9 +115,19 @@ h2 {
 
 .torn h2 {
     display: inline-block;
+    justify-content: center;
+    align-items: center;
 }
 
 .torn h2:first-letter {
+    text-transform: uppercase;
+}
+
+.unitat h2 {
+    display: inline-block;
+}
+
+.unitat h2:first-letter {
     text-transform: uppercase;
 }
 
@@ -119,8 +138,8 @@ h2 {
     border: yellow solid;
     border-radius: 15px;
     width: 100%;
-    height: 40px;
-}
+    height: 30px;
+    padding-top: 5px;}
 
 .nit {
     display: flex;
@@ -129,7 +148,8 @@ h2 {
     border: rgb(142, 120, 229) solid;
     border-radius: 15px;
     width: 100%;
-    height: 40px;
+    height: 30px;
+    padding-top: 5px;
 }
 
 .ucies {
@@ -138,8 +158,10 @@ h2 {
     background-color: rgb(232, 124, 124);
     border: rgb(233, 93, 93) solid;
     border-radius: 15px;
-    width: 100%;
-    height: 40px;
+    width: 98%;
+    height: 30px;
+    padding-top: 5px;
+
 }
 
 .unitat1 {
@@ -148,9 +170,9 @@ h2 {
     background-color: rgb(168, 200, 254);
     border: rgb(149, 188, 255) solid;
     border-radius: 15px;
-    width: 100%;
-    height: 40px;
-}
+    width: 98%;
+    height: 30px;
+    padding-top: 5px;}
 
 .unitat2 {
     display: flex;
@@ -158,9 +180,9 @@ h2 {
     background-color: rgb(125, 171, 251);
     border: rgb(97, 154, 251) solid;
     border-radius: 15px;
-    width: 100%;
-    height: 40px;
-}
+    width: 98%;
+    height: 30px;
+    padding-top: 5px;}
 
 .unitat3 {
     display: flex;
@@ -168,9 +190,9 @@ h2 {
     background-color: rgb(63, 132, 251);
     border: rgb(36, 115, 251) solid;
     border-radius: 15px;
-    width: 100%;
-    height: 40px;
-}
+    width: 98%;
+    height: 30px;
+    padding-top: 5px;}
 
 .unitat4 {
     display: flex;
@@ -178,9 +200,9 @@ h2 {
     background-color: rgb(24, 107, 250);
     border: rgb(0, 94, 255) solid;
     border-radius: 15px;
-    width: 100%;
-    height: 40px;
-}
+    width: 98%;
+    height: 30px;
+    padding-top: 5px;}
 
 h1 {
     font-size: 20px;
