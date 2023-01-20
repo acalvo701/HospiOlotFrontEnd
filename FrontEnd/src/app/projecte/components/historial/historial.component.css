@@ -61,6 +61,10 @@ h2 {
     overflow-y: scroll;
 }
 
+.categoria {
+    text-transform: uppercase;
+}
+
 .dades {
     display: grid;
     justify-content: space-around;
@@ -107,6 +111,7 @@ h2 {
 
 .estat h2 {
     display: inline-block;
+    text-transform: lowercase;
 }
 
 .estat h2:first-letter {
@@ -115,8 +120,7 @@ h2 {
 
 .torn h2 {
     display: inline-block;
-    justify-content: center;
-    align-items: center;
+    text-transform: lowercase;
 }
 
 .torn h2:first-letter {
@@ -125,6 +129,7 @@ h2 {
 
 .unitat h2 {
     display: inline-block;
+    text-transform: lowercase;
 }
 
 .unitat h2:first-letter {

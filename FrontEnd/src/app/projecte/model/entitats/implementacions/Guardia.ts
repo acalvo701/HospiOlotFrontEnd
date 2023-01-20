@@ -1,14 +1,14 @@
 export class Guardia{
-    data: string;
+    dia: string;
     categoria: string;
-    status: string;
+    estat: string;
     torn: string;
     unitat: string;
 
-    constructor(data: string, categoria: string, status: string, torn: string, unitat: string) {
-        this.data = data;
+    constructor(dia: string, categoria: string, estat: string, torn: string, unitat: string) {
+        this.dia = dia;
         this.categoria = categoria;
-        this.status = status;
+        this.estat = estat;
         this.torn = torn;
         this.unitat = unitat;
     }

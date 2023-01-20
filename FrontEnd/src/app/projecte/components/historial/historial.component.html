@@ -8,26 +8,26 @@
             <div class="fons">
                 <div *ngFor="let guardia of guardies" class="guardies">
                     <div class="diaCat">
-                        <h1><b>{{guardia.data}}</b></h1>
-                        <h2><b>{{guardia.categoria}}</b></h2>
+                        <h1><b>{{guardia.dia}}</b></h1>
+                        <h2 class="categoria"><b>{{guardia.categoria}}</b></h2>
                     </div>
                     <div class="dades">
                         <div>
                             <h1>Estat:</h1>
                             <div class="estat">
-                                <h2 class="{{guardia.status}}">{{guardia.status}}</h2>
+                                <h2 class="{{passarMinuscules(guardia.estat)}}">{{guardia.estat}}</h2>
                             </div>
                         </div>
                         <div>
                             <h1>Torns:</h1>
                             <div class="torn">
-                                <h2 class="{{guardia.torn}}">{{guardia.torn}}</h2>
+                                <h2 class="{{passarMinuscules(guardia.torn)}}">{{guardia.torn}}</h2>
                             </div>
                         </div>
                         <div>
                             <h1>Unitat:</h1>
                             <div class="unitat">
-                            <h2 class="{{guardia.unitat}}">{{guardia.unitat}}</h2>
+                            <h2 class="{{passarMinuscules(guardia.unitat)}}">{{guardia.unitat}}</h2>
                             </div>
                         </div>
                         <hr class="separador">
