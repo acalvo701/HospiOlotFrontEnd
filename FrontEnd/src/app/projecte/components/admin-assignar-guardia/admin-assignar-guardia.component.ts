@@ -7,13 +7,13 @@ import { AdminApiService } from '../../model/services/admin/admin-api';
   styleUrls: ['./admin-assignar-guardia.component.css']
 })
 export class AdminAssignarGuardiaComponent {
-   treba
+  //  treba
   constructor(private httpClient: AdminApiService) { 
 
     this.httpClient.getAllTreballadors().subscribe(
       response => {
         console.log(response);
-        this.treballadors = response.historial;
+        // this.treballadors = response.historial;
       }
     )
   }

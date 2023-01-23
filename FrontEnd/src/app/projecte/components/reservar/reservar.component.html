@@ -1,20 +1,40 @@
 <p>reservar works!</p>
- <!-- 
-<div *ngFor="let categoria of this.guardiesReformades">
+
+<div *ngFor="let categoria of this.guardiesReformades |keyvalue">
 {{categoria.key}}
-<div *ngFor="let unitat of categoria |keyvalue">
+<div *ngFor="let unitat of categoria.value |keyvalue">
     {{unitat.key}}
 
-   <div *ngFor="let torn of unitat |keyvalue">
-        {{log(torn.key)}}
+    <div *ngFor="let torn of unitat.value |keyvalue">
+        
+       {{torn.value.nom}}
        
-        <div *ngFor="let final of torn.value as Object">
+       {{torn.value.guardia.id}}
+       {{torn.value.guardia.id}}
+       {{torn.value.guardia.id}}
+       <button (click) = 'reservarGuardia(torn.value.guardia.id)'>RESERVAR</button>
+        <!-- <div *ngFor="let final of unitat[torn] ">
 
 
-        </div> 
+        </div>  -->
      </div>
 </div>
 </div>
 
+<div>
+<h4>Les meves guàrdies</h4>
 
- -->
+<div *ngFor="let guardia of lesMevesGuardies">
+    <div>
+       <p>{{guardia.categoria}} - {{guardia.unitat}} - {{guardia.torn}}</p> 
+        <p>{{guardia.pl</p>
+    </div>
+    <div>
+
+        <!-- <button (click)="cancelarGuardia(idGuardia")></button> -->
+    </div>
+</div>
+
+</div>
+
+
