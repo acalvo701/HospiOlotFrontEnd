@@ -10,7 +10,8 @@ import { GuardiaApiService } from '../../model/services/guardia/guardia-api.serv
 })
 export class ReservarComponent {
   guardies: Array<Guardia> = [];
-  guardiesReformades: {};
+  guardiesReformades:reformat = {};
+  lesMevesGuardies: Array<Guardia> = [];
   @Input() dia: Date; // decorate the property with @Input()
 
 
@@ -28,6 +29,13 @@ export class ReservarComponent {
 
       }
     )
+
+    this.httpClient.getGuardiesByDayFromTreballador(dia).subscribe(
+      response => {
+        this.lesMevesGuardies = response.guardies;
+        console.log(this.lesMevesGuardies);
+      }
+    )
   }
  
   log(variable:any){
@@ -35,18 +43,6 @@ export class ReservarComponent {
 
   }
   tractarGuardies() {
-
-    interface reformat {
-      [key: string]: {
-        [key: string]: {
-          [key: string]: {
-            nom: string,
-            guardiaf: Guardia,
-          },
-        }
-
-      }
-    };
 
     let reformado = {} as reformat;
 
@@ -65,7 +61,7 @@ export class ReservarComponent {
       
       reformado[categoria][unitat][torn] = {
         nom: torn,
-        guardiaf: guardia,
+        guardia: guardia,
       }
 
 
@@ -78,5 +74,31 @@ export class ReservarComponent {
 
   }
 
+  reservarGuardia(idGuardia:string){
+    this.httpClient.reservarGuardia(idGuardia).subscribe(
+      response => {
+        console.log(response);
+        this.guardies = response.guardies;
 
+        if (this.guardies && this.guardies.length > 0) {
+
+          this.guardiesReformades = this.tractarGuardies();
+        }
+
+      }
+    )
+
+  }
 }
+
+interface reformat {
+  [key: string]: {
+    [key: string]: {
+      [key: string]: {
+        nom: string,
+        guardia: Guardia,
+      },
+    }
+
+  }
+};
