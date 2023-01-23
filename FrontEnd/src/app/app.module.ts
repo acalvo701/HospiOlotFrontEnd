@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {MaterialExampleModule} from '../material.module';
-
+import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
@@ -13,10 +13,11 @@ import { CalendariComponent } from './projecte/components/calendari/calendari.co
 import { MesComponent } from './projecte/components/mes/mes.component';
 import { DiaComponent } from './projecte/components/dia/dia.component';
 import { HistorialComponent } from './projecte/components/historial/historial.component';
+import { ReservarComponent } from './projecte/components/reservar/reservar.component';
 
 
 @NgModule({
-  declarations: [AppComponent, MesComponent, CalendariComponent, DiaComponent, HistorialComponent],
+  declarations: [AppComponent, MesComponent, CalendariComponent, DiaComponent, HistorialComponent, ReservarComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -24,7 +25,8 @@ import { HistorialComponent } from './projecte/components/historial/historial.co
     HttpClientModule,
     MatNativeDateModule,
     MaterialExampleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule,
     
     
   ],

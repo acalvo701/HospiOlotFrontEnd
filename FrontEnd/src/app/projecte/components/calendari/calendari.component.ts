@@ -7,5 +7,5 @@ import { MatCard } from '@angular/material/card';
   styleUrls: ['./calendari.component.css']
 })
 export class CalendariComponent {
-  selected!: Date | null;
+  selected: Date = new Date();
 }
