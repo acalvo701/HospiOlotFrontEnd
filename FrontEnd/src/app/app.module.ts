@@ -14,10 +14,12 @@ import { MesComponent } from './projecte/components/mes/mes.component';
 import { DiaComponent } from './projecte/components/dia/dia.component';
 import { HistorialComponent } from './projecte/components/historial/historial.component';
 import { ReservarComponent } from './projecte/components/reservar/reservar.component';
+import { NavbarComponent } from './projecte/components/navbar/navbar.component';
+import { AdminAssignarGuardiaComponent } from './projecte/components/admin-assignar-guardia/admin-assignar-guardia.component';
 
 
 @NgModule({
-  declarations: [AppComponent, MesComponent, CalendariComponent, DiaComponent, HistorialComponent, ReservarComponent],
+  declarations: [AppComponent, MesComponent, CalendariComponent, DiaComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

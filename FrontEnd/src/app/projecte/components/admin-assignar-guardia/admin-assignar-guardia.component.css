@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    background-color: #a0ce4e;
+    height: 100vh;
+}
+
+.header {
+    background-color: #7bb902;
+    height: 8%;
+}
+
+hr {
+    height: 2%;
+    background-color: white;
+    border-style: none;
+}
+
+.cos {
+    height: 78%;
+}
+
+.titol {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 26px;
+    margin: 2%;
+}
+
+h1,
+h2 {
+    margin: 0;
+}
+
+.fons {
+    margin: 2%;
+    border-radius: 15px;
+    background-color: white;
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+.centre {
+    text-align: center;
+}

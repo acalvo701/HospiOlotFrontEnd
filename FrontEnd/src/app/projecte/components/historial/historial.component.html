@@ -1,43 +1,41 @@
 <div class="body">
     <div class="header">
-        
+
     </div>
     <hr>
-        <div class="cos">
-            <h1 class="titol">HISTORIAL DE GUÀRDIES</h1>
-            <div class="fons">
-                <div *ngFor="let guardia of guardies" class="guardies">
-                    <div class="diaCat">
-                        <h1><b>{{guardia.dia}}</b></h1>
-                        <h2 class="categoria"><b>{{guardia.categoria}}</b></h2>
+    <div class="cos">
+        <h1 class="titol">HISTORIAL DE GUÀRDIES</h1>
+        <div class="fons">
+            <div *ngFor="let guardia of guardies" class="guardies">
+                <div class="diaCat">
+                    <h1><b>{{guardia.dia}}</b></h1>
+                    <h2 class="categoria"><b>{{guardia.categoria}}</b></h2>
+                </div>
+                <div class="dades">
+                    <div>
+                        <h1>Estat:</h1>
+                        <div class="estat">
+                            <h2 class="{{passarMinuscules(guardia.estat)}}">{{guardia.estat}}</h2>
+                        </div>
                     </div>
-                    <div class="dades">
-                        <div>
-                            <h1>Estat:</h1>
-                            <div class="estat">
-                                <h2 class="{{passarMinuscules(guardia.estat)}}">{{guardia.estat}}</h2>
-                            </div>
+                    <div>
+                        <h1>Torns:</h1>
+                        <div class="torn">
+                            <h2 class="{{passarMinuscules(guardia.torn)}}">{{guardia.torn}}</h2>
                         </div>
-                        <div>
-                            <h1>Torns:</h1>
-                            <div class="torn">
-                                <h2 class="{{passarMinuscules(guardia.torn)}}">{{guardia.torn}}</h2>
-                            </div>
-                        </div>
-                        <div>
-                            <h1>Unitat:</h1>
-                            <div class="unitat">
+                    </div>
+                    <div>
+                        <h1>Unitat:</h1>
+                        <div class="unitat">
                             <h2 class="{{passarMinuscules(guardia.unitat)}}">{{guardia.unitat}}</h2>
-                            </div>
                         </div>
-                        <hr class="separador">
-                        <br>
                     </div>
+                    <hr class="separador">
+                    <br>
                 </div>
             </div>
         </div>
+    </div>
     <hr>
-   
+    <app-navbar></app-navbar>
 </div>
-
-

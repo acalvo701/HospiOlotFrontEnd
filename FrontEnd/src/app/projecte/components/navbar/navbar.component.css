@@ -1,0 +1,15 @@
+footer {
+    background-color: #7bb902;
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+svg {
+    fill: white;
+}
+
+svg:hover {
+    fill: black;
+}
