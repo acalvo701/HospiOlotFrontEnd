@@ -1,0 +1,19 @@
+<p>reservar works!</p>
+
+<div *ngFor="let categoria of this.guardiesReformades">
+{{categoria.key}}
+<div *ngFor="let unitat of categoria |keyvalue">
+    {{unitat.key}}
+
+    <!-- <div *ngFor="let torn of unitat |keyvalue">
+        {{log(torn.key)}}
+       
+        <div *ngFor="let final of torn.value as Object">
+
+
+        </div> 
+     </div> -->
+</div>
+</div>
+
+

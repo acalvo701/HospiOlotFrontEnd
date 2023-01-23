@@ -10,8 +10,12 @@ export class GuardiaApiService {
   constructor(private http: HttpClient) { }
   getHistoryTreballador(idTreballador: number):Observable<any> {
     const requestOptions = this.createHeader();
-    const json = {idTreballador: 8};
     return this.http.get('http://172.24.4.61:4000/guardiatreballador/getHistoryTreballador?idTreballador='+idTreballador, requestOptions);
+  }
+
+  getGuardiesByDay(data: string):Observable<any>{
+    const requestOptions = this.createHeader();
+    return this.http.get('http://172.24.4.61:4000/guardia/getGuardiesByDay?data='+data, requestOptions);
   }
   private createHeader() {
     const header = {
