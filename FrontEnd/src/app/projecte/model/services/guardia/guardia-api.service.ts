@@ -17,6 +17,16 @@ export class GuardiaApiService {
     const requestOptions = this.createHeader();
     return this.http.get('http://172.24.4.61:4000/guardia/getGuardiesByDay?data='+data, requestOptions);
   }
+
+  reservarGuardia(idGuardia:string,idTreballador:string = "8"):Observable<any>{
+    const requestOptions = this.createHeader();
+    return this.http.post('http://172.24.4.61:4000/guardiatreballador/bookGuardia?idGuardia='+idGuardia+'&idTreballador='+idTreballador, requestOptions);
+  }
+
+  getGuardiesByDayFromTreballador(dia:string,idTreballador:string = "8"):Observable<any>{
+    const requestOptions = this.createHeader();
+    return this.http.get('http://172.24.4.61:4000/guardiatreballador/getGuardiesByDayFromTreballador?dia='+dia+'&idTreballador='+idTreballador, requestOptions);
+  }
   private createHeader() {
     const header = {
         'Access-Control-Allow-Origin':'*',

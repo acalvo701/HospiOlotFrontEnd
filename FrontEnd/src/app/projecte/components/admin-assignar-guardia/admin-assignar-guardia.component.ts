@@ -9,6 +9,7 @@ import { AdminApiService } from '../../model/services/admin/admin-api';
   templateUrl: './admin-assignar-guardia.component.html',
   styleUrls: ['./admin-assignar-guardia.component.css']
 })
+
 export class AdminAssignarGuardiaComponent implements OnInit {
 
   treballadors: Array<Treballador> = [];
@@ -26,6 +27,7 @@ export class AdminAssignarGuardiaComponent implements OnInit {
       }
     )
   }
+
 
   ngOnInit(): void {
     this.guardiaForm = this.fb.group({
@@ -50,9 +52,9 @@ export class AdminAssignarGuardiaComponent implements OnInit {
   }
 
   assignarGuardia() {
-    
 
-    this.httpClient.insertarGuardiaTreballadorAdmin(this.guardiaForm.get("idTreballador")?.value,this.guardiaForm.get("idGuardia")?.value,this.guardiaForm.get("estat")?.value).subscribe(
+
+    this.httpClient.insertarGuardiaTreballadorAdmin(this.guardiaForm.get("idTreballador")?.value, this.guardiaForm.get("idGuardia")?.value, this.guardiaForm.get("estat")?.value).subscribe(
       response => {
         console.log(response);
         this.guardies = response.guardies;
