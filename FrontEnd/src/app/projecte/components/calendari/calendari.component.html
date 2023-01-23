@@ -1,7 +1,5 @@
 <mat-card class="demo-inline-calendar-card">
-    <mat-calendar [(selected)]="selected" ></mat-calendar>
+    <mat-calendar  [(selected)]="selected" (selectedChange)=initialize()></mat-calendar>
 </mat-card>
-
-<p>Selected date: {{selected | date:'yyyy-MM-dd'}}</p>
 
 <app-reservar [dia]="selected"></app-reservar>

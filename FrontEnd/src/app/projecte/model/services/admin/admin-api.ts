@@ -21,6 +21,7 @@ export class AdminApiService {
 
   insertarGuardiaTreballadorAdmin(idTreballador:string, idGuardia:string, estat:string):Observable<any> {
     const requestOptions = this.createHeader();
+    let json = {};
     return this.http.post(`http://172.24.4.61:4000/guardiatreballador/insertarGuardiaTreballadorAdmin`, json, requestOptions);
   }
 

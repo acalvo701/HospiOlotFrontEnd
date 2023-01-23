@@ -1,0 +1,39 @@
+.mb-0>a {
+    display: block;
+    position: relative;
+}
+
+.mb-0>a:after {
+    content: "\f078";
+    /* fa-chevron-down */
+    font-family: 'FontAwesome';
+    position: absolute;
+    right: 0;
+}
+
+.mb-0>a[aria-expanded="true"]:after {
+    content: "\f077";
+    /* fa-chevron-up */
+}
+
+.btn-cancelar{
+    color: #fff;
+    background-color: #5500FF;
+    border-color: #5500FF;
+}
+
+.btn-reservar{
+    color: #fff;
+    background-color: #FFA700;
+    border-color:#FFA700;
+}
+
+.carta-guardia{
+    display: flex;
+    justify-content: space-between;
+}
+
+.carta-guardia-esquerra{
+    display: flex;
+    flex-direction: column;
+}
