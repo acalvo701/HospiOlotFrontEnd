@@ -20,7 +20,7 @@ hr {
 }
 
 .cos {
-    height: 78%;
+    height: 77%;
 }
 
 
@@ -42,7 +42,7 @@ h2 {
     margin: 2%;
     border-radius: 15px;
     background-color: white;
-    max-height: 70vh;
+    max-height: 60vh;
     overflow-y: scroll;
 }
 
@@ -206,10 +206,16 @@ h1 {
 .separador {
     grid-column-start: 1;
     grid-column-end: 4;
-    height: 40%;
+    height: 8px;
     width: 96%;
     margin: 2%;
     border-radius: 15px;
     background-color: grey;
-    margin-bottom: 4%;
+    margin-bottom: 20px;
+}
+@media(max-width:768px) {
+    .fons {
+        max-height: 70vh;
+        overflow-y: scroll;
+    }
 }

@@ -6,39 +6,44 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GuardiaApiService {
+  IP: string;
 
-  constructor(private http: HttpClient) { }
-  getHistoryTreballador(idTreballador: number):Observable<any> {
-    const requestOptions = this.createHeader();
-    return this.http.get('http://172.24.4.61:4000/guardiatreballador/getHistoryTreballador?idTreballador='+idTreballador, requestOptions);
+  constructor(private http: HttpClient) {
+    this.IP = "172.24.4.61";
   }
 
-  getGuardiesByDay(data: string):Observable<any>{
+  getHistoryTreballador(idTreballador: number): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.get('http://172.24.4.61:4000/guardia/getGuardiesByDay?data='+data, requestOptions);
+    return this.http.get(`http://${this.IP}:4000/guardiatreballador/getHistoryTreballador?idTreballador=` + idTreballador, requestOptions);
   }
 
-  reservarGuardia(idGuardia:string,idTreballador:string = "8"):Observable<any>{
+  getGuardiesByDay(data: string): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.post('http://172.24.4.61:4000/guardiatreballador/bookGuardia?idGuardia='+idGuardia+'&idTreballador='+idTreballador, requestOptions);
+    return this.http.get(`http://${this.IP}:4000/guardia/getGuardiesByDay?data=` + data, requestOptions);
   }
 
-  getGuardiesByDayFromTreballador(dia:string,idTreballador:string = "8"):Observable<any>{
+  reservarGuardia(idGuardia: string, idTreballador: string = "8"): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.get('http://172.24.4.61:4000/guardiatreballador/getGuardiesByDayFromTreballador?dia='+dia+'&idTreballador='+idTreballador, requestOptions);
+    return this.http.post(`http://${this.IP}:4000/guardiatreballador/bookGuardia?idGuardia=` + idGuardia + '&idTreballador=' + idTreballador, requestOptions);
   }
 
-  cancelarGuardia(idGuardia:string,idTreballador:string = "8"):Observable<any>{
+  getGuardiesByDayFromTreballador(dia: string, idTreballador: string = "8"): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.post('http://172.24.4.61:4000/guardiatreballador/cancelGuardia?idGuardia='+idGuardia+'&idTreballador='+idTreballador, requestOptions);
+    return this.http.get(`http://${this.IP}:4000/guardiatreballador/getGuardiesByDayFromTreballador?dia=` + dia + '&idTreballador=' + idTreballador, requestOptions);
   }
+
+  cancelarGuardia(idGuardia: string, idTreballador: string = "8"): Observable<any> {
+    const requestOptions = this.createHeader();
+    return this.http.post('http://172.24.4.61:4000/guardiatreballador/cancelGuardia?idGuardia=' + idGuardia + '&idTreballador=' + idTreballador, requestOptions);
+  }
+
   private createHeader() {
     const header = {
-        'Access-Control-Allow-Origin':'*',
-        'Content-Type':'application/json',
-        'Accept':'application/json',
-        'Accept-Control-Allow-Headers': 'Origin,Content-Type,Accept,Authorization',
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Control-Allow-Headers': 'Origin,Content-Type,Accept,Authorization',
     }
-    return { headers: new HttpHeaders(header)}
-}
+    return { headers: new HttpHeaders(header) }
+  }
 }

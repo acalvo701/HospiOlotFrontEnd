@@ -1,0 +1,40 @@
+<h2 class="centre">Crear Guàrdia</h2>
+<form [formGroup]="this.crearGuardiaForm">
+    <section class="left">
+        <div class="input-container">
+            <label><b>Categoria:</b></label>
+            <select formControlName="categoria">
+                <option selected></option>
+                <option *ngFor="let categoria of categories">{{ categoria.nom }}
+                </option>
+            </select>
+        </div>
+        <div class="input-container">
+            <label><b>Unitat:</b></label>
+            <select formControlName="unitat">
+                <option selected></option>
+                <option *ngFor="let unitat of unitats">{{ unitat.nom }}
+                </option>
+            </select>
+        </div>
+            <div class="input-container">
+                <label><b>Torn:</b></label>
+                <select formControlName="torn">
+                    <option selected></option>
+                    <option *ngFor="let torn of torns">{{ torn.nom }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-container">
+                <label><b>Data:</b></label>
+                <input type="date" formControlName="dataGuardia">
+            </div>
+            <div class="input-container">
+                <label><b>Número de Places:</b></label>
+                <input type="number" min="1" formControlName="numPlaces">
+            </div>        
+        <div class="send-container">
+            <button type="button" [disabled]="!this.crearGuardiaForm.valid" (click)="crearGuardia()">Crear</button>
+        </div>
+    </section>
+</form>

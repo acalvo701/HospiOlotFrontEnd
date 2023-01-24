@@ -1,0 +1,32 @@
+<h2 class="centre">Canviar Estat Guàrdia</h2>
+<form [formGroup]="this.estatGuardiaForm">
+    <section class="left">
+        <div class="input-container">
+            <label><b>Data:</b></label>
+            <input type="date" formControlName="dataGuardia" (change)="getDataEntrada()">
+        </div>
+        <div *ngIf="ocult === false">
+            <div class="input-container">
+                <label><b>Guàrdia:</b></label>
+                    <select formControlName="idGuardia">
+                        <option *ngFor="let guardia of guardies" value="{{ guardia.id }}">{{ guardia.categoria }} ➤ {{
+                            guardia.unitat }} ➤ {{ guardia.torn }}</option>
+                    </select>
+            </div>
+        
+            <div class="input-container">
+                <label><b>Estat:</b></label>
+                <select formControlName="estat">
+                    <option selected></option>
+                    <option>ACTIU</option>
+                    <option>INACTIU</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="send-container">
+            <button type="button" [disabled]="!this.estatGuardiaForm.valid" (click)="estatGuardia()"
+                >Canviar</button>
+        </div>
+    </section>
+</form>

@@ -15,11 +15,21 @@ import { HistorialComponent } from './projecte/components/historial/historial.co
 import { ReservarComponent } from './projecte/components/reservar/reservar.component';
 import { NavbarComponent } from './projecte/components/navbar/navbar.component';
 import { AdminAssignarGuardiaComponent } from './projecte/components/admin-assignar-guardia/admin-assignar-guardia.component';
+<<<<<<< HEAD
 import { LoginComponent } from './projecte/components/login/login.component';
 
 
 @NgModule({
   declarations: [AppComponent, MesComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, LoginComponent],
+=======
+import { AdminCrearGuardiaComponent } from './projecte/components/admin-crear-guardia/admin-crear-guardia.component';
+import { AdminEstatGuardiaComponent } from './projecte/components/admin-estat-guardia/admin-estat-guardia.component';
+import { AdminMainScreenComponent } from './projecte/components/admin-main-screen/admin-main-screen.component';
+
+
+@NgModule({
+  declarations: [AppComponent, MesComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent],
+>>>>>>> fbf0d03d0ee6eff7dd82b667377aab4199382e6c
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
