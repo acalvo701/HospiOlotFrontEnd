@@ -12,12 +12,7 @@
 .header {
     background-color: #7bb902;
     height: 8%;
-}
-
-hr {
-    height: 2%;
-    background-color: white;
-    border-style: none;
+    border-bottom: 2vh solid white;
 }
 
 .cos {
@@ -60,4 +55,13 @@ h1 {
 }
 .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
     border-color: #51b53f;
+}
+
+button:disabled {
+    opacity: 0.3;
+    cursor: default !important;
+    
+    &:hover {
+        background-color: #a5d051 !important;
+    }
 }

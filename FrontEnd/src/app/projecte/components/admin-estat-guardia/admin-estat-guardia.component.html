@@ -27,6 +27,8 @@
         <div class="send-container">
             <button type="button" [disabled]="!this.estatGuardiaForm.valid" (click)="estatGuardia()"
                 >Canviar</button>
+            <br>
+                {{ valid ? valid : error }}
         </div>
     </section>
 </form>
