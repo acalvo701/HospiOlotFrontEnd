@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.body {
+    background-color: #a0ce4e;
+    height: 100vh;
+}
+
+.header {
+    background-color: #7bb902;
+    height: 8%;
+}
+
+hr {
+    height: 2%;
+    background-color: white;
+    border-style: none;
+}
+
+.cos {
+    height: 78%;
+}
+
+.titol {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 26px;
+    margin: 2%;
+}
+
+h1,
+h2 {
+    margin: 0;
+}
+
+.fons {
+    margin: 2%;
+    border-radius: 15px;
+    background-color: white;
+    max-height: 70vh;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+.centre {
+    text-align: center;
+}
+.mdc-tab__ripple::before, .mat-mdc-tab .mat-ripple-element, .mat-mdc-tab-header-pagination .mat-ripple-element, .mat-mdc-tab-link .mat-ripple-element {
+    background-color: #51b53f;
+}
+.mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+    color: black;
+}
+.mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
+    border-color: #51b53f;
+}

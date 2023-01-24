@@ -1,48 +1,42 @@
-<div class="body">
-    <div class="header">
-
-    </div>
-    <hr>
-    <div class="cos">
-        <h1 class="titol">ADMINISTRACIÓ</h1>
-        <div class="fons">
-            <h2 class="centre">Assignar Guàrdia</h2>
-            <form class="centre" [formGroup]="this.guardiaForm">
-                <label><b>Treballador:</b>
-                <select>
-                    <option selected></option>
-                    <option *ngFor="let treballador of treballadors" value="{{ treballador.id }}" formControlName="idTreballador">{{ treballador.nom }}
-                    </option>
-                </select>
-            </label>
-                <br>
-                <label><b>Data:</b>
-                <input type="date" formControlName="dataGuardia" (change)="getDataEntrada()">
-                </label>
-                <br>
-                <div *ngIf="dataGuardia">
-                    <label><b>Guàrdia:</b>
-                    <select>
-                        <option *ngFor="let guardia of guardies" value="{{ guardia.id }}" formControlName="idGuardia">{{ guardia.categoria }} ➤ {{
-                            guardia.unitat }} ➤ {{ guardia.torn }}</option>
-                    </select>
-                    </label>
-                    <br>
-                    <br>
-                    <br>
-                    <label><b>Estat:</b>
-                    <select formControlName="estat">
-                        <option selected></option>
-                        <option>ASSIGNADA</option>
-                        <option>PENDENT</option>
-                        <option>CANCELADA</option>
-                    </select>
-                    </label>
-                </div>
-                <button type="button" (click)="assignarGuardia()"></button>
-            </form>
+<h2 class="centre">Assignar Guàrdia</h2>
+<form [formGroup]="this.assignarGuardiaForm">
+    <section class="left">
+        <div class="input-container">
+            <label><b>Treballador:</b></label>
+            <select formControlName="idTreballador">
+                <option selected></option>
+                <option *ngFor="let treballador of treballadors" value="{{ treballador.id }}">{{ treballador.nom
+                    }}
+                </option>
+            </select>
         </div>
-    </div>
-    <hr>
-    <app-navbar></app-navbar>
-</div>
+        <div class="input-container">
+            <label><b>Data:</b></label>
+            <input type="date" formControlName="dataGuardia" (change)="getDataEntrada()">
+        </div>
+        <div *ngIf="ocult === false">
+            <div class="input-container">
+                <label><b>Guàrdia:</b></label>
+                <select formControlName="idGuardia">
+                    <option *ngFor="let guardia of guardies" value="{{ guardia.id }}">{{ guardia.categoria }} ➤
+                        {{
+                        guardia.unitat }} ➤ {{ guardia.torn }}</option>
+                </select>
+            </div>
+            <div class="input-container">
+                <label><b>Estat:</b></label>
+                <select formControlName="estat">
+                    <option selected></option>
+                    <option>ASSIGNADA</option>
+                    <option>PENDENT</option>
+                    <option>CANCELADA</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="send-container">
+            <button type="button" [disabled]="!this.assignarGuardiaForm.valid" (click)="assignarGuardia()"
+                >Assignar</button>
+        </div>
+    </section>
+</form>

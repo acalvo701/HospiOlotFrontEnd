@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Guardia } from '../../model/entitats/implementacions/Guardia';
+import { GuardiaTreballador } from '../../model/entitats/implementacions/GuardiaTreballador';
 import { Treballador } from '../../model/entitats/implementacions/Treballador';
 import { AdminApiService } from '../../model/services/admin/admin-api';
 
 @Component({
   selector: 'app-admin-assignar-guardia',
   templateUrl: './admin-assignar-guardia.component.html',
-  styleUrls: ['./admin-assignar-guardia.component.css']
+  styleUrls: ['./admin-assignar-guardia.component.scss']
 })
 
 export class AdminAssignarGuardiaComponent implements OnInit {
+  assignarGuardiaForm: FormGroup;
 
   treballadors: Array<Treballador> = [];
   guardies: Array<Guardia> = [];
-  dataGuardia: Date;
 
-  guardiaForm: FormGroup;
+  dataGuardia: Date;
+  ocult: boolean = true;
 
   constructor(private httpClient: AdminApiService, private fb: FormBuilder) {
 
@@ -28,18 +30,19 @@ export class AdminAssignarGuardiaComponent implements OnInit {
     )
   }
 
-
   ngOnInit(): void {
-    this.guardiaForm = this.fb.group({
-      dataGuardia: [null],
-      guardia: [null],
-      estat: [null]
+    this.assignarGuardiaForm = this.fb.group({
+      idTreballador: ['', Validators.required],
+      dataGuardia: ['', Validators.required],
+      idGuardia: ['', Validators.required],
+      estat: ['', Validators.required]
     })
   }
 
   getDataEntrada() {
-    this.dataGuardia = this.guardiaForm.get("dataGuardia")?.value;
+    this.dataGuardia = this.assignarGuardiaForm.get("dataGuardia")?.value;
     this.selectGuardies();
+    this.ocult = false;
   }
 
   selectGuardies() {
@@ -53,12 +56,15 @@ export class AdminAssignarGuardiaComponent implements OnInit {
 
   assignarGuardia() {
 
+   let assignarGuardia = new GuardiaTreballador(this.assignarGuardiaForm.get("idTreballador")?.value, this.assignarGuardiaForm.get("idGuardia")?.value, this.assignarGuardiaForm.get("estat")?.value);
 
-    this.httpClient.insertarGuardiaTreballadorAdmin(this.guardiaForm.get("idTreballador")?.value, this.guardiaForm.get("idGuardia")?.value, this.guardiaForm.get("estat")?.value).subscribe(
+    this.httpClient.insertarGuardiaTreballadorAdmin(assignarGuardia).subscribe(
       response => {
         console.log(response);
         this.guardies = response.guardies;
       }
     )
+    this.ocult = true;
+    this.assignarGuardiaForm.reset();
   }
 }
