@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import moment from 'moment';
 import { Guardia } from '../../model/entitats/implementacions/Guardia';
 import { GuardiaApiService } from '../../model/services/guardia/guardia-api.service';
@@ -10,38 +10,42 @@ import { GuardiaApiService } from '../../model/services/guardia/guardia-api.serv
 })
 export class ReservarComponent {
   guardies: Array<Guardia> = [];
-  guardiesReformades:reformat = {};
+  guardiesReformades: reformat = {};
   lesMevesGuardies: Array<Guardia> = [];
   @Input() dia: Date; // decorate the property with @Input()
+  
 
 
   constructor(private httpClient: GuardiaApiService) {
-    let dia = (moment(this.dia)).format('YYYY-MM-DD')
+    this.initialize();
+
+  }
+
+
+  initialize(){
+    let dia = (moment(this.dia)).format('YYYY-MM-DD');
     this.httpClient.getGuardiesByDay(dia).subscribe(
       response => {
-        console.log(response);
         this.guardies = response.guardies;
-
-        if (this.guardies && this.guardies.length > 0) {
-
-          this.guardiesReformades = this.tractarGuardies();
-        }
-
+        this.guardiesReformades = this.tractarGuardies();
+        this.getLesMevesGuardies();
       }
     )
+   
+  }
 
+  getLesMevesGuardies() {
+    let dia = (moment(this.dia)).format('YYYY-MM-DD')
     this.httpClient.getGuardiesByDayFromTreballador(dia).subscribe(
       response => {
-        this.lesMevesGuardies = response.guardies;
-        console.log(this.lesMevesGuardies);
+        this.lesMevesGuardies = (response.guardies);
+        
+        console.log(this.guardies);
       }
     )
   }
- 
-  log(variable:any){
-    console.log(variable);
 
-  }
+ 
   tractarGuardies() {
 
     let reformado = {} as reformat;
@@ -51,14 +55,14 @@ export class ReservarComponent {
       let unitat: string = guardia.unitat;
       let torn: string = guardia.torn;
 
-      if(reformado[categoria]==undefined){
+      if (reformado[categoria] == undefined) {
         reformado[categoria] = {}
       }
-      
-      if(reformado[categoria][unitat] == undefined){
+
+      if (reformado[categoria][unitat] == undefined) {
         reformado[categoria][unitat] = {}
       }
-      
+
       reformado[categoria][unitat][torn] = {
         nom: torn,
         guardia: guardia,
@@ -67,14 +71,11 @@ export class ReservarComponent {
 
 
     });
-    console.log(Object.entries(reformado));
+
     return reformado;
-
-
-
   }
 
-  reservarGuardia(idGuardia:string){
+  reservarGuardia(idGuardia: string) {
     this.httpClient.reservarGuardia(idGuardia).subscribe(
       response => {
         console.log(response);
@@ -84,10 +85,44 @@ export class ReservarComponent {
 
           this.guardiesReformades = this.tractarGuardies();
         }
-
+        this.getLesMevesGuardies();
       }
     )
 
+  }
+
+  guardiaReservada(idGuardia:string){
+    return this.lesMevesGuardies.find(guardia => guardia.id === idGuardia) != undefined;
+
+  }
+
+  getPersonesApuntades(idGuardia:string){
+    let guardiaTrobada = this.lesMevesGuardies.find(guardia => guardia.id === idGuardia);
+    if(guardiaTrobada != undefined){
+
+      return guardiaTrobada.personesApuntades;
+    }
+
+    return 0;
+
+
+  }
+
+  cancelarGuardia(idGuardia: string) {
+    this.httpClient.cancelarGuardia(idGuardia).subscribe(
+      response => {
+        console.log(response);
+        
+        this.getLesMevesGuardies();
+      }
+    )
+
+  
+  }
+
+
+  log(variable: any) {
+    console.log(variable);
   }
 }
 

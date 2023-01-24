@@ -11,7 +11,6 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CalendariComponent } from './projecte/components/calendari/calendari.component';
 import { MesComponent } from './projecte/components/mes/mes.component';
-import { DiaComponent } from './projecte/components/dia/dia.component';
 import { HistorialComponent } from './projecte/components/historial/historial.component';
 import { ReservarComponent } from './projecte/components/reservar/reservar.component';
 import { NavbarComponent } from './projecte/components/navbar/navbar.component';
@@ -22,7 +21,7 @@ import { AdminMainScreenComponent } from './projecte/components/admin-main-scree
 
 
 @NgModule({
-  declarations: [AppComponent, MesComponent, CalendariComponent, DiaComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent],
+  declarations: [AppComponent, MesComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
