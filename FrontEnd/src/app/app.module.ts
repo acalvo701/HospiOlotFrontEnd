@@ -15,10 +15,11 @@ import { HistorialComponent } from './projecte/components/historial/historial.co
 import { ReservarComponent } from './projecte/components/reservar/reservar.component';
 import { NavbarComponent } from './projecte/components/navbar/navbar.component';
 import { AdminAssignarGuardiaComponent } from './projecte/components/admin-assignar-guardia/admin-assignar-guardia.component';
+import { LoginComponent } from './projecte/components/login/login.component';
 
 
 @NgModule({
-  declarations: [AppComponent, MesComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent],
+  declarations: [AppComponent, MesComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, LoginComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

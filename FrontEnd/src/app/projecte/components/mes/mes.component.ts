@@ -14,7 +14,6 @@ export const MY_FORMATS = {
   }
 };
 
-
 @Component({
   selector: 'app-mes',
   templateUrl: './mes.component.html',

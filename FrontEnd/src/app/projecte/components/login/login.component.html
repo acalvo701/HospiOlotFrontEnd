@@ -1,33 +1,25 @@
-
-<div onmousemove="this.getCursorPosition(event)">
+<div>
   <div class="wrapper">
     <main>
       <section>
         <div class="face">
-          <img src="https://assets.codepen.io/9277864/PF.png" alt="Face" widht="250" height="250" />
-          <div class="eye-cover1">
-            <div id="eyes1"></div>
-          </div>
-
-          <div class="eye-cover2">
-            <div id="eyes2"></div>
-          </div>
+          <div class="bm_container" id="icon-container-female_nurse"></div>
+          <!-- <img src="assets/loginImage.png"> -->
+          <h1>IMATGE HOSPIOLOT</h1>
         </div>
-        <div class="login-container">
+        <div class="">
           <div class="email-login">
-            <div class="login-h-container">
-              <h1>Login to your account</h1>
-              <p>Don’t have an account? <a href="#">Sign up Free!</a></p>
-            </div>
-            <form>
-              <label for="email">
-                <input id="email" name="email" type="email" placeholder="" autocomplete="off">
-                <span id="span-email">Email</span>
-              </label>
-              <label for="password">
-                <input id="password" name="password" type="password" placeholder="">
-                <span id="span-password">Password</span>
-              </label>
+
+            <form (ngSubmit)="onSubmit()" #usuariForm="ngForm">
+              <div class="form-group">
+                <label for="dni" class="form-label">Dni</label>
+                  <input id="dni" class="form-control" type="text" [(ngModel)]="treballador.dni" type="text" autocomplete="on" name="dni" required>
+              </div>
+              <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input id="password" class="form-control" type="password" [(ngModel)]="treballador.password" name="password" required>
+              </div>
+              {{treballador.dni}}
               <div class="recovery">
                 <div>
                   <input type="checkbox" id="remember" name="remember">
@@ -35,19 +27,24 @@
                 </div>
                 <a href="">Forgot Password?</a>
               </div>
-              <input type="submit" value="Login with Email">
-            </form>
+
+
+              <button [disabled]="!usuariForm.form.valid" type="submit" class="btn btn-green">Iniciar sessió</button>
+            </form >
           </div>
         </div>
+
+
       </section>
-      <div class="vector-1"></div>
-      <div class="vector-2"></div>
+      <div class="vector-1">
+      </div>
+
+      <div class="vector-2">
+      </div>
+
       <div class="vector-3"></div>
+
     </main>
-    <footer>
-      <small>Created by <a href="https://twitter.com/intent/follow?screen_name=TanGravam" target="_top">@TanGravam</a></small>
-    </footer>
+
   </div>
 </div>
-
-
