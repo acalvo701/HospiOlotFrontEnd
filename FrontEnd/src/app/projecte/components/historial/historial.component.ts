@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import moment from 'moment';
 import { Subscription } from 'rxjs';
 import { Guardia } from '../../model/entitats/implementacions/Guardia';
 import { GuardiaApiService } from '../../model/services/guardia/guardia-api.service';
@@ -25,6 +26,12 @@ export class HistorialComponent implements OnDestroy{
   passarMinuscules(string: string): string {
     return string.toLowerCase();
   }
+
+  dataFlip (dateString:string) :string {
+    var momentVariable = moment(dateString, 'YYYY-MM-DD');  
+    return momentVariable.format('DD-MM-YYYY');   
+    
+    }
 
 
 }

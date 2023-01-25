@@ -11,6 +11,7 @@
 .header {
     background-color: #7bb902;
     height: 8%;
+    border-bottom: 2vh solid white;
 }
 
 hr {
@@ -45,6 +46,9 @@ h2 {
     max-height: 60vh;
     overflow-y: scroll;
 }
+::-webkit-scrollbar {
+    display: none;
+}
 
 .categoria {
     text-transform: uppercase;
@@ -54,8 +58,7 @@ h2 {
     display: grid;
     justify-content: space-around;
     text-align: center;
-    grid-template-columns: 30% 28% 28%;
-
+    grid-template-columns: 28% 28% 28%;
 }
 
 .estat,
@@ -212,10 +215,13 @@ h1 {
     border-radius: 15px;
     background-color: grey;
     margin-bottom: 20px;
+    opacity: 100;
 }
 @media(max-width:768px) {
     .fons {
         max-height: 70vh;
-        overflow-y: scroll;
+    }
+    .dades {
+        grid-template-columns: 30% 28% 28%;
     }
 }

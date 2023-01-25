@@ -2,13 +2,12 @@
     <div class="header">
 
     </div>
-    <hr>
     <div class="cos">
         <h1 class="titol">HISTORIAL DE GUÀRDIES</h1>
         <div class="fons">
             <div *ngFor="let guardia of guardies" class="guardies">
                 <div class="diaCat">
-                    <h1><b>{{guardia.dia}}</b></h1>
+                    <h1><b>{{dataFlip(guardia.dia)}}</b></h1>
                     <h2 class="categoria"><b>{{guardia.categoria}}</b></h2>
                 </div>
                 <div class="dades">
