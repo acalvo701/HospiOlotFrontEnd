@@ -19,9 +19,10 @@ import { AdminCrearGuardiaComponent } from './projecte/components/admin-crear-gu
 import { AdminEstatGuardiaComponent } from './projecte/components/admin-estat-guardia/admin-estat-guardia.component';
 import { AdminMainScreenComponent } from './projecte/components/admin-main-screen/admin-main-screen.component';
 import { LoginComponent } from './projecte/components/login/login.component';
+import { AdminModificarEsquemaComponent } from './projecte/components/admin-modificar-esquema/admin-modificar-esquema.component';
 
 @NgModule({
-  declarations: [AppComponent, MesComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent],
+  declarations: [AppComponent, MesComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

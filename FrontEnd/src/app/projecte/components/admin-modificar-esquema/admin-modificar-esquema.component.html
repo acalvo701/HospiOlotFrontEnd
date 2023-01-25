@@ -1,0 +1,59 @@
+<h2 class="centre">Modificar Esquema</h2>
+<form [formGroup]="this.modificarEsquemaForm">
+    <section class="left">
+        <table>
+            <thead>
+                <th>Categoria</th>
+                <th>Unitat</th>
+                <th>Torn</th>
+                <th>Número Places</th>
+                <th>Estat</th>
+            </thead>
+            <tbody>
+                
+                <tr *ngFor="let guardia of guardiesEsquema">
+                    <td>
+                        <div class="input-container">
+                            <select formControlName="categoria">
+                                <option *ngFor="let categoria of categories" [selected]="guardia.categoria == categoria.nom">{{categoria.nom}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <select formControlName="unitat">
+                                <option *ngFor="let unitat of unitats" [selected]="guardia.unitat == unitat.nom">{{unitat.nom}}</option>
+                            </select>
+                            </div>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <select formControlName="torn">
+                                <option *ngFor="let torn of torns" [selected]="guardia.torn == torn.nom">{{torn.nom}}</option>
+                            </select>
+                            </div>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <input  value="{{guardia.numeroPlaces}}" formControlName="numeroPlaces" id="places" min="0">
+                            {{guardia.numeroPlaces}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <select formControlName="estat">
+                                <option  [selected]="guardia.estat == 'ACTIU'">ACTIU</option>
+                                <option  [selected]="guardia.estat == 'INACTIU'">INACTIU</option>
+                            </select>
+                            </div>
+                    </td>
+                    <td>
+                        <div class="send-container">
+                            <button  type="button" [disabled]="!this.modificarEsquemaForm.valid" (click)="modificarEsquema(guardia.id)" value="{{guardia.id}}">Editar</button>
+                        </div>    
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</form>

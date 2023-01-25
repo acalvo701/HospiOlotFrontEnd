@@ -48,13 +48,13 @@ export class AdminCrearGuardiaComponent implements OnInit {
       unitat: ['', Validators.required],
       torn: ['', Validators.required],
       dataGuardia: ['', Validators.required],
-      numPlaces: ['', Validators.required],
+      numeroPlaces: ['', Validators.required],
     })
   }
 
   crearGuardia() {
 
-    let creacioGuardia = new Guardia('', this.crearGuardiaForm.get("dataGuardia")?.value, this.crearGuardiaForm.get("categoria")?.value, 'ACTIU', this.crearGuardiaForm.get("torn")?.value, this.crearGuardiaForm.get("unitat")?.value, this.crearGuardiaForm.get("numPlaces")?.value);
+    let creacioGuardia = new Guardia('', this.crearGuardiaForm.get("dataGuardia")?.value, this.crearGuardiaForm.get("categoria")?.value, 'ACTIU', this.crearGuardiaForm.get("torn")?.value, this.crearGuardiaForm.get("unitat")?.value, this.crearGuardiaForm.get("numeroPlaces")?.value);
 
     this.httpClient.insertGuardia(creacioGuardia).subscribe(
       response => {

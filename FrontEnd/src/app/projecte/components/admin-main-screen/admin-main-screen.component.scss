@@ -40,6 +40,10 @@ h2 {
     max-height: 70vh;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 h1 {
     font-size: 20px;
 }

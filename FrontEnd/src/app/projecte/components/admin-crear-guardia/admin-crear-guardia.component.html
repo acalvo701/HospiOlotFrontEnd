@@ -31,7 +31,7 @@
             </div>
             <div class="input-container">
                 <label><b>Número de Places:</b></label>
-                <input type="number" min="1" formControlName="numPlaces">
+                <input type="number" min="0" formControlName="numeroPlaces">
             </div>        
         <div class="send-container">
             <button type="button" [disabled]="!this.crearGuardiaForm.valid" (click)="crearGuardia()">Crear</button>
