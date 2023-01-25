@@ -17,7 +17,7 @@ form {
         padding: 10px;
         background: white;
         border-radius: 15px;
-        max-height: 70vh;
+        max-height: 52vh;
 
         .input-container {
             label {
@@ -71,6 +71,7 @@ form {
             font-size: 16px;
             cursor: pointer;
             font-weight: bold;
+            margin-bottom: 10px;
 
             &:hover {
                 background: #7bb902;
