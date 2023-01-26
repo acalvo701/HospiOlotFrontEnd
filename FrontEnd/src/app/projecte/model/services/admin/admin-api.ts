@@ -12,7 +12,8 @@ export class AdminApiService {
   IP: string;
 
   constructor(private http: HttpClient) {
-    this.IP = "172.24.4.61";
+   // this.IP = "172.24.4.61";
+    this.IP = "localhost";
   }
 
   getGuardiesEsquema(): Observable<any> {
@@ -61,6 +62,14 @@ export class AdminApiService {
     return this.http.post(`http://${this.IP}:4000/guardia/insertGuardia`, guardiaJSON, requestOptions);
   }
 
+  insertEsquemaRow(guardiaModel: GuardiaModel): Observable<any> {
+
+    const requestOptions = this.createHeader();
+    const guardiaModelJSON = JSON.stringify(guardiaModel);
+
+    return this.http.post(`http://${this.IP}:4000/guardiaModel/insertEsquemaRow`, guardiaModelJSON, requestOptions);
+  }
+
   updateEstatGuardiaAdmin(guardia: Guardia): Observable<any> {
 
     const requestOptions = this.createHeader();
@@ -75,6 +84,14 @@ export class AdminApiService {
     const guardiaModelJSON = JSON.stringify(guardiaModel);
 
     return this.http.post(`http://${this.IP}:4000/guardiaModel/updateEsquemaRow`, guardiaModelJSON, requestOptions);
+  }
+
+  deleteEsquemaRow(guardiaModel: GuardiaModel): Observable<any> {
+
+    const requestOptions = this.createHeader();
+    const guardiaModelJSON = JSON.stringify(guardiaModel);
+
+    return this.http.post(`http://${this.IP}:4000/guardiaModel/deleteEsquemaRow`, guardiaModelJSON, requestOptions);
   }
 
 

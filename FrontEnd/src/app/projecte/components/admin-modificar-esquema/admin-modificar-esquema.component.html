@@ -1,59 +1,140 @@
 <h2 class="centre">Modificar Esquema</h2>
-<form [formGroup]="this.modificarEsquemaForm">
-    <section class="left">
-        <table>
-            <thead>
-                <th>Categoria</th>
-                <th>Unitat</th>
-                <th>Torn</th>
-                <th>Número Places</th>
-                <th>Estat</th>
-            </thead>
-            <tbody>
-                
-                <tr *ngFor="let guardia of guardiesEsquema">
-                    <td>
-                        <div class="input-container">
-                            <select formControlName="categoria">
-                                <option *ngFor="let categoria of categories" [selected]="guardia.categoria == categoria.nom">{{categoria.nom}}</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input-container">
-                            <select formControlName="unitat">
-                                <option *ngFor="let unitat of unitats" [selected]="guardia.unitat == unitat.nom">{{unitat.nom}}</option>
-                            </select>
+<section class="encapsulamentFormularis">
+    <form *ngFor="let guardia of guardiesEsquema" id="formulari_{{guardia.id}}">
+        <section class="left">
+            <table>
+                <thead>
+                    <th>Categoria</th>
+                    <th>Unitat</th>
+                    <th>Torn</th>
+                    <th>Número Places</th>
+                    <th>Estat</th>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <div class="input-container">
+                                <select name="categoria">
+                                    <option *ngFor="let categoria of categories"
+                                        [selected]="guardia.categoria == categoria.nom">{{categoria.nom}}</option>
+                                </select>
                             </div>
-                    </td>
-                    <td>
-                        <div class="input-container">
-                            <select formControlName="torn">
-                                <option *ngFor="let torn of torns" [selected]="guardia.torn == torn.nom">{{torn.nom}}</option>
-                            </select>
+                        </td>
+                        <td>
+                            <div class="input-container">
+                                <select name="unitat">
+                                    <option *ngFor="let unitat of unitats" [selected]="guardia.unitat == unitat.nom">
+                                        {{unitat.nom}}</option>
+                                </select>
                             </div>
-                    </td>
-                    <td>
-                        <div class="input-container">
-                            <input  value="{{guardia.numeroPlaces}}" formControlName="numeroPlaces" id="places" min="0">
-                            {{guardia.numeroPlaces}}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input-container">
-                            <select formControlName="estat">
-                                <option  [selected]="guardia.estat == 'ACTIU'">ACTIU</option>
-                                <option  [selected]="guardia.estat == 'INACTIU'">INACTIU</option>
-                            </select>
+                        </td>
+                        <td>
+                            <div class="input-container">
+                                <select name="torn">
+                                    <option *ngFor="let torn of torns" [selected]="guardia.torn == torn.nom">
+                                        {{torn.nom}}
+                                    </option>
+                                </select>
                             </div>
-                    </td>
-                    <td>
-                        <div class="send-container">
-                            <button  type="button" [disabled]="!this.modificarEsquemaForm.valid" (click)="modificarEsquema(guardia.id)" value="{{guardia.id}}">Editar</button>
-                        </div>    
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-</form>
+                        </td>
+                        <td>
+                            <div class="input-container">
+                                <input type="number" id="places" name="numeroPlaces" min="0"
+                                    value="{{guardia.numeroPlaces}}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-container">
+                                <select name="estat">
+                                    <option [selected]="guardia.estat == 'ACTIU'">ACTIU</option>
+                                    <option [selected]="guardia.estat == 'INACTIU'">INACTIU</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button-container">
+                                <button class="editar" type="button" (click)="modificarEsquema(guardia.id)"
+                                    value="{{guardia.id}}">Editar</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button-container">
+                                <button class="eliminar" type="button" (click)="eliminarEsquema(guardia.id)"
+                                    value="{{guardia.id}}">Eliminar</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <span id="msg" *ngIf="guardarId == guardia.id">
+                    {{valid ? valid : error}}
+                </span>
+            </table>
+        </section>
+    </form>
+
+    <form id="formulariAfegir">
+        <section class="left">
+            <table>
+                <thead>
+                    <th>Categoria</th>
+                    <th>Unitat</th>
+                    <th>Torn</th>
+                    <th>Número Places</th>
+                    <th>Estat</th>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <div class="input-container">
+                                <select name="categoria">
+                                    <option selected></option>
+                                    <option *ngFor="let categoria of categories">{{categoria.nom}}</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-container">
+                                <select name="unitat">
+                                    <option selected></option>
+                                    <option *ngFor="let unitat of unitats">{{unitat.nom}}</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-container">
+                                <select name="torn">
+                                    <option selected></option>
+                                    <option *ngFor="let torn of torns">{{torn.nom}}</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-container">
+                                <input type="number" id="places" name="numeroPlaces" min="0" value="0">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-container">
+                                <select name="estat">
+                                    <option selected></option>
+                                    <option>ACTIU</option>
+                                    <option>INACTIU</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button-container">
+                                <button class="afegir" type="button" (click)="afegirEsquema()">Afegir</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <span id="msg" *ngIf="validAfegir || errorAfegir">
+                    {{validAfegir ? validAfegir : errorAfegir}}
+                </span>
+            </table>
+        </section>
+    </form>
+</section>

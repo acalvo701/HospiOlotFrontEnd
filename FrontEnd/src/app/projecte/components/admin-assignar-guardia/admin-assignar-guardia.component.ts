@@ -42,13 +42,14 @@ export class AdminAssignarGuardiaComponent implements OnInit {
   getDataEntrada() {
     this.dataGuardia = this.assignarGuardiaForm.get("dataGuardia")?.value;
     this.selectGuardies();
-    this.ocult = false;
+    if (this.guardies.length != 0) {
+      this.ocult = false;
+    }
   }
 
   selectGuardies() {
     this.httpClient.getGuardiesByDay(this.dataGuardia).subscribe(
       response => {
-        console.log(response);
         this.guardies = response.guardies;
       }
     )
@@ -56,11 +57,10 @@ export class AdminAssignarGuardiaComponent implements OnInit {
 
   assignarGuardia() {
 
-   let assignarGuardia = new GuardiaTreballador(this.assignarGuardiaForm.get("idTreballador")?.value, this.assignarGuardiaForm.get("idGuardia")?.value, this.assignarGuardiaForm.get("estat")?.value);
+    let assignarGuardia = new GuardiaTreballador(this.assignarGuardiaForm.get("idTreballador")?.value, this.assignarGuardiaForm.get("idGuardia")?.value, this.assignarGuardiaForm.get("estat")?.value);
 
     this.httpClient.insertarGuardiaTreballadorAdmin(assignarGuardia).subscribe(
       response => {
-        console.log(response);
         this.guardies = response.guardies;
       }
     )

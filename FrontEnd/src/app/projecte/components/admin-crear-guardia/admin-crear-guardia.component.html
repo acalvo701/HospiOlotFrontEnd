@@ -17,24 +17,26 @@
                 </option>
             </select>
         </div>
-            <div class="input-container">
-                <label><b>Torn:</b></label>
-                <select formControlName="torn">
-                    <option selected></option>
-                    <option *ngFor="let torn of torns">{{ torn.nom }}
-                    </option>
-                </select>
-            </div>
-            <div class="input-container">
-                <label><b>Data:</b></label>
-                <input type="date" formControlName="dataGuardia">
-            </div>
-            <div class="input-container">
-                <label><b>Número de Places:</b></label>
-                <input type="number" min="0" formControlName="numeroPlaces">
-            </div>        
+        <div class="input-container">
+            <label><b>Torn:</b></label>
+            <select formControlName="torn">
+                <option selected></option>
+                <option *ngFor="let torn of torns">{{ torn.nom }}
+                </option>
+            </select>
+        </div>
+        <div class="input-container">
+            <label><b>Data:</b></label>
+            <input type="date" formControlName="dataGuardia">
+        </div>
+        <div class="input-container">
+            <label><b>Número de Places:</b></label>
+            <input type="number" min="0" formControlName="numeroPlaces">
+        </div>
         <div class="send-container">
             <button type="button" [disabled]="!this.crearGuardiaForm.valid" (click)="crearGuardia()">Crear</button>
+            <br>
+            {{ valid ? valid : error }}
         </div>
     </section>
 </form>

@@ -17,11 +17,13 @@ export class AdminEstatGuardiaComponent implements OnInit, OnDestroy {
   dataGuardia: Date;
   ocult: boolean = true;
 
-  subscription: Subscription;
+  subscription!: Subscription[];
   error: string;
   valid: string;
 
-  constructor(private httpClient: AdminApiService, private fb: FormBuilder) { }
+  constructor(private httpClient: AdminApiService, private fb: FormBuilder) {
+    this.subscription = new Array<Subscription>();
+  }
 
   ngOnInit(): void {
     this.estatGuardiaForm = this.fb.group({
@@ -32,28 +34,40 @@ export class AdminEstatGuardiaComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscription.forEach((s) => {
+      s.unsubscribe();
+    });
   }
 
   getDataEntrada() {
     this.dataGuardia = this.estatGuardiaForm.get("dataGuardia")?.value;
     this.selectGuardies();
-    this.ocult = false;
+    if (this.guardies.length != 0) {
+      this.ocult = false;
+    }
   }
 
   selectGuardies() {
-    this.httpClient.getGuardiesByDay(this.dataGuardia).subscribe(
-      response => {
-        console.log(response);
-        this.guardies = response.guardies;
-      }
-    )
+    this.subscription.push(this.httpClient.getGuardiesByDay(this.dataGuardia).
+      subscribe(
+        {
+          next: (response) => {
+            this.guardies = response.guardies;
+          },
+          //per veure l'error que retorna de l'api
+          error: () => {
+
+          },
+          complete: () => {
+
+          },
+        }));
   }
 
   estatGuardia() {
     let estatGuardia = new Guardia(this.estatGuardiaForm.get("idGuardia")?.value, this.estatGuardiaForm.get("dataGuardia")?.value, '', this.estatGuardiaForm.get("estat")?.value, '', '');
 
-    this.subscription = this.httpClient.updateEstatGuardiaAdmin(estatGuardia).
+    this.subscription.push(this.httpClient.updateEstatGuardiaAdmin(estatGuardia).
       pipe(take(1), catchError((err: any) => {
         return throwError(() => new Error("Error d'API"))
       }))
@@ -69,7 +83,7 @@ export class AdminEstatGuardiaComponent implements OnInit, OnDestroy {
           complete: () => {
 
           },
-        });
+        }));
 
     this.ocult = true;
     this.estatGuardiaForm.reset();
