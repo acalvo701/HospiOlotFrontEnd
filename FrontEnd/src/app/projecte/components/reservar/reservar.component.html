@@ -2,7 +2,7 @@
     <div class="card" *ngFor="let categoria of this.guardiesReformades |keyvalue">
         <div class="card-header" id="heading-1">
             <h5 class="mb-0">
-                <a role="button" data-toggle="collapse" href="#collapse-{{categoria.key}}" aria-expanded="true"
+                <a role="button" data-bs-toggle="collapse" href="#collapse-{{categoria.key}}" aria-expanded="false"
                     aria-controls="collapse-1">
                     {{categoria.key}}
                 </a>
@@ -15,7 +15,7 @@
                     <div class="card" *ngFor="let unitat of categoria.value |keyvalue">
                         <div class="card-header" id="heading-1-1">
                             <h5 class="mb-0">
-                                <a class="collapsed" role="button" data-toggle="collapse"
+                                <a class="collapsed" role="button" data-bs-toggle="collapse"
                                     href="#collapse-{{categoria.key}}-{{unitat.key}}" aria-expanded="false"
                                     attr.aria-controls="collapse-{{categoria.key}}-{{unitat.key}}">
                                     {{unitat.key}}
