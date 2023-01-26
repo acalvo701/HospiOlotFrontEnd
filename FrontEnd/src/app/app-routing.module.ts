@@ -11,7 +11,7 @@ import { AuthGuard } from './projecte/guards/auth.guard';
     { path: 'mes', component: MesComponent, canActivate: [AuthGuard] },
     { path: 'historial', component: HistorialComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminMainScreenComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent},
   ];
 
 

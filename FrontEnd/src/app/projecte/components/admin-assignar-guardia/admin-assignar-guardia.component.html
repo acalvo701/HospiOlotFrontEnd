@@ -35,8 +35,10 @@
 
         </div>
         <div class="send-container">
-            <button type="button" [disabled]="!this.assignarGuardiaForm.valid" (click)="assignarGuardia()"
-                >Assignar</button>
+            <button type="button" [disabled]="!this.assignarGuardiaForm.valid"
+                (click)="assignarGuardia()">Assignar</button>
+            <br>
+            {{ valid ? valid : error }}
         </div>
     </section>
 </form>

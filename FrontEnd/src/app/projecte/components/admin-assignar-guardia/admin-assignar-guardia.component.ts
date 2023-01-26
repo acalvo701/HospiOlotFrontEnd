@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { catchError, Subscription, take, throwError } from 'rxjs';
 import { Guardia } from '../../model/entitats/implementacions/Guardia';
 import { GuardiaTreballador } from '../../model/entitats/implementacions/GuardiaTreballador';
 import { Treballador } from '../../model/entitats/implementacions/Treballador';
@@ -11,7 +12,7 @@ import { AdminApiService } from '../../model/services/admin/admin-api';
   styleUrls: ['./admin-assignar-guardia.component.scss']
 })
 
-export class AdminAssignarGuardiaComponent implements OnInit {
+export class AdminAssignarGuardiaComponent implements OnInit, OnDestroy {
   assignarGuardiaForm: FormGroup;
 
   treballadors: Array<Treballador> = [];
@@ -20,14 +21,14 @@ export class AdminAssignarGuardiaComponent implements OnInit {
   dataGuardia: Date;
   ocult: boolean = true;
 
-  constructor(private httpClient: AdminApiService, private fb: FormBuilder) {
+  subscription!: Subscription[];
+  error: string;
+  valid: string;
 
-    this.httpClient.getAllTreballadors().subscribe(
-      response => {
-        console.log(response);
-        this.treballadors = response.treballadors;
-      }
-    )
+  constructor(private httpClient: AdminApiService, private fb: FormBuilder) {
+    this.subscription = new Array<Subscription>();
+
+    this.getAllTreballadors();
   }
 
   ngOnInit(): void {
@@ -39,6 +40,12 @@ export class AdminAssignarGuardiaComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(): void {
+    this.subscription.forEach((s) => {
+      s.unsubscribe();
+    });
+  }
+
   getDataEntrada() {
     this.dataGuardia = this.assignarGuardiaForm.get("dataGuardia")?.value;
     this.selectGuardies();
@@ -47,24 +54,64 @@ export class AdminAssignarGuardiaComponent implements OnInit {
     }
   }
 
-  selectGuardies() {
-    this.httpClient.getGuardiesByDay(this.dataGuardia).subscribe(
-      response => {
-        this.guardies = response.guardies;
-      }
-    )
-  }
-
   assignarGuardia() {
 
     let assignarGuardia = new GuardiaTreballador(this.assignarGuardiaForm.get("idTreballador")?.value, this.assignarGuardiaForm.get("idGuardia")?.value, this.assignarGuardiaForm.get("estat")?.value);
 
-    this.httpClient.insertarGuardiaTreballadorAdmin(assignarGuardia).subscribe(
-      response => {
-        this.guardies = response.guardies;
-      }
-    )
+    this.subscription.push(this.httpClient.insertarGuardiaTreballadorAdmin(assignarGuardia).
+      pipe(take(1), catchError((err: any) => {
+        return throwError(() => new Error("Error d'API"))
+      }))
+      .subscribe(
+        {
+          next: (response) => {
+            this.guardies = response.guardies;
+            this.valid = response.message;
+          },
+          //per veure l'error que retorna de l'api
+          error: (err: any) => {
+            this.error = err.error;
+          },
+          complete: () => {
+
+          },
+        }));
+
     this.ocult = true;
     this.assignarGuardiaForm.reset();
+  }
+
+  getAllTreballadors() {
+    this.subscription.push(this.httpClient.getAllTreballadors().
+      subscribe(
+        {
+          next: (response) => {
+            this.treballadors = response.treballadors;
+          },
+          //per veure l'error que retorna de l'api
+          error: () => {
+
+          },
+          complete: () => {
+
+          },
+        }));
+  }
+
+  selectGuardies() {
+    this.subscription.push(this.httpClient.getGuardiesByDay(this.dataGuardia).
+      subscribe(
+        {
+          next: (response) => {
+            this.guardies = response.guardies;
+          },
+          //per veure l'error que retorna de l'api
+          error: () => {
+
+          },
+          complete: () => {
+
+          },
+        }));
   }
 }
