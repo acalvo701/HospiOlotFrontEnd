@@ -9,9 +9,9 @@ import { AuthGuard } from './projecte/guards/auth.guard';
 
   const routes: Routes = [
     { path: 'mes', component: MesComponent, canActivate: [AuthGuard] },
-    { path: 'historial', component: HistorialComponent },
-    { path: 'admin', component: AdminMainScreenComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'historial', component: HistorialComponent, canActivate: [AuthGuard] },
+    { path: 'admin', component: AdminMainScreenComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   ];
 
 
