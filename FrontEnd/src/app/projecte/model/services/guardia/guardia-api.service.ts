@@ -9,8 +9,7 @@ export class GuardiaApiService {
   IP: string;
 
   constructor(private http: HttpClient) {
-    // this.IP = "172.24.4.61";
-    this.IP = "localhost";
+    this.IP = "172.24.4.61";
   }
 
   getHistoryTreballador(idTreballador: number): Observable<any> {
