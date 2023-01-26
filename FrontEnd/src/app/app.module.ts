@@ -6,7 +6,7 @@ import {MaterialExampleModule} from '../material.module';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CalendariComponent } from './projecte/components/calendari/calendari.component';
@@ -20,7 +20,8 @@ import { AdminEstatGuardiaComponent } from './projecte/components/admin-estat-gu
 import { AdminMainScreenComponent } from './projecte/components/admin-main-screen/admin-main-screen.component';
 import { LoginComponent } from './projecte/components/login/login.component';
 import { AdminModificarEsquemaComponent } from './projecte/components/admin-modificar-esquema/admin-modificar-esquema.component';
-
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { JwtInterceptor } from './projecte/interceptors/jwt.interceptor';
 @NgModule({
   declarations: [AppComponent, MesComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent],
   imports: [
@@ -34,7 +35,15 @@ import { AdminModificarEsquemaComponent } from './projecte/components/admin-modi
     AppRoutingModule,
     
   ],
-  providers: [],
+  providers: [JwtHelperService, {
+    provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    {provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true,
+    }
+  
+  
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
