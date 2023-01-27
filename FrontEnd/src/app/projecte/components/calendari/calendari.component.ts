@@ -19,8 +19,7 @@ export class CalendariComponent {
   }
   dateClass() {
     return (date: Date): MatCalendarCellCssClasses => {
-      console.log(typeof date == typeof (new Date()));
-      console.log(date.getTime
+   
       return 'special-date';
       
       // const highlightDate = this.datesToHighlight

@@ -4,7 +4,7 @@
 }
 .header {
   background-color: #7bb902;
-  height: 8%;
+  height: 50px;
   border-bottom: 2vh solid white;
 }
 hr {
@@ -30,15 +30,17 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   margin: 0;
   padding: 30px;
+  
 }
 
 html, body {
   height: 100%;
 }
-.white{
+.cos{
   background-color: white;
     display:flex;
     justify-content: center;
+    border-bottom: 40vh solid white;
 }
 
 .calendari{
