@@ -1,3 +1,8 @@
-.demo-inline-calendar-card {
-    width: 300px;
-  }
+.calendariCard {
+  width: 100%;
+  max-width: 500px;
+}
+
+.special-date{
+  background-color: red !important
+}

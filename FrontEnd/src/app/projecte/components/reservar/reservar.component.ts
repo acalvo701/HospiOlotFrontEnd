@@ -12,7 +12,7 @@ export class ReservarComponent {
   guardies: Array<Guardia> = [];
   guardiesReformades: reformat = {};
   lesMevesGuardies: Array<Guardia> = [];
-  @Input() dia: Date; // decorate the property with @Input()
+  @Input() dia: Date |null; // decorate the property with @Input()
   
 
 

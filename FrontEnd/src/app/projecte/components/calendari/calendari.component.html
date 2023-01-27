@@ -1,5 +1,5 @@
-<mat-card class="demo-inline-calendar-card">
-    <mat-calendar  [(selected)]="selected" (selectedChange)=initialize()></mat-calendar>
+<mat-card class="calendariCard">
+    <mat-calendar [(selected)]="selected" (selectedChange)=initialize() [dateClass]="dateClass()" ></mat-calendar>
 </mat-card>
 
 <app-reservar [dia]="selected"></app-reservar>

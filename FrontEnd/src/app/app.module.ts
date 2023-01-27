@@ -22,6 +22,7 @@ import { LoginComponent } from './projecte/components/login/login.component';
 import { AdminModificarEsquemaComponent } from './projecte/components/admin-modificar-esquema/admin-modificar-esquema.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { JwtInterceptor } from './projecte/interceptors/jwt.interceptor';
+
 @NgModule({
   declarations: [AppComponent, MesComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent],
   imports: [

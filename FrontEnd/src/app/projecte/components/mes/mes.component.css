@@ -40,3 +40,8 @@ html, body {
     display:flex;
     justify-content: center;
 }
+
+.calendari{
+  display: flex;
+  justify-content: center;
+}
