@@ -1,0 +1,20 @@
+<h2 class="centre">Generar Guàrdies Esquema</h2>
+<form [formGroup]="this.generarGuardiesForm">
+    <section class="left">
+        <div class="input-container">
+            <label><b>Setmanes generar guàrdies:</b></label>
+            <input type="number" min="1" formControlName="setmanes">
+        </div>
+        <div class="input-container">
+            <label><b>A partir de la data:</b></label>
+            <input type="date" formControlName="data">
+        </div>        
+            
+        <div class="send-container">
+            <button type="button" [disabled]="!this.generarGuardiesForm.valid" (click)="generarGuardiesEsquema()"
+                >Generar</button>
+            <br>
+                {{ valid ? valid : error }}
+        </div>
+    </section>
+</form>
