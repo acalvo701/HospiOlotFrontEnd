@@ -2,9 +2,10 @@
     background-color: #a0ce4e;
    
 }
-.header{
-    background-color: #7bb902;
-    height: 50px;
+.header {
+  background-color: #7bb902;
+  height: 8%;
+  border-bottom: 2vh solid white;
 }
 hr {
     height: 10px;

@@ -24,7 +24,11 @@ export class LoginComponent {
     
 
     this.authService.login(this.treballador.dni,this.treballador.password).pipe(
-      map(token => this.router.navigate(['mes']))
+      map(token => 
+        //jwt_decode(token);
+        this.router.navigate(['mes'])
+        
+        )
 
     ).subscribe();
 

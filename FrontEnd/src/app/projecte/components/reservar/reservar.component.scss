@@ -37,3 +37,80 @@
     display: flex;
     flex-direction: column;
 }
+
+
+.mb-0>a {
+    display: block;
+    position: relative;
+  }
+  
+  
+  .mb-0>a:after {
+    content: "\2191";
+    /* fa-chevron-down */
+   
+    position: absolute;
+    right: 0;
+    content: "\2191";
+    font-family: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji';
+    background-color: black;
+    color:white;
+    padding: 5px;
+    padding-left: 13px;
+    padding-right: 13px;
+   
+  }
+  
+  .mb-0>a[aria-expanded="true"]:after {
+    content: "\2193";
+    font-family: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji';
+    /* fa-chevron-up */
+    background-color: black;
+    color:white;
+    padding: 5px;
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+  
+  .dia::after{
+    content: "\2600";
+
+  }
+  .nit:after{
+    content: "\263E"
+  }
+  
+  .btn-cancelar{
+    color: #fff;
+    background-color: #5500FF;
+    border-color: #5500FF;
+  }
+  
+  .btn-reservar{
+    color: #fff;
+    background-color: #FFA700;
+    border-color:#FFA700;
+  }
+  
+  .carta-guardia{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .carta-guardia-esquerra{
+    display: flex;
+    flex-direction: column;
+  }
+  .card{
+    border: 1px white;
+  }
+  .card-header{
+    background-color: white;
+    
+  }
+  a{
+    color: black;
+  }
+  .small{
+    font-size: x-small;
+  }

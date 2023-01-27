@@ -1,12 +1,12 @@
 <div id="accordion">
     <div class="card" *ngFor="let categoria of this.guardiesReformades |keyvalue">
         <div class="card-header" id="heading-1">
-            <h5 class="mb-0">
-                <a role="button" data-bs-toggle="collapse" href="#collapse-{{categoria.key}}" aria-expanded="false"
+            <h6 class="mb-0">
+                <a role="button" data-bs-toggle="collapse" href="#collapse-{{categoria.key}}" aria-expanded="true"
                     aria-controls="collapse-1">
                     {{categoria.key}}
                 </a>
-            </h5>
+            </h6>
         </div>
         <div id="collapse-{{categoria.key}}" class="collapse" data-parent="#accordion" aria-labelledby="heading-1">
             <div class="card-body">
@@ -14,22 +14,22 @@
                 <div id="accordion-{{categoria.key}}">
                     <div class="card" *ngFor="let unitat of categoria.value |keyvalue">
                         <div class="card-header" id="heading-1-1">
-                            <h5 class="mb-0">
+                            <h6 class="mb-0">
                                 <a class="collapsed" role="button" data-bs-toggle="collapse"
                                     href="#collapse-{{categoria.key}}-{{unitat.key}}" aria-expanded="false"
                                     attr.aria-controls="collapse-{{categoria.key}}-{{unitat.key}}">
                                     {{unitat.key}}
                                 </a>
-                            </h5>
+                            </h6>
                         </div>
                         <div id="collapse-{{categoria.key}}-{{unitat.key}}" class="collapse" attr.data-parent="#accordion-{{categoria.key}}" aria-labelledby="heading-1">
                             <div class="carta-guardia card-body" *ngFor="let torn of unitat.value |keyvalue">
                                 
 
                                 <div class="carta-guardia-esquerra">
-                                   <span> {{torn.value.nom}}</span>
-                                   <span> {{torn.value.guardia.id}}</span>
-                                <span>{{getPersonesApuntades(torn.value.guardia.id)}} / {{torn.value.guardia.numeroPlaces}}</span>
+                                   <span class="{{torn.value.nom}}"> {{torn.value.nom}}</span>
+                                 
+                                <span class="small">{{getPersonesApuntades(torn.value.guardia.id)}} / {{torn.value.guardia.numeroPlaces}} Apuntades</span>
                                 </div>
                                 <div>
                                     <button class="btn btn-cancelar" (click)='cancelarGuardia(torn.value.guardia.id)'
@@ -51,40 +51,3 @@
     </div>
 
 </div>
-
-
-<!-- <p>reservar works!</p>
-
-<div *ngFor="let categoria of this.guardiesReformades |keyvalue">
-{{categoria.key}}
-<div *ngFor="let unitat of categoria.value |keyvalue">
-    {{unitat.key}}
-
-    <div *ngFor="let torn of unitat.value |keyvalue">
-        
-       {{torn.value.nom}}
-       
-       <button (click) = 'cancelarGuardia(torn.value.guardia.id)' *ngIf="guardiaReservada(torn.value.guardia.id)">CANCELAR</button>
-       <button (click) = 'reservarGuardia(torn.value.guardia.id)' *ngIf="!guardiaReservada(torn.value.guardia.id)">RESERVAR</button>
-
-     </div>
-</div>
-</div>
-
-<div>
-<h4>Les meves guàrdies</h4>
-
-<div *ngFor="let guardia of lesMevesGuardies">
-    <div>
-       <p>{{guardia.categoria}} - {{guardia.unitat}} - {{guardia.torn}}</p> 
-        <p>{{guardia.personesApuntades}} / {{guardia.numeroPlaces}}</p>
-    </div>
-    <div>
-
-        <button (click)="cancelarGuardia(guardia.id)">CANCELAR</button>
-    </div>
-</div>
-
-</div>
-
- -->
