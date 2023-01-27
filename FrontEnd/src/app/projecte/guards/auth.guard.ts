@@ -37,7 +37,7 @@ export class AuthGuard implements CanActivate {
     
     let isRefreshSuccess: boolean;
     try {
-      const response = await lastValueFrom(this.http.post(`http://localhost:4000/treballador/refreshToken`, tokenModel));
+      const response = await lastValueFrom(this.http.post(`http://172.24.4.61:4000/treballador/refreshToken`, tokenModel));
       const newToken = (<any>response).accessToken;
       const newRefreshToken = (<any>response).refreshToken;
       localStorage.setItem("SGaccessToken", newToken);

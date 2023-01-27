@@ -10,7 +10,7 @@ export class AuthenticationService {
   IP: string;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
-    this.IP = "localhost";
+    this.IP = "172.24.4.61";
   }
 
   login(dni: string, password: string){
