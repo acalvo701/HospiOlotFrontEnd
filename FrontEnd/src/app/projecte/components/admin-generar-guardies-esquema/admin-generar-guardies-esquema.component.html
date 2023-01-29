@@ -2,12 +2,12 @@
 <form [formGroup]="this.generarGuardiesForm">
     <section class="left">
         <div class="input-container">
-            <label><b>Setmanes generar guàrdies:</b></label>
-            <input type="number" min="1" formControlName="setmanes">
+            <label><b>Dia Inici:</b></label>
+            <input type="date" formControlName="diaInici">
         </div>
         <div class="input-container">
-            <label><b>A partir de la data:</b></label>
-            <input type="date" formControlName="data">
+            <label><b>Dia Fi:</b></label>
+            <input type="date" formControlName="diaFi">
         </div>        
             
         <div class="send-container">
