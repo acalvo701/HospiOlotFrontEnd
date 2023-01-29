@@ -44,7 +44,7 @@ export class CalendariComponent {
   guardiesMes: Array<Guardia>;
 
   constructor(private httpClient: GuardiaApiService) {
-    this.initialize();
+  //  this.initialize();
     this.getMonthGuardies();
   }
 
