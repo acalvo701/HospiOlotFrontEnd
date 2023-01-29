@@ -10,7 +10,6 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CalendariComponent } from './projecte/components/calendari/calendari.component';
-import { MesComponent } from './projecte/components/mes/mes.component';
 import { HistorialComponent } from './projecte/components/historial/historial.component';
 import { ReservarComponent } from './projecte/components/reservar/reservar.component';
 import { NavbarComponent } from './projecte/components/navbar/navbar.component';
@@ -24,7 +23,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { JwtInterceptor } from './projecte/interceptors/jwt.interceptor';
 import { AdminGenerarGuardiesEsquemaComponent } from './projecte/components/admin-generar-guardies-esquema/admin-generar-guardies-esquema.component';
 @NgModule({
-  declarations: [AppComponent, MesComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent, AdminGenerarGuardiesEsquemaComponent],
+  declarations: [AppComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent, AdminGenerarGuardiesEsquemaComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

@@ -18,7 +18,6 @@ export class ReservarComponent {
 
   constructor(private httpClient: GuardiaApiService) {
     this.initialize();
-
   }
 
 

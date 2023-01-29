@@ -1,5 +1,19 @@
-<mat-card class="calendariCard">
-    <mat-calendar [(selected)]="selected" (selectedChange)=initialize() [dateClass]="dateClass()" ></mat-calendar>
-</mat-card>
+<div class="body">
+    <div class="header">
 
-<app-reservar [dia]="selected"></app-reservar>
+
+    </div>
+    <div class="cos">
+
+        <mat-card class="calendariCard">
+            <mat-calendar [(selected)]="selected" (selectedChange)=initialize()
+                [dateClass]="dateClass()"></mat-calendar>
+        </mat-card>
+
+        <app-reservar [dia]="selected"></app-reservar>
+
+    </div>
+
+
+    <app-navbar></app-navbar>
+</div>

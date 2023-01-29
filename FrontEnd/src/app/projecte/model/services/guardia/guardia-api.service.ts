@@ -22,6 +22,11 @@ export class GuardiaApiService {
     return this.http.get(`http://${this.IP}:4000/guardia/getGuardiesByDay?data=` + data, requestOptions);
   }
 
+  getMonthGuardiesByDate(data:Date): Observable<any>{
+    const requestOptions = this.createHeader();
+    return this.http.get(`http://${this.IP}:4000/guardia/getMonthGuardiesByDate?data=` + data, requestOptions);
+  }
+
   reservarGuardia(idGuardia: string, idTreballador: string = "8"): Observable<any> {
     const requestOptions = this.createHeader();
     return this.http.post(`http://${this.IP}:4000/guardiatreballador/bookGuardia?idGuardia=` + idGuardia + '&idTreballador=' + idTreballador, requestOptions);
