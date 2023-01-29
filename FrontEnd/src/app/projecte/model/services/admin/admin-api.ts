@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Guardia } from '../../entitats/implementacions/Guardia';
 import { GuardiaModel } from '../../entitats/implementacions/GuardiaModel';
 import { GuardiaTreballador } from '../../entitats/implementacions/GuardiaTreballador';
@@ -12,7 +13,7 @@ export class AdminApiService {
   IP: string;
 
   constructor(private http: HttpClient) {
-    this.IP = "172.24.4.61";
+    this.IP = environment.ip;
   }
 
   getGuardiesEsquema(): Observable<any> {
@@ -84,6 +85,13 @@ export class AdminApiService {
 
     return this.http.post(`http://${this.IP}:4000/guardiaModel/updateEsquemaRow`, guardiaModelJSON, requestOptions);
   }
+
+  generarGuardies(diaInici:Date, nSetmanes: number){
+    let Json = {diaInici: diaInici, nSetmanes: nSetmanes}
+    const requestOptions = this.createHeader();
+    return this.http.post(`http://${this.IP}:4000/guardiaModel/generarGuardiesEsquema`, Json, requestOptions);
+  }
+
 
   deleteEsquemaRow(guardiaModel: GuardiaModel): Observable<any> {
 

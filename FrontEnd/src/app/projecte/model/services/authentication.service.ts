@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +11,7 @@ export class AuthenticationService {
   IP: string;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
-    this.IP = "172.24.4.61";
+    this.IP = environment.ip;
   }
 
   login(dni: string, password: string){
