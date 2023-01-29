@@ -42,9 +42,7 @@ export class AdminEstatGuardiaComponent implements OnInit, OnDestroy {
   getDataEntrada() {
     this.dataGuardia = this.estatGuardiaForm.get("dataGuardia")?.value;
     this.selectGuardies();
-    if (this.guardies.length != 0) {
-      this.ocult = false;
-    }
+    
   }
 
   selectGuardies() {
@@ -53,6 +51,10 @@ export class AdminEstatGuardiaComponent implements OnInit, OnDestroy {
         {
           next: (response) => {
             this.guardies = response.guardies;
+            this.ocult = true;
+            if (this.guardies.length != 0) {
+              this.ocult = false;
+            }
           },
           //per veure l'error que retorna de l'api
           error: () => {

@@ -49,9 +49,7 @@ export class AdminAssignarGuardiaComponent implements OnInit, OnDestroy {
   getDataEntrada() {
     this.dataGuardia = this.assignarGuardiaForm.get("dataGuardia")?.value;
     this.selectGuardies();
-    if (this.guardies.length != 0) {
-      this.ocult = false;
-    }
+
   }
 
   assignarGuardia() {
@@ -104,6 +102,10 @@ export class AdminAssignarGuardiaComponent implements OnInit, OnDestroy {
         {
           next: (response) => {
             this.guardies = response.guardies;
+            this.ocult = true;
+            if (this.guardies.length != 0) {
+              this.ocult = false;
+            }
           },
           //per veure l'error que retorna de l'api
           error: () => {
