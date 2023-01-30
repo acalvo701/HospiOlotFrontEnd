@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
+  
 })
 export class LoginComponent {
   treballador = {
@@ -33,7 +34,10 @@ export class LoginComponent {
     ).subscribe();
 
     }
-    
+    public showPassword: boolean = false;
+    public togglePasswordVisibility(): void {
+      this.showPassword = !this.showPassword;
+    }
   }
  
 

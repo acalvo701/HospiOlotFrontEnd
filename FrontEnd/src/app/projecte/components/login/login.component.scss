@@ -2,7 +2,17 @@
   box-sizing: border-box;
   margin: 0;
 }
+mat-form-field{
+  border:100
+}
+.mdi-icon {
+  position: absolute;
+  right: 2px;
+  top: 60px;
+ background-color: white;
 
+
+}
 
 .wrapper {
   max-width: 960px;
@@ -150,7 +160,7 @@ label span {
 label:focus-within span,
 .focus-span {
   transform: translate(0.27rem, -94%) scale(0.8);
-  background-color: #fff;
+  background-color:#fff;
 }
 
 .recovery {

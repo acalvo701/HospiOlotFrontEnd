@@ -11,22 +11,21 @@
           <div class="email-login">
 
             <form (ngSubmit)="onSubmit()" #usuariForm="ngForm">
+              <mat-form-field>
               <div class="form-group">
                 <label for="dni" class="form-label">Dni</label>
                   <input id="dni" class="form-control" type="text" [(ngModel)]="treballador.dni" type="text" autocomplete="on" name="dni" required>
               </div>
+            </mat-form-field>
+          <mat-form-field>
               <div class="form-group">
                 <label for="password" class="form-label">Password</label>
-                <input id="password" class="form-control" type="password" [(ngModel)]="treballador.password" name="password" required>
+                <input matInput type="password" name="password" atInput [type]="showPassword ? 'text' : 'password'" name="password" id="password" class="form-control" type="password" [(ngModel)]="treballador.password" name="password" required>
+                <mat-icon matSuffix (click)="togglePasswordVisibility()"class="mdi-icon" >{{showPassword?'visibility_off':'visibility'}}</mat-icon>
               </div>
+            </mat-form-field>
               {{treballador.dni}}
-              <div class="recovery">
-                <div>
-                  <input type="checkbox" id="remember" name="remember">
-                  <label for="remember">Remember me</label>
-                </div>
-                <a href="">Forgot Password?</a>
-              </div>
+              
 
 
               <button [disabled]="!usuariForm.form.valid" type="submit" class="btn btn-green">Iniciar sessió</button>
