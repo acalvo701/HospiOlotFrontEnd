@@ -151,7 +151,7 @@ h2 {
 
 }
 
-.unitat1 {
+.unitat_1 {
     display: flex;
     justify-content: center;
     background-color: rgb(168, 200, 254);
@@ -161,7 +161,7 @@ h2 {
     height: 40px;
     padding-top: 5px;}
 
-.unitat2 {
+.unitat_2 {
     display: flex;
     justify-content: center;
     background-color: rgb(125, 171, 251);
@@ -171,7 +171,7 @@ h2 {
     height: 40px;
     padding-top: 5px;}
 
-.unitat3 {
+.unitat_3 {
     display: flex;
     justify-content: center;
     background-color: rgb(63, 132, 251);
@@ -181,7 +181,7 @@ h2 {
     height: 40px;
     padding-top: 5px;}
 
-.unitat4 {
+.unitat_4 {
     display: flex;
     justify-content: center;
     background-color: rgb(24, 107, 250);
