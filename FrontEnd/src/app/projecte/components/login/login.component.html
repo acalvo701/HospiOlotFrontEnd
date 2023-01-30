@@ -20,7 +20,7 @@
           <mat-form-field>
               <div class="form-group">
                 <label for="password" class="form-label">Password</label>
-                <input matInput type="password" name="password" atInput [type]="showPassword ? 'text' : 'password'" name="password" id="password" class="form-control" type="password" [(ngModel)]="treballador.password" name="password" required>
+                <input matInput="" type="password" atInput [type]="showPassword ? 'text' : 'password'" id="password" class="form-control" type="password" [(ngModel)]="treballador.password" name="password" required>
                 <mat-icon matSuffix (click)="togglePasswordVisibility()"class="mdi-icon" >{{showPassword?'visibility_off':'visibility'}}</mat-icon>
               </div>
             </mat-form-field>

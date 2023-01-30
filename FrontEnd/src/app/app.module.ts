@@ -25,8 +25,12 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { JwtInterceptor } from './projecte/interceptors/jwt.interceptor';
 import { AdminGenerarGuardiesEsquemaComponent } from './projecte/components/admin-generar-guardies-esquema/admin-generar-guardies-esquema.component';
 import { HeaderComponent } from './projecte/components/header/header.component';
+import { LogoutComponent } from './projecte/components/logout/logout.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 @NgModule({
-  declarations: [AppComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent, AdminGenerarGuardiesEsquemaComponent, HeaderComponent],
+  declarations: [AppComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent, AdminGenerarGuardiesEsquemaComponent, HeaderComponent, LogoutComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -36,6 +40,8 @@ import { HeaderComponent } from './projecte/components/header/header.component';
     MaterialExampleModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
     
   ],
   providers: [
