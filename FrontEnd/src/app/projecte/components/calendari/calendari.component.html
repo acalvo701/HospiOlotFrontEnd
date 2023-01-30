@@ -1,16 +1,15 @@
 <div class="body">
     <app-header></app-header>
-    <div class="cosCalendar">
-        <h2 class="centre titol">CALENDARI DE GUÀRDIES</h2>
+    <div class="cos">
+        <h1 class="titol">CALENDARI</h1>
+        <div class="calendariDiv">
         <mat-card class="calendariCard">
-            <mat-calendar [(selected)]="selected" (selectedChange)=initialize()
-                [dateClass]="dateClass()"></mat-calendar>
+            <mat-calendar [(selected)]="selected" (selectedChange)=initialize() (monthSelected)="this.getAllGuardies()"></mat-calendar>
         </mat-card>
 
         <app-reservar [dia]="selected"></app-reservar>
-
     </div>
-
+    </div>
 
     <app-navbar></app-navbar>
 </div>

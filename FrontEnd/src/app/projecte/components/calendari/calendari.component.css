@@ -73,6 +73,13 @@ svg:hover {
   fill: black;
 }
 
+.calendariDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 app-reservar {
   width: 100%;
+  max-width: 500px
 }

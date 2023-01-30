@@ -28,6 +28,11 @@ export class GuardiaApiService {
     return this.http.get(`http://${this.IP}:4000/guardia/getMonthGuardiesByDate?data=` + data, requestOptions);
   }
 
+  getAllGuardiesFromTreballador(idTreballador:string = "8"){
+    const requestOptions = this.createHeader();
+    return this.http.get(`http://${this.IP}:4000/guardia/getAllGuardiesFromTreballador?idTreballador=${idTreballador}`, requestOptions);
+  }
+
   getMonthGuardiesByDateFromTreballador(data:string, idTreballador:string = "8"){
     const requestOptions = this.createHeader();
     return this.http.get(`http://${this.IP}:4000/guardia/getMonthGuardiesByDateFromTreballador?data=${data}&idTreballador=${idTreballador}`, requestOptions);

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatCard } from '@angular/material/card';
 import { MatCalendarCellClassFunction, MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { ReservarComponent } from '../reservar/reservar.component';
@@ -8,6 +8,8 @@ import { DateAdapter, NativeDateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, 
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { Guardia } from '../../model/entitats/implementacions/Guardia';
 import { GuardiaApiService } from '../../model/services/guardia/guardia-api.service';
+import { formatDate } from '@angular/common';
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY', // this is how your date will be parsed from Input
@@ -19,23 +21,19 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY'
   }
 };
-import { formatDate } from '@angular/common';
 
 class PickDateAdapter extends NativeDateAdapter {
-
   override format(date: Date, displayFormat: Object): string {
-    if (displayFormat === 'input') {
-      return formatDate(date, 'yyyy-MM-dd', this.locale);;
-    } else {
-      return date.toDateString();
-    }
+    
+      return formatDate(date, 'yyyy-MM-dd', 'ca-CA');;
+    
   }
-
   override getFirstDayOfWeek(): number {
     return 1;
   }
 
 }
+
 
 @Component({
   selector: 'app-calendari',
@@ -49,26 +47,38 @@ class PickDateAdapter extends NativeDateAdapter {
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class CalendariComponent {
+export class CalendariComponent implements OnInit{
   selected: Date | null = new Date();
   @ViewChild(ReservarComponent) child: ReservarComponent;
   guardiesMes: Map<string, Array<string>>;
 
   constructor(private httpClient: GuardiaApiService) {
-
+    this.getAllGuardies();
   }
 
-  ngOnInit() {
-this.getMonthGuardies();
-  }
   initialize() {
     this.child.dia = this.selected;
     this.child.initialize();
-
   }
 
-  getMonthGuardies() {
-    this.httpClient.getMonthGuardiesByDateFromTreballador(new Date().toISOString()).subscribe(
+  ngOnInit(){
+    this.getAllGuardies();
+  }
+  ngAfterViewInit() {
+    const monthPrevBtn = document.querySelectorAll(
+      '.mat-calendar-previous-button'
+    );
+    const monthNextBtn = document.querySelectorAll('.mat-calendar-next-button');
+    let elements = Array.from(monthPrevBtn).concat(Array.from(monthNextBtn));
+    elements.forEach((button) => {
+        document.addEventListener('click', (event) => {
+          this.pintar();
+        });
+      });
+    }
+  
+  getAllGuardies() {
+    this.httpClient.getAllGuardiesFromTreballador().subscribe(
       response => {
 
         let dies = new Map<string, Array<string>>;
@@ -82,41 +92,36 @@ this.getMonthGuardies();
             estats.push(guardia.estat);
             dies.set(guardia.dia, estats);
           }
+          console.log(this.guardiesMes);
           this.guardiesMes = dies;
+          this.pintar();
         });
-
-
       }
     );
   }
 
-  dateClass() {
+  pintar() {
+    Array.from(document.getElementsByClassName('mat-calendar-body-cell')).forEach(cela => {
+      let dataLabel = cela.getAttribute("aria-label");
+      if (dataLabel) {
+        let data = new Date(dataLabel);
 
-    return (date: Date): MatCalendarCellCssClasses => {
-
-      //todo guardiesMes és undefined perquè el subscribe no ha finalitzat encara i ja s'està fent aquest.
-      this.selected!.setHours(0, 0, 0, 0);
-      let dataFormated = formatDate(date, 'yyyy-MM-dd', 'ca-CA');
-
-      let estatsDelDia = this.guardiesMes.get(dataFormated);
-
-      if (estatsDelDia != null && estatsDelDia.includes('PENDENT')) {
-        return 'pendent-date';
-      } else if (estatsDelDia != null && estatsDelDia.includes('ASSIGNADA')) {
-        return 'assignada-date';
+        this.selected!.setHours(0, 0, 0, 0);
+        let dataFormated = formatDate(data, 'yyyy-MM-dd', 'ca-CA');
+  
+        let estatsDelDia = this.guardiesMes.get(dataFormated);
+  
+        if (estatsDelDia != null && estatsDelDia.includes('PENDENT')) {
+          cela.classList.add('pendent-date');
+        } else if (estatsDelDia != null && estatsDelDia.includes('ASSIGNADA')) {
+          cela.classList.add('assignada-date');
+        }
       }
-
-      if (date < this.selected!) {
-        return 'grey-date';
-      }
+    })
 
 
-
-
-      return 'special-date';
-
-    };
   }
+
 
 }
 
