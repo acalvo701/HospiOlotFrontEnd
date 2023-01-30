@@ -44,6 +44,11 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     });
   }
 
+  getEsquema() {
+    this.obtenirEsquemaSelect();
+
+  }
+
   modificarEsquema(id: string) {
     const nomFormulari: any = document.getElementById(`formulari_${id}`);
 
@@ -92,7 +97,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
             this.error = err.error;
           },
           complete: () => {
-            //this.obtenirEsquemaSelect();
+            this.obtenirEsquemaSelect();
             this.getAllCategories();
             this.getAllUnitats();
             this.getAllTorns();
@@ -100,7 +105,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
         }));
   }
 
-  afegirEsquema() {
+  afegirRowEsquema() {
     const nomFormulari: any = document.getElementById(`formulariAfegir`);
 
     let formulari: any = new FormData(nomFormulari);
@@ -123,7 +128,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
               this.errorAfegir = err.error;
             },
             complete: () => {
-              //this.obtenirEsquemaSelect();
+              this.obtenirEsquemaSelect();
               this.getAllCategories();
               this.getAllUnitats();
               this.getAllTorns();
@@ -134,28 +139,31 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     }
   }
 
- /* obtenirEsquemaSelect() {
+  obtenirEsquemaSelect() {
+    const nomFormulari: any = document.getElementById(`formulariSelect`);
+    let formulari: any = new FormData(nomFormulari);
     
-
-      this.subscription.push(this.httpClient.getEsquemaByIdTreballadorAndName(this.idTreballador, nomEsquema).
-        pipe(take(1), catchError((err: any) => {
-          return throwError(() => new Error("Error d'API"));
-        }))
-        .subscribe(
-          {
-            next: (response) => {
-              this.guardiesEsquema = response;
-            },
-            //per veure l'error que retorna de l'api
-            error: (err: any) => {
-              this.errorAfegir = err.error;
-            },
-            complete: () => {
-              
-            },
-          }));
-    
-  }*/
+    this.subscription.push(this.httpClient.getEsquemaByIdTreballadorAndName(this.idTreballador, formulari.get('esquema')).
+      pipe(take(1), catchError((err: any) => {
+        return throwError(() => new Error("Error d'API"));
+      }))
+      .subscribe(
+        {
+          next: (response) => {
+            this.guardiesEsquema = response.esquema;
+          },
+          //per veure l'error que retorna de l'api
+          error: (err: any) => {
+            this.errorAfegir = err.error;
+          },
+          complete: () => {
+          this.obtenirEsquemaSelect();
+          this.getAllCategories();
+          this.getAllUnitats();
+          this.getAllTorns();
+          },
+        }));
+  }
 
   getNomsEsquemaByIdTreballador() {
     this.subscription.push(this.httpClient.getNomsEsquemaByIdTreballador(this.idTreballador).
@@ -223,5 +231,12 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
           },
         }));
+  }
+  afegirEsquema() {
+    const nomFormulari: any = document.getElementById(`formulariSelect`);
+    let formulari: any = new FormData(nomFormulari);
+    if(formulari.get('nomEsquema') != ''){
+
+    }
   }
 }
