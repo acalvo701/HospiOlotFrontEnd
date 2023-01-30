@@ -54,7 +54,15 @@ h1 {
 }
 
 .special-date {
-  background-color: red !important
+  background-color: red !important;
+}
+
+.grey-date {
+  background-color: grey !important;
+}
+
+.pendent-date{
+  background-color: orange !important;
 }
 
 svg {
