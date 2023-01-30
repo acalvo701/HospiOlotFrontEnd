@@ -8,12 +8,6 @@
     height: 100vh;
 }
 
-.header {
-    background-color: #7bb902;
-    height: 8%;
-    border-bottom: 2vh solid white;
-}
-
 hr {
     height: 2%;
     background-color: white;
@@ -21,7 +15,7 @@ hr {
 }
 
 .cos {
-    height: 77%;
+    height: 78%;
 }
 
 

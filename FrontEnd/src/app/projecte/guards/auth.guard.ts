@@ -3,12 +3,16 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { lastValueFrom, Observable } from 'rxjs';
 import { AuthenticationService } from '../model/services/authentication.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  IP:string;
   
-  constructor( private http: HttpClient, private auth: AuthenticationService, private router: Router){}
+  constructor( private http: HttpClient, private auth: AuthenticationService, private router: Router) {
+    this.IP = environment.ip;
+  }
   async canActivate(): Promise<boolean>{
     const accessToken = localStorage.getItem("SGaccessToken");
     if(this.auth.isAuthenticated()){
@@ -37,7 +41,7 @@ export class AuthGuard implements CanActivate {
     
     let isRefreshSuccess: boolean;
     try {
-      const response = await lastValueFrom(this.http.post(`http://172.24.4.61:4000/treballador/refreshToken`, tokenModel));
+      const response = await lastValueFrom(this.http.post(`http://${this.IP}:4000/treballador/refreshToken`, tokenModel));
       const newToken = (<any>response).accessToken;
       const newRefreshToken = (<any>response).refreshToken;
       localStorage.setItem("SGaccessToken", newToken);

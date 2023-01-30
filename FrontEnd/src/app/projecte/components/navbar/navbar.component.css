@@ -16,5 +16,9 @@ svg {
 }
 
 svg:hover {
-    fill: black;
+    fill: #616161;
+}
+
+.active{
+    fill: #616161;
 }

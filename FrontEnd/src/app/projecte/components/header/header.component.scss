@@ -1,0 +1,19 @@
+.infoHeader {
+    display: flex;
+    flex-direction: column;
+    //float: right;
+    align-items: flex-end;
+}
+
+.header {
+    background-color: #7bb902;
+    height: 8%;
+    border-bottom: 2vh solid white;
+}
+
+label {
+    color:white;
+    font-weight: bold;
+    font-size: 18px;
+    padding-right: 12px;
+}

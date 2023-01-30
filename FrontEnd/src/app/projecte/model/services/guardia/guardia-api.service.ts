@@ -39,7 +39,7 @@ export class GuardiaApiService {
 
   cancelarGuardia(idGuardia: string, idTreballador: string = "8"): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.post('http://172.24.4.61:4000/guardiatreballador/cancelGuardia?idGuardia=' + idGuardia + '&idTreballador=' + idTreballador, requestOptions);
+    return this.http.post(`http://${this.IP}:4000/guardiatreballador/cancelGuardia?idGuardia` + idGuardia + '&idTreballador=' + idTreballador, requestOptions);
   }
 
   private createHeader() {
