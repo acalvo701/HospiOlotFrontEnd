@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { userInfoService } from '../../model/services/userInfo/userInfo';
 
 @Component({
   selector: 'app-admin-main-screen',
@@ -10,5 +11,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
 export class AdminMainScreenComponent {
 
+  rol:string;
+
+  constructor(uInfo: userInfoService) {
+    const userInfo = uInfo.getInfoToken();
+    this.rol = userInfo.categoria;
+  }
 
 }

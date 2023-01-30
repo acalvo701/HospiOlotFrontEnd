@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HeaderInfoService } from '../../model/services/headerInfo/header-info.service';
+import { userInfoService } from '../../model/services/userInfo/userInfo';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,7 @@ export class HeaderComponent {
   nom:string;
   categoria:string;
 
-  constructor(header: HeaderInfoService) {
+  constructor(header: userInfoService) {
     const userInfo = header.getInfoToken();
 
     this.nom = userInfo.nom;
