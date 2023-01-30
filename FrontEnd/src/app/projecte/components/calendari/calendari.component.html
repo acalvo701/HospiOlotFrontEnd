@@ -1,10 +1,7 @@
 <div class="body">
-    <div class="header">
-
-
-    </div>
-    <div class="cos">
-
+    <app-header></app-header>
+    <div class="cosCalendar">
+        <h2 class="centre titol">CALENDARI DE GUÀRDIES</h2>
         <mat-card class="calendariCard">
             <mat-calendar [(selected)]="selected" (selectedChange)=initialize()
                 [dateClass]="dateClass()"></mat-calendar>

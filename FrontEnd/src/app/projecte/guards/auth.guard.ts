@@ -8,8 +8,11 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  IP:string;
   
-  constructor( private http: HttpClient, private auth: AuthenticationService, private router: Router){}
+  constructor( private http: HttpClient, private auth: AuthenticationService, private router: Router) {
+    this.IP = environment.ip;
+  }
   async canActivate(): Promise<boolean>{
     const accessToken = localStorage.getItem("SGaccessToken");
     if(this.auth.isAuthenticated()){
