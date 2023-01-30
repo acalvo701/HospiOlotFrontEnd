@@ -22,9 +22,14 @@ export class GuardiaApiService {
     return this.http.get(`http://${this.IP}:4000/guardia/getGuardiesByDay?data=` + data, requestOptions);
   }
 
-  getMonthGuardiesByDate(data:Date): Observable<any>{
+  getMonthGuardiesByDate(data:string): Observable<any>{
     const requestOptions = this.createHeader();
     return this.http.get(`http://${this.IP}:4000/guardia/getMonthGuardiesByDate?data=` + data, requestOptions);
+  }
+
+  getMonthGuardiesByDateFromTreballador(data:string, idTreballador:string = "8"){
+    const requestOptions = this.createHeader();
+    return this.http.get(`http://${this.IP}:4000/guardia/getMonthGuardiesByDateFromTreballador?data=${data}&idTreballador=${idTreballador}`, requestOptions);
   }
 
   reservarGuardia(idGuardia: string, idTreballador: string = "8"): Observable<any> {
@@ -39,7 +44,7 @@ export class GuardiaApiService {
 
   cancelarGuardia(idGuardia: string, idTreballador: string = "8"): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.post('http://172.24.4.61:4000/guardiatreballador/cancelGuardia?idGuardia=' + idGuardia + '&idTreballador=' + idTreballador, requestOptions);
+    return this.http.post(`http://${this.IP}:4000/guardiatreballador/cancelGuardia?idGuardia=${idGuardia}&idTreballador=${idTreballador}`, requestOptions);
   }
 
   private createHeader() {

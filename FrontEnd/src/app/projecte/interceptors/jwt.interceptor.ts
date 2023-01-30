@@ -15,7 +15,6 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     const token = localStorage.getItem('SGaccessToken');
-console.log("AA");
     if(token){
       const clonedReq = request.clone({
         headers: request.headers.set('Authorization', `Bearer ${token}`)

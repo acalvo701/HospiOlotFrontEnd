@@ -3,10 +3,6 @@
   max-width: 500px;
 }
 
-.special-date{
-  background-color: red !important
-}
-
 .body{
   background-color: #a0ce4e;
  
@@ -45,14 +41,14 @@ padding: 30px;
 html, body {
 height: 100%;
 }
-.cos{
+/* .cos{
 
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
   border-bottom: 40vh solid white;
-}
+} */
 
 app-reservar{
   width: 100%;
@@ -60,4 +56,16 @@ app-reservar{
 .calendari{
 
 
+}
+
+.special-date {
+  background-color: red !important;
+}
+
+.grey-date {
+  background-color: grey !important;
+}
+
+.pendent-date{
+  background-color: orange !important;
 }

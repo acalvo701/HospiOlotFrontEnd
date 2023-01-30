@@ -2,9 +2,9 @@ import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatCard } from '@angular/material/card';
 import { MatCalendarCellClassFunction, MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { ReservarComponent } from '../reservar/reservar.component';
-import {Inject} from '@angular/core';
-import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter,MAT_MOMENT_DATE_ADAPTER_OPTIONS,} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { Inject } from '@angular/core';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS, } from '@angular/material-moment-adapter';
+import { DateAdapter, NativeDateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { Guardia } from '../../model/entitats/implementacions/Guardia';
 import { GuardiaApiService } from '../../model/services/guardia/guardia-api.service';
@@ -19,61 +19,104 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY'
   }
 };
+import { formatDate } from '@angular/common';
 
+class PickDateAdapter extends NativeDateAdapter {
+
+  override format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date, 'yyyy-MM-dd', this.locale);;
+    } else {
+      return date.toDateString();
+    }
+  }
+
+  override getFirstDayOfWeek(): number {
+    return 1;
+  }
+
+}
 
 @Component({
   selector: 'app-calendari',
   templateUrl: './calendari.component.html',
   styleUrls: ['./calendari.component.css'],
   providers: [
-    // The locale would typically be provided on the root module of your application. We do it at
-    // the component level here, due to limitations of our example generation script.
-    {provide: MAT_DATE_LOCALE, useValue: 'ca-CA'},
+    { provide: MAT_DATE_LOCALE, useValue: 'ca-CA' },
+    { provide: DateAdapter, useClass: PickDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
 
-    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
-    // `MatMomentDateModule` in your applications root module. We provide it at the component level
-    // here, due to limitations of our example generation script.
-    {provide: DateAdapter,useClass: MomentDateAdapter,deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
-    },
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}],
+  ],
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendariComponent {
-  selected: Date |null = new Date();
-  @ViewChild(ReservarComponent) child:ReservarComponent;
-  guardiesMes: Array<Guardia>;
+  selected: Date | null = new Date();
+  @ViewChild(ReservarComponent) child: ReservarComponent;
+  guardiesMes: Map<string, Array<string>>;
 
   constructor(private httpClient: GuardiaApiService) {
-  //  this.initialize();
-    this.getMonthGuardies();
+
   }
 
-
-
-  initialize(){
+  ngOnInit() {
+this.getMonthGuardies();
+  }
+  initialize() {
     this.child.dia = this.selected;
     this.child.initialize();
-    
+
   }
 
-  getMonthGuardies(){
-   // this.httpClient.getMonthGuardiesByDate(new Date()); 
+  getMonthGuardies() {
+    this.httpClient.getMonthGuardiesByDateFromTreballador(new Date().toISOString()).subscribe(
+      response => {
+
+        let dies = new Map<string, Array<string>>;
+
+        Object.values(response)[0].forEach((guardia: any) => {
+          if (dies.has(guardia.dia)) {
+            let dia = dies.get(guardia.dia);
+            dia?.push(guardia.estat);
+          } else {
+            let estats = new Array<string>;
+            estats.push(guardia.estat);
+            dies.set(guardia.dia, estats);
+          }
+          this.guardiesMes = dies;
+        });
+
+
+      }
+    );
   }
 
   dateClass() {
+
     return (date: Date): MatCalendarCellCssClasses => {
-   
+
+      //todo guardiesMes és undefined perquè el subscribe no ha finalitzat encara i ja s'està fent aquest.
+      this.selected!.setHours(0, 0, 0, 0);
+      let dataFormated = formatDate(date, 'yyyy-MM-dd', 'ca-CA');
+
+      let estatsDelDia = this.guardiesMes.get(dataFormated);
+
+      if (estatsDelDia != null && estatsDelDia.includes('PENDENT')) {
+        return 'pendent-date';
+      } else if (estatsDelDia != null && estatsDelDia.includes('ASSIGNADA')) {
+        return 'assignada-date';
+      }
+
+      if (date < this.selected!) {
+        return 'grey-date';
+      }
+
+
 
 
       return 'special-date';
-      
-      // const highlightDate = this.datesToHighlight
-      //   .map(strDate => new Date(strDate))
-      //   .some(d => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear());
-      
-      // return highlightDate ? 'special-date' : '';
+
     };
   }
-  
+
 }
 

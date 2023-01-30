@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -7,7 +7,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-
+import { registerLocaleData } from '@angular/common';
+import localeCa from '@angular/common/locales/ca';
+registerLocaleData(localeCa);
 import { AppComponent } from './app.component';
 import { CalendariComponent } from './projecte/components/calendari/calendari.component';
 import { HistorialComponent } from './projecte/components/historial/historial.component';
@@ -35,7 +37,9 @@ import { AdminGenerarGuardiesEsquemaComponent } from './projecte/components/admi
     AppRoutingModule,
     
   ],
-  providers: [JwtHelperService, {
+  providers: [
+    { provide: LOCALE_ID, useValue: 'ca-CA'},
+    JwtHelperService, {
     provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     {provide: HTTP_INTERCEPTORS,
     useClass: JwtInterceptor,
