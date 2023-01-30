@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class GuardiaApiService {
   IP: string;
 
   constructor(private http: HttpClient) {
-    this.IP = "localhost";
+    this.IP = environment.ip;
   }
 
   getHistoryTreballador(idTreballador: number): Observable<any> {
