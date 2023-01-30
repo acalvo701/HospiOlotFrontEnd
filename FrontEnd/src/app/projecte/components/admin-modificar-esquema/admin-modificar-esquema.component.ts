@@ -5,6 +5,7 @@ import { GuardiaModel } from '../../model/entitats/implementacions/GuardiaModel'
 import { Torn } from '../../model/entitats/implementacions/Torn';
 import { Unitat } from '../../model/entitats/implementacions/Unitat';
 import { AdminApiService } from '../../model/services/admin/admin-api';
+import { userInfoService } from '../../model/services/userInfo/userInfo';
 
 @Component({
   selector: 'app-admin-modificar-esquema',
@@ -17,6 +18,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
   categories: Array<Categoria> = [];
   unitats: Array<Unitat> = [];
   torns: Array<Torn> = [];
+  esquemes: Array<GuardiaModel> = [];
 
   subscription!: Subscription[];
   error: string;
@@ -24,11 +26,13 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
   valid: string;
   validAfegir: string;
   guardarId: string;
+  idTreballador: string;
 
-  constructor(private httpClient: AdminApiService) {
+  constructor(private httpClient: AdminApiService, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
-
-    this.getGuardiesEsquema();
+    const userInfo = uInfo.getInfoToken();
+    this.idTreballador = userInfo.id;
+    this.getNomsEsquemaByIdTreballador();
     this.getAllCategories();
     this.getAllUnitats();
     this.getAllTorns();
@@ -45,7 +49,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
     let formulari: any = new FormData(nomFormulari);
 
-    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'));
+    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador, formulari.get('esquema'));
 
     this.subscription.push(this.httpClient.updateEsquemaRow(creacioGuardia).
       pipe(take(1), catchError((err: any) => {
@@ -72,7 +76,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
     let formulari: any = new FormData(nomFormulari);
 
-    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'));
+    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador, formulari.get('esquema'));
 
     this.subscription.push(this.httpClient.deleteEsquemaRow(creacioGuardia).
       pipe(take(1), catchError((err: any) => {
@@ -88,7 +92,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
             this.error = err.error;
           },
           complete: () => {
-            this.getGuardiesEsquema();
+            //this.obtenirEsquemaSelect();
             this.getAllCategories();
             this.getAllUnitats();
             this.getAllTorns();
@@ -103,7 +107,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
     if (formulari.get('categoria') != "" && formulari.get('unitat') != "" && formulari.get('torn') != "" && formulari.get('numeroPlaces') != "" && formulari.get('estat') != "") {
 
-      let creacioGuardia = new GuardiaModel('', formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'));
+      let creacioGuardia = new GuardiaModel('', formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador, formulari.get('esquema'));
 
       this.subscription.push(this.httpClient.insertEsquemaRow(creacioGuardia).
         pipe(take(1), catchError((err: any) => {
@@ -119,7 +123,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
               this.errorAfegir = err.error;
             },
             complete: () => {
-              this.getGuardiesEsquema();
+              //this.obtenirEsquemaSelect();
               this.getAllCategories();
               this.getAllUnitats();
               this.getAllTorns();
@@ -130,12 +134,35 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     }
   }
 
-  getGuardiesEsquema() {
-    this.subscription.push(this.httpClient.getGuardiesEsquema().
+ /* obtenirEsquemaSelect() {
+    
+
+      this.subscription.push(this.httpClient.getEsquemaByIdTreballadorAndName(this.idTreballador, nomEsquema).
+        pipe(take(1), catchError((err: any) => {
+          return throwError(() => new Error("Error d'API"));
+        }))
+        .subscribe(
+          {
+            next: (response) => {
+              this.guardiesEsquema = response;
+            },
+            //per veure l'error que retorna de l'api
+            error: (err: any) => {
+              this.errorAfegir = err.error;
+            },
+            complete: () => {
+              
+            },
+          }));
+    
+  }*/
+
+  getNomsEsquemaByIdTreballador() {
+    this.subscription.push(this.httpClient.getNomsEsquemaByIdTreballador(this.idTreballador).
       subscribe(
         {
           next: (response) => {
-            this.guardiesEsquema = response;
+            this.esquemes = response.esquema;
           },
           //per veure l'error que retorna de l'api
           error: () => {
@@ -165,7 +192,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
   }
 
   getAllUnitats() {
-    this.subscription.push(this.httpClient.getAllUnitats().
+    this.subscription.push(this.httpClient.getUnitatsByIdTreballador(this.idTreballador).
       subscribe(
         {
           next: (response) => {

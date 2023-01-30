@@ -6,6 +6,7 @@ import { Guardia } from '../../model/entitats/implementacions/Guardia';
 import { Torn } from '../../model/entitats/implementacions/Torn';
 import { Unitat } from '../../model/entitats/implementacions/Unitat';
 import { AdminApiService } from '../../model/services/admin/admin-api';
+import { userInfoService } from '../../model/services/userInfo/userInfo';
 
 @Component({
   selector: 'app-admin-crear-guardia',
@@ -22,10 +23,12 @@ export class AdminCrearGuardiaComponent implements OnInit, OnDestroy {
   subscription!: Subscription[];
   error: string;
   valid: string;
+  idTreballador: string;
 
-  constructor(private httpClient: AdminApiService, private fb: FormBuilder) {
+  constructor(private httpClient: AdminApiService, private fb: FormBuilder, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
-
+    const userInfo = uInfo.getInfoToken();
+    this.idTreballador = userInfo.id;
     this.getAllCategories();
     this.getAllUnitats();
     this.getAllTorns();
@@ -90,7 +93,7 @@ export class AdminCrearGuardiaComponent implements OnInit, OnDestroy {
   }
 
   getAllUnitats() {
-    this.subscription.push(this.httpClient.getAllUnitats().
+    this.subscription.push(this.httpClient.getUnitatsByIdTreballador(this.idTreballador).
       subscribe(
         {
           next: (response) => {

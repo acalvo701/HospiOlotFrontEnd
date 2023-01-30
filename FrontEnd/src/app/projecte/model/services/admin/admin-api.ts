@@ -21,6 +21,16 @@ export class AdminApiService {
     return this.http.get(`http://${this.IP}:4000/guardiaModel/getEsquema`, requestOptions);
   }
 
+  getNomsEsquemaByIdTreballador(idTreballador: string): Observable<any>{
+    const requestOptions = this.createHeader();
+    return this.http.get(`http://${this.IP}:4000/guardiaModel/getNomsEsquemaByIdTreballador?idTreballador=` + idTreballador, requestOptions);
+  }
+
+  getEsquemaByIdTreballadorAndName(idTreballador: string, nomEsquema: string): Observable<any>{
+    const requestOptions = this.createHeader();
+    return this.http.get(`http://${this.IP}:4000/guardiaModel/getEsquemaByIdTreballadorAndName?idTreballador=` + idTreballador + `&nomEsquema=` + nomEsquema, requestOptions);
+  }
+
   getAllTreballadors(): Observable<any> {
     const requestOptions = this.createHeader();
     return this.http.get(`http://${this.IP}:4000/treballador/getAllTreballadors`, requestOptions);
@@ -31,9 +41,9 @@ export class AdminApiService {
     return this.http.get(`http://${this.IP}:4000/categoria/getAllCategories`, requestOptions);
   }
 
-  getAllUnitats(): Observable<any> {
+  getUnitatsByIdTreballador(idTreballador: string): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${this.IP}:4000/unitat/getAllUnitats`, requestOptions);
+    return this.http.get(`http://${this.IP}:4000/unitat/getUnitatsByIdTreballador?idTreballador=`+ idTreballador, requestOptions);
   }
 
   getAllTorns(): Observable<any> {
@@ -41,9 +51,9 @@ export class AdminApiService {
     return this.http.get(`http://${this.IP}:4000/torn/getAllTorns`, requestOptions);
   }
 
-  getGuardiesByDay(data: Date): Observable<any> {
+  getGuardiesByDayAdmin(data: Date, idTreballador: string): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${this.IP}:4000/guardia/getGuardiesByDay?data=` + data, requestOptions);
+    return this.http.get(`http://${this.IP}:4000/guardia/getGuardiesByDayAdmin?data=` + data+  '&idTreballador=' + idTreballador, requestOptions);
   }
 
   insertarGuardiaTreballadorAdmin(guardia: GuardiaTreballador): Observable<any> {

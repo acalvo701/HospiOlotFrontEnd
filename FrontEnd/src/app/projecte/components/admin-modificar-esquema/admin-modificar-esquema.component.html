@@ -1,5 +1,16 @@
 <h2 class="centre">Modificar Esquema</h2>
 <section class="encapsulamentFormularis">
+    <form id="formulariSelect">
+        <section class="left">
+            <div class="input-container">
+                <label><b>Treballador:</b></label>
+                <select name="esquema">
+                    <option selected></option>
+                    <option *ngFor="let esquema of esquemes">{{esquema.nomEsquema}}</option>
+                </select>
+            </div>
+        </section>
+    </form>
     <form *ngFor="let guardia of guardiesEsquema" id="formulari_{{guardia.id}}">
         <section class="left">
             <table>

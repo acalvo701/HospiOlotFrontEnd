@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Guardia } from '../../model/entitats/implementacions/Guardia';
 import { AdminApiService } from '../../model/services/admin/admin-api';
 import { catchError, Subscription, take, throwError } from 'rxjs';
+import { userInfoService } from '../../model/services/userInfo/userInfo';
 
 @Component({
   selector: 'app-admin-estat-guardia',
@@ -20,9 +21,12 @@ export class AdminEstatGuardiaComponent implements OnInit, OnDestroy {
   subscription!: Subscription[];
   error: string;
   valid: string;
+  idTreballador: string;
 
-  constructor(private httpClient: AdminApiService, private fb: FormBuilder) {
+  constructor(private httpClient: AdminApiService, private fb: FormBuilder, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
+    const userInfo = uInfo.getInfoToken();
+    this.idTreballador = userInfo.id;
   }
 
   ngOnInit(): void {
@@ -46,7 +50,7 @@ export class AdminEstatGuardiaComponent implements OnInit, OnDestroy {
   }
 
   selectGuardies() {
-    this.subscription.push(this.httpClient.getGuardiesByDay(this.dataGuardia).
+    this.subscription.push(this.httpClient.getGuardiesByDayAdmin(this.dataGuardia, this.idTreballador).
       subscribe(
         {
           next: (response) => {

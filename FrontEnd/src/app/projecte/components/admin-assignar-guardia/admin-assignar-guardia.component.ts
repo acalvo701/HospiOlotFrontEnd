@@ -5,6 +5,7 @@ import { Guardia } from '../../model/entitats/implementacions/Guardia';
 import { GuardiaTreballador } from '../../model/entitats/implementacions/GuardiaTreballador';
 import { Treballador } from '../../model/entitats/implementacions/Treballador';
 import { AdminApiService } from '../../model/services/admin/admin-api';
+import { userInfoService } from '../../model/services/userInfo/userInfo';
 
 @Component({
   selector: 'app-admin-assignar-guardia',
@@ -24,10 +25,12 @@ export class AdminAssignarGuardiaComponent implements OnInit, OnDestroy {
   subscription!: Subscription[];
   error: string;
   valid: string;
+  idTreballador: string;
 
-  constructor(private httpClient: AdminApiService, private fb: FormBuilder) {
+  constructor(private httpClient: AdminApiService, private fb: FormBuilder, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
-
+    const userInfo = uInfo.getInfoToken();
+    this.idTreballador = userInfo.id;
     this.getAllTreballadors();
   }
 
@@ -97,7 +100,7 @@ export class AdminAssignarGuardiaComponent implements OnInit, OnDestroy {
   }
 
   selectGuardies() {
-    this.subscription.push(this.httpClient.getGuardiesByDay(this.dataGuardia).
+    this.subscription.push(this.httpClient.getGuardiesByDayAdmin(this.dataGuardia, this.idTreballador).
       subscribe(
         {
           next: (response) => {
