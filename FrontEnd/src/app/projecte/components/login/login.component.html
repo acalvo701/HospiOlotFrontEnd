@@ -14,15 +14,13 @@
               <mat-form-field>
               <div class="form-group">
                 <label for="dni" class="form-label">Dni</label>
-                  <input id="dni" class="form-control" type="text" [(ngModel)]="treballador.dni" type="text" autocomplete="on" name="dni" required>
+                  <input matInput id="dni" class="form-control" type="text" [(ngModel)]="treballador.dni" type="text" autocomplete="on" name="dni" required>
               </div>
             </mat-form-field>
           <mat-form-field>
-              <div class="form-group">
-                <label for="password" class="form-label">Password</label>
-                <input matInput="" type="password" atInput [type]="showPassword ? 'text' : 'password'" id="password" class="form-control" type="password" [(ngModel)]="treballador.password" name="password" required>
-                <mat-icon matSuffix (click)="togglePasswordVisibility()"class="mdi-icon" >{{showPassword?'visibility_off':'visibility'}}</mat-icon>
-              </div>
+              
+            <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"[(ngModel)]="treballador.password" name="password" required>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </mat-form-field>
               {{treballador.dni}}
               

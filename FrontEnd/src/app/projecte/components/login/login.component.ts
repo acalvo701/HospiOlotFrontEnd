@@ -16,13 +16,15 @@ export class LoginComponent {
     dni:"",
     password:"",
   };
-  
+  hide = true;
   constructor(private router:Router, private http:HttpClient, private authService:AuthenticationService){
 
   }
   submitted = false;
 
   ngOnInit(){
+
+
     if(this.authService.isAuthenticated()){
       this.router.navigate(['calendari']);
     }
@@ -41,10 +43,7 @@ export class LoginComponent {
     ).subscribe();
 
     }
-    public showPassword: boolean = false;
-    public togglePasswordVisibility(): void {
-      this.showPassword = !this.showPassword;
-    }
+
   }
  
 
