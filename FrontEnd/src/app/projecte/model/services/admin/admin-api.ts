@@ -58,7 +58,7 @@ export class AdminApiService {
     const requestOptions = this.createHeader();
     const nomEsquemaJSON = JSON.stringify(nomEsquema);
 
-    return this.http.post(`http://${this.IP}:4000/guardiaModelTreballador/insertNomEsquemaByIdTreballador`, nomEsquemaJSON, requestOptions); 
+    return this.http.post(`http://${environment.ip}:4000/guardiaModelTreballador/insertNomEsquemaByIdTreballador`, nomEsquemaJSON, requestOptions); 
   }
 
   insertarGuardiaTreballadorAdmin(guardia: GuardiaTreballador): Observable<any> {
