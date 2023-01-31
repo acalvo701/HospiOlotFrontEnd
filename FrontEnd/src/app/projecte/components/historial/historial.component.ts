@@ -13,7 +13,7 @@ export class HistorialComponent implements OnDestroy{
   guardies: Array<Guardia> = [];
   subscription!: Subscription;
   constructor(private httpClient: GuardiaApiService) { 
-    this.subscription = this.httpClient.getHistoryTreballador(8).subscribe(
+    this.subscription = this.httpClient.getHistoryTreballador().subscribe(
       response => {
         this.guardies = response.historial;
       }

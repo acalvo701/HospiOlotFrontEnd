@@ -70,10 +70,11 @@ export class CalendariComponent implements OnInit{
     );
     const monthNextBtn = document.querySelectorAll('.mat-calendar-next-button');
     let elements = Array.from(monthPrevBtn).concat(Array.from(monthNextBtn));
+    console.log(elements);
     elements.forEach((button) => {
-        document.addEventListener('click', (event) => {
+      button.addEventListener('click',() =>{
           this.pintar();
-        });
+        } );
       });
     }
   

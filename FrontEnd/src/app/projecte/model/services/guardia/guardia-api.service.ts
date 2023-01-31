@@ -12,9 +12,9 @@ export class GuardiaApiService {
   constructor(private http: HttpClient, private userInfo: userInfoService) {
   }
 
-  getHistoryTreballador(idTreballador: number): Observable<any> {
+  getHistoryTreballador(): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${environment.ip}:4000/guardiatreballador/getHistoryTreballador?idTreballador=${this.userInfo.user.id}`, requestOptions);
+    return this.http.get(`http://${environment.ip}:4000/guardiatreballador/getHistoryTreballador`, requestOptions);
   }
 
   getGuardiesByDay(data: string): Observable<any> {
