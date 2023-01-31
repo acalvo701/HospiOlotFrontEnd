@@ -10,6 +10,9 @@
                         <button class="afegir" type="button" (click)="afegirEsquema()">Afegir</button>
                     </div>
                 </div>
+                <span id="msg" *ngIf="validCrear || errorCrear">
+                    {{validCrear ? validCrear : errorCrear}}
+                </span>
             </div>
             <div class="input-container" *ngIf="esquemes.length != 0">
                 <label><b>Els meus Esquemes:</b></label>

@@ -126,13 +126,14 @@ form {
 
     @media(max-width:992px) {
         padding: 0 1.5%;
+        
     }
 
     @media(max-width:768px) {
         margin-bottom: 50px;
 
         section {
-            width: 100%;
+            //width: 100%;
             margin: 0;
             max-height: 55vh;
             overflow-y: scroll;
@@ -150,6 +151,8 @@ form {
                 width: 100%;
             }
         }
+        //.crearEsquema {
+        //}
     }
 }
 

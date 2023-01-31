@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Guardia } from '../../entitats/implementacions/Guardia';
 import { GuardiaModel } from '../../entitats/implementacions/GuardiaModel';
+import { GuardiaModelTreballador } from '../../entitats/implementacions/GuardiaModelTreballador';
 import { GuardiaTreballador } from '../../entitats/implementacions/GuardiaTreballador';
 
 @Injectable({
@@ -16,19 +17,14 @@ export class AdminApiService {
     this.IP = environment.ip;
   }
 
-  getGuardiesEsquema(): Observable<any> {
-    const requestOptions = this.createHeader();
-    return this.http.get(`http://${this.IP}:4000/guardiaModel/getEsquema`, requestOptions);
-  }
-
   getNomsEsquemaByIdTreballador(idTreballador: string): Observable<any>{
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${this.IP}:4000/guardiaModel/getNomsEsquemaByIdTreballador?idTreballador=` + idTreballador, requestOptions);
+    return this.http.get(`http://${this.IP}:4000/guardiaModelTreballador/getNomsEsquemaByIdTreballador?idTreballador=` + idTreballador, requestOptions);
   }
 
   getEsquemaByIdTreballadorAndName(idTreballador: string, nomEsquema: string): Observable<any>{
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${this.IP}:4000/guardiaModel/getEsquemaByIdTreballadorAndName?idTreballador=` + idTreballador + `&nomEsquema=` + nomEsquema, requestOptions);
+    return this.http.get(`http://${this.IP}:4000/guardiaModelTreballador/getEsquemaByIdTreballadorAndName?idTreballador=` + idTreballador + `&nomEsquema=` + nomEsquema, requestOptions);
   }
 
   getAllTreballadors(): Observable<any> {
@@ -53,7 +49,14 @@ export class AdminApiService {
 
   getGuardiesByDayAdmin(data: Date, idTreballador: string): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${this.IP}:4000/guardia/getGuardiesByDayAdmin?data=` + data+  '&idTreballador=' + idTreballador, requestOptions);
+    return this.http.get(`http://${this.IP}:4000/guardia/getGuardiesByDayAdmin?data=` + data+  `&idTreballador=` + idTreballador, requestOptions);
+  }
+
+  insertNomEsquemaByIdTreballador(nomEsquema: GuardiaModelTreballador): Observable<any> {
+    const requestOptions = this.createHeader();
+    const nomEsquemaJSON = JSON.stringify(nomEsquema);
+
+    return this.http.post(`http://${this.IP}:4000/guardiaModelTreballador/insertNomEsquemaByIdTreballador`, nomEsquemaJSON, requestOptions); 
   }
 
   insertarGuardiaTreballadorAdmin(guardia: GuardiaTreballador): Observable<any> {

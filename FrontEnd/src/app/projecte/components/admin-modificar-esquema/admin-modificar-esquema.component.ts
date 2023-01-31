@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { catchError, Subscription, take, throwError } from 'rxjs';
 import { Categoria } from '../../model/entitats/implementacions/Categoria';
 import { GuardiaModel } from '../../model/entitats/implementacions/GuardiaModel';
+import { GuardiaModelTreballador } from '../../model/entitats/implementacions/GuardiaModelTreballador';
 import { Torn } from '../../model/entitats/implementacions/Torn';
 import { Unitat } from '../../model/entitats/implementacions/Unitat';
 import { AdminApiService } from '../../model/services/admin/admin-api';
@@ -18,13 +19,15 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
   categories: Array<Categoria> = [];
   unitats: Array<Unitat> = [];
   torns: Array<Torn> = [];
-  esquemes: Array<GuardiaModel> = [];
+  esquemes: Array<GuardiaModelTreballador> = [];
 
   subscription!: Subscription[];
   error: string;
   errorAfegir: string;
+  errorCrear: string;
   valid: string;
   validAfegir: string;
+  validCrear: string;
   guardarId: string;
   idTreballador: string;
 
@@ -54,7 +57,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
     let formulari: any = new FormData(nomFormulari);
 
-    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador, formulari.get('esquema'));
+    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador);
 
     this.subscription.push(this.httpClient.updateEsquemaRow(creacioGuardia).
       pipe(take(1), catchError((err: any) => {
@@ -81,7 +84,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
     let formulari: any = new FormData(nomFormulari);
 
-    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador, formulari.get('esquema'));
+    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador);
 
     this.subscription.push(this.httpClient.deleteEsquemaRow(creacioGuardia).
       pipe(take(1), catchError((err: any) => {
@@ -112,7 +115,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
     if (formulari.get('categoria') != "" && formulari.get('unitat') != "" && formulari.get('torn') != "" && formulari.get('numeroPlaces') != "" && formulari.get('estat') != "") {
 
-      let creacioGuardia = new GuardiaModel('', formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador, formulari.get('esquema'));
+      let creacioGuardia = new GuardiaModel('', formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador);
 
       this.subscription.push(this.httpClient.insertEsquemaRow(creacioGuardia).
         pipe(take(1), catchError((err: any) => {
@@ -236,7 +239,33 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     const nomFormulari: any = document.getElementById(`formulariSelect`);
     let formulari: any = new FormData(nomFormulari);
     if(formulari.get('nomEsquema') != ''){
-
+      
+      let creacioEsquema = new GuardiaModelTreballador(this.idTreballador, formulari.get('nomEsquema'));
+      this.subscription.push(this.httpClient.insertNomEsquemaByIdTreballador(creacioEsquema).
+        pipe(take(1), catchError((err: any) => {
+          console.log(err);
+          if(err.error.error.code == 'ER_DUP_ENTRY'){
+            return throwError(() => new Error("Ja existeix aquest nom d'esquema"));
+          }
+          return throwError(() =>
+          
+          new Error("Error d'API"));
+        }))
+        .subscribe(
+          {
+            next: (response) => {
+              this.validCrear = response.message;
+            },
+            //per veure l'error que retorna de l'api
+            error: (err: any) => {
+              this.errorCrear = err;
+            },
+            complete: () => {
+              this.getNomsEsquemaByIdTreballador();
+            },
+          }));
+    } else {
+      this.errorCrear = "Falten camps per emplenar!";
     }
   }
 }
