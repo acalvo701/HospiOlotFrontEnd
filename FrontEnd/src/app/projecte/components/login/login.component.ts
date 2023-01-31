@@ -23,16 +23,12 @@ export class LoginComponent {
   submitted = false;
 
   ngOnInit(){
-
-
-    if(this.authService.isAuthenticated()){
+    if(this.authService.isAuthenticated())
       this.router.navigate(['calendari']);
-    }
   }
 
   onSubmit() { 
     
-
     this.authService.login(this.treballador.dni,this.treballador.password).pipe(
       map(token => 
         //jwt_decode(token);
