@@ -10,9 +10,9 @@ export class HeaderComponent {
   nom:string;
   categoria:string;
 
-  constructor(header: userInfoService) {
-
-    this.nom = header.user.nom;
-    this.categoria = header.user.categoria;
+  constructor(userInfo: userInfoService) {
+    console.log(userInfo);
+    this.nom = userInfo.user.nom;
+    this.categoria = userInfo.user.categoria;
   }
 }

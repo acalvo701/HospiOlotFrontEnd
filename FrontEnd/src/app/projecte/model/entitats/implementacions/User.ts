@@ -6,7 +6,7 @@ export class User {
 
     constructor(jsonToken:any) {
         this.dni = jsonToken.dni;
-        this.categoria = jsonToken.estat;
+        this.categoria = jsonToken.categoria;
         this.nom = jsonToken.nom;
         this.id = jsonToken.id;
     }

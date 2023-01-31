@@ -8,6 +8,7 @@ import { User } from '../../entitats/implementacions/User';
 export class userInfoService {
   user: User;
   constructor(private jwtHelper: JwtHelperService) {
+    console.log(this.jwtHelper.decodeToken(localStorage.getItem('SGaccessToken')!));
     this.user = new User(this.jwtHelper.decodeToken(localStorage.getItem('SGaccessToken')!));
   }
 
