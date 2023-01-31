@@ -3,26 +3,47 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse 
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
+import { catchError, Observable } from 'rxjs';
+import { throwError, BehaviorSubject, of, finalize } from "rxjs";
+import { filter, take, switchMap } from "rxjs/operators";
+import { Router } from '@angular/router';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor( private router: Router
+  ) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    let req = request;
     const token = localStorage.getItem('SGaccessToken');
-    if(token){
-      const clonedReq = request.clone({
-        headers: request.headers.set('Authorization', `Bearer ${token}`)
-      });
-      return next.handle(clonedReq);
-    }else{
-      return next.handle(request);
+    if (token) {
+      request = req.clone(
+        {
+          setHeaders: {
+            authorization: `Bearer ${token}`
+          }
+        });
     }
+
+    return next.handle(request).pipe(catchError((err:HttpErrorResponse)=>{
+      
+      if (err.status === 401) {
+        this.router.navigateByUrl('/login');
+      }
+      return throwError( err );
+
+    })
+
+
+
+    )
+
+
+
 
   }
 }

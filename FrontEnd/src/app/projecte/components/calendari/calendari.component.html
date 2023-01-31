@@ -5,6 +5,7 @@
         <div class="calendariDiv">
         <mat-card class="calendariCard">
             <mat-calendar [(selected)]="selected" (selectedChange)=initialize() (monthSelected)="this.getAllGuardies()"></mat-calendar>
+        <div class="mat-calendar-content llegendaCalendar"> <span><span class="assignada-date-circle">⬤</span>Assignades</span>  <span><span class="pendent-date-circle">⬤</span>Pendents</span></div>
         </mat-card>
 
         <app-reservar [dia]="selected"></app-reservar>

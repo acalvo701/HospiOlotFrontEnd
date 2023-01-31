@@ -22,6 +22,12 @@ export class LoginComponent {
   }
   submitted = false;
 
+  ngOnInit(){
+    if(this.authService.isAuthenticated()){
+      this.router.navigate(['calendari']);
+    }
+  }
+
   onSubmit() { 
     
 
