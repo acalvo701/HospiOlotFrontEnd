@@ -113,8 +113,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     const selectFormulari: any = document.getElementById(`selectFormulari`);
 
     let formulari: any = new FormData(nomFormulari);
-    let idGMT = selectFormulari.options[nomFormulari.selectedIndex].id;
-
+    let idGMT = selectFormulari.options[selectFormulari.selectedIndex].id;
 
     if (formulari.get('categoria') != "" && formulari.get('unitat') != "" && formulari.get('torn') != "" && formulari.get('numeroPlaces') != "" && formulari.get('estat') != "") {
 
@@ -138,6 +137,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
               this.getAllCategories();
               this.getAllUnitats();
               this.getAllTorns();
+              nomFormulari.reset();
             },
           }));
     } else {
@@ -259,7 +259,6 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
       let creacioEsquema = new GuardiaModelTreballador('', this.idTreballador, formulari.get('nomEsquema'));
       this.subscription.push(this.httpClient.insertNomEsquemaByIdTreballador(creacioEsquema).
         pipe(take(1), catchError((err: any) => {
-          console.log(err);
           if(err.error.error.code == 'ER_DUP_ENTRY'){
             return throwError(() => new Error("Ja existeix aquest nom d'esquema"));
           }
