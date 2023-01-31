@@ -26,7 +26,7 @@ export class AdminApiService {
 
   getEsquemaByIdTreballadorAndName(idTreballador: string, nomEsquema: string): Observable<any>{
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${environment.ip}:4000/guardiaModelTreballador/getEsquemaByIdTreballadorAndName?idTreballador=` + idTreballador + `&nomEsquema=` + nomEsquema, requestOptions);
+    return this.http.get(`http://${environment.ip}:4000/guardiaModel/getEsquemaByIdTreballadorAndName?idTreballador=` + idTreballador + `&nomEsquema=` + nomEsquema, requestOptions);
   }
 
   getAllTreballadors(): Observable<any> {

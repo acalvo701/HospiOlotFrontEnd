@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { catchError, Subscription, take, throwError } from 'rxjs';
 import { Categoria } from '../../model/entitats/implementacions/Categoria';
 import { GuardiaModel } from '../../model/entitats/implementacions/GuardiaModel';
@@ -31,6 +31,10 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
   guardarId: string;
   idTreballador: string;
 
+  mostrarAfegir: boolean = false;
+
+  string: string;
+
   constructor(private httpClient: AdminApiService, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
     this.idTreballador = uInfo.user.id;
@@ -46,17 +50,12 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     });
   }
 
-  getEsquema() {
-    this.obtenirEsquemaSelect();
-
-  }
-
   modificarEsquema(id: string) {
     const nomFormulari: any = document.getElementById(`formulari_${id}`);
 
     let formulari: any = new FormData(nomFormulari);
 
-    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador);
+    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), '');
 
     this.subscription.push(this.httpClient.updateEsquemaRow(creacioGuardia).
       pipe(take(1), catchError((err: any) => {
@@ -83,7 +82,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
     let formulari: any = new FormData(nomFormulari);
 
-    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador);
+    let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), '');
 
     this.subscription.push(this.httpClient.deleteEsquemaRow(creacioGuardia).
       pipe(take(1), catchError((err: any) => {
@@ -107,14 +106,19 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
         }));
   }
 
+
+
   afegirRowEsquema() {
     const nomFormulari: any = document.getElementById(`formulariAfegir`);
+    const selectFormulari: any = document.getElementById(`selectFormulari`);
 
     let formulari: any = new FormData(nomFormulari);
+    let idGMT = selectFormulari.options[nomFormulari.selectedIndex].id;
+
 
     if (formulari.get('categoria') != "" && formulari.get('unitat') != "" && formulari.get('torn') != "" && formulari.get('numeroPlaces') != "" && formulari.get('estat') != "") {
 
-      let creacioGuardia = new GuardiaModel('', formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), this.idTreballador);
+      let creacioGuardia = new GuardiaModel('', formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), idGMT);
 
       this.subscription.push(this.httpClient.insertEsquemaRow(creacioGuardia).
         pipe(take(1), catchError((err: any) => {
@@ -144,7 +148,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
   obtenirEsquemaSelect() {
     const nomFormulari: any = document.getElementById(`formulariSelect`);
     let formulari: any = new FormData(nomFormulari);
-    
+
     this.subscription.push(this.httpClient.getEsquemaByIdTreballadorAndName(this.idTreballador, formulari.get('esquema')).
       pipe(take(1), catchError((err: any) => {
         return throwError(() => new Error("Error d'API"));
@@ -159,12 +163,22 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
             this.errorAfegir = err.error;
           },
           complete: () => {
-          this.obtenirEsquemaSelect();
+          this.comprovarValorSelect();
           this.getAllCategories();
           this.getAllUnitats();
           this.getAllTorns();
           },
         }));
+  }
+  
+  comprovarValorSelect() {
+    const nomFormulari: any = document.getElementById(`formulariSelect`);
+    let formulari: any = new FormData(nomFormulari);
+    if (formulari.get('esquema') == "") {
+      this.mostrarAfegir = false;
+    }else {
+      this.mostrarAfegir = true;
+    }
   }
 
   getNomsEsquemaByIdTreballador() {
@@ -234,12 +248,15 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
           },
         }));
   }
+
+
+
   afegirEsquema() {
     const nomFormulari: any = document.getElementById(`formulariSelect`);
     let formulari: any = new FormData(nomFormulari);
     if(formulari.get('nomEsquema') != ''){
       
-      let creacioEsquema = new GuardiaModelTreballador(this.idTreballador, formulari.get('nomEsquema'));
+      let creacioEsquema = new GuardiaModelTreballador('', this.idTreballador, formulari.get('nomEsquema'));
       this.subscription.push(this.httpClient.insertNomEsquemaByIdTreballador(creacioEsquema).
         pipe(take(1), catchError((err: any) => {
           console.log(err);

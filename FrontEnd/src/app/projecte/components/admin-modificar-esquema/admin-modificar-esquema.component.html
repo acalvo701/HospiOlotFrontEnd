@@ -7,7 +7,7 @@
                 <div class="crearEsquema">
                     <input type="text" name="nomEsquema">
                     <div class="button-container">
-                        <button class="afegir" type="button" (click)="afegirEsquema()">Afegir</button>
+                        <button class="afegir" type="button" (click)="afegirEsquema()">Crear</button>
                     </div>
                 </div>
                 <span id="msg" *ngIf="validCrear || errorCrear">
@@ -16,9 +16,9 @@
             </div>
             <div class="input-container" *ngIf="esquemes.length != 0">
                 <label><b>Els meus Esquemes:</b></label>
-                <select name="esquema" (change)="obtenirEsquemaSelect()">
+                <select name="esquema" id="selectFormulari" (change)="obtenirEsquemaSelect()">
                     <option selected></option>
-                    <option *ngFor="let esquema of esquemes">{{esquema.nomEsquema}}</option>
+                    <option *ngFor="let esquema of esquemes" id="{{esquema.id}}" value="{{esquema.nomEsquema}}">{{esquema.nomEsquema}}</option>
                 </select>
             </div>
         </section>
@@ -96,7 +96,7 @@
         </section>
     </form>
 
-    <form id="formulariAfegir" *ngIf="guardiesEsquema.length != 0">
+    <form id="formulariAfegir" *ngIf="mostrarAfegir">
         <section class="left">
             <table>
                 <thead>
