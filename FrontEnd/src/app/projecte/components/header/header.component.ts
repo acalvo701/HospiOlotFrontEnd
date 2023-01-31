@@ -11,8 +11,8 @@ export class HeaderComponent {
   categoria:string;
 
   constructor(header: userInfoService) {
-    const userInfo = header.getInfoToken();
-    this.nom = userInfo.nom;
-    this.categoria = userInfo.categoria;
+
+    this.nom = header.user.nom;
+    this.categoria = header.user.categoria;
   }
 }

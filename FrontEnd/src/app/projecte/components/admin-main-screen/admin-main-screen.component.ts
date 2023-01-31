@@ -14,8 +14,8 @@ export class AdminMainScreenComponent {
   rol:string;
 
   constructor(uInfo: userInfoService) {
-    const userInfo = uInfo.getInfoToken();
-    this.rol = userInfo.categoria;
+
+    this.rol = uInfo.user.categoria;
   }
 
 }

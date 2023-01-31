@@ -8,16 +8,14 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthenticationService {
 
-  IP: string;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
-    this.IP = environment.ip;
   }
 
   login(dni: string, password: string){
   
     let userData = { dni: dni, password: password }
-    return this.http.post<any>(`http://${this.IP}:4000/treballador/login`, userData).pipe(
+    return this.http.post<any>(`http://${environment.ip}:4000/treballador/login`, userData).pipe(
     map((response) =>{
       localStorage.setItem('SGaccessToken', response.accessToken);
       localStorage.setItem('SGrefreshToken', response.refreshToken);
