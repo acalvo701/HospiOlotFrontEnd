@@ -118,6 +118,12 @@ form {
         clear: both;
     }
 
+    .crearEsquema {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
     @media(max-width:992px) {
         padding: 0 1.5%;
     }
