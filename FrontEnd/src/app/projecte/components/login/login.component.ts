@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { Treballador } from '../../model/entitats/implementacions/Treballador';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs';
-import { AuthenticationService } from '../../model/services/authentication.service';
+import { AuthenticationService } from '../../model/services/auth/authentication.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,6 +21,12 @@ export class LoginComponent {
 
   }
   submitted = false;
+
+  ngOnInit(){
+    if(this.authService.isAuthenticated()){
+      this.router.navigate(['calendari']);
+    }
+  }
 
   onSubmit() { 
     

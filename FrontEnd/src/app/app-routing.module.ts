@@ -14,6 +14,7 @@ import { LogoutComponent } from './projecte/components/logout/logout.component';
     { path: 'admin', component: AdminMainScreenComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent},
     { path: 'logout', component: LogoutComponent},
+    
   ];
 
 

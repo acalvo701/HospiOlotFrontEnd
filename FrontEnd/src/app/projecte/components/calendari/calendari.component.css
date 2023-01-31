@@ -53,18 +53,6 @@ h1 {
   max-width: 500px;
 }
 
-.special-date {
-  background-color: red !important;
-}
-
-.grey-date {
-  background-color: grey !important;
-}
-
-.pendent-date{
-  background-color: orange !important;
-}
-
 svg {
   fill: white;
 }
@@ -79,6 +67,13 @@ svg:hover {
   align-items: center;
 }
 
+.llegendaCalendar{
+
+  display: flex;
+  justify-content: space-evenly;
+
+
+}
 app-reservar {
   width: 100%;
   max-width: 500px

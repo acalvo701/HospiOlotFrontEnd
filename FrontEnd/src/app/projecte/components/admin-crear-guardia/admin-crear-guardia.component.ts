@@ -27,8 +27,7 @@ export class AdminCrearGuardiaComponent implements OnInit, OnDestroy {
 
   constructor(private httpClient: AdminApiService, private fb: FormBuilder, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
-    const userInfo = uInfo.getInfoToken();
-    this.idTreballador = userInfo.id;
+    this.idTreballador = uInfo.user.id;
     this.getAllCategories();
     this.getAllUnitats();
     this.getAllTorns();

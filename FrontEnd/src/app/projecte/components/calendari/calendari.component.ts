@@ -92,7 +92,6 @@ export class CalendariComponent implements OnInit{
             estats.push(guardia.estat);
             dies.set(guardia.dia, estats);
           }
-          console.log(this.guardiesMes);
           this.guardiesMes = dies;
           this.pintar();
         });
