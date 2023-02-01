@@ -96,7 +96,7 @@ export class AdminApiService {
     return this.http.post(`http://${environment.ip}:4000/guardiaModel/updateEsquemaRow`, guardiaModelJSON, requestOptions);
   }
 
-  generarGuardies(diaInici:Date, diaFi: Date){
+  generarGuardiesEsquema(diaInici:Date, diaFi: Date){
     let Json = {diaInici: diaInici, diaFi: diaFi}
     const requestOptions = this.createHeader();
     return this.http.post(`http://${environment.ip}:4000/guardiaModel/generarGuardiesEsquema`, Json, requestOptions);
