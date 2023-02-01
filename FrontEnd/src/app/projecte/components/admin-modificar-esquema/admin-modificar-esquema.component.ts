@@ -33,8 +33,6 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
   mostrarAfegir: boolean = false;
 
-  string: string;
-
   constructor(private httpClient: AdminApiService, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
     this.idTreballador = uInfo.user.id;
@@ -48,6 +46,92 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     this.subscription.forEach((s) => {
       s.unsubscribe();
     });
+  }
+
+  afegirEsquema() {
+    const nomFormulari: any = document.getElementById(`formulariSelect`);
+    let formulari: any = new FormData(nomFormulari);
+    if(formulari.get('nomEsquema') != ''){
+      
+      let creacioEsquema = new GuardiaModelTreballador('', this.idTreballador, formulari.get('nomEsquema'));
+      this.subscription.push(this.httpClient.insertNomEsquemaByIdTreballador(creacioEsquema).
+        pipe(take(1), catchError((err: any) => {
+          if(err.error.error.code == 'ER_DUP_ENTRY'){
+            return throwError(() => new Error("Ja existeix aquest nom d'esquema"));
+          }
+          return throwError(() =>
+          
+          new Error("Error d'API"));
+        }))
+        .subscribe(
+          {
+            next: (response) => {
+              this.validCrear = response.message;
+            },
+            //per veure l'error que retorna de l'api
+            error: (err: any) => {
+              this.errorCrear = err;
+            },
+            complete: () => {
+              this.getNomsEsquemaByIdTreballador();
+            },
+          }));
+    } else {
+      this.errorCrear = "Falten camps per emplenar!";
+    }
+  }
+
+  getNomsEsquemaByIdTreballador() {
+    this.subscription.push(this.httpClient.getNomsEsquemaByIdTreballador(this.idTreballador).
+      subscribe(
+        {
+          next: (response) => {
+            this.esquemes = response.esquema;
+          },
+          //per veure l'error que retorna de l'api
+          error: () => {
+
+          },
+          complete: () => {
+
+          },
+        }));
+  }
+
+  obtenirEsquemaSelect() {
+    const nomFormulari: any = document.getElementById(`formulariSelect`);
+    let formulari: any = new FormData(nomFormulari);
+
+    this.subscription.push(this.httpClient.getEsquemaByIdTreballadorAndName(this.idTreballador, formulari.get('esquema')).
+      pipe(take(1), catchError((err: any) => {
+        return throwError(() => new Error("Error d'API"));
+      }))
+      .subscribe(
+        {
+          next: (response) => {
+            this.guardiesEsquema = response.esquema;
+          },
+          //per veure l'error que retorna de l'api
+          error: (err: any) => {
+            this.errorAfegir = err.error;
+          },
+          complete: () => {
+          this.comprovarValorSelect();
+          this.getAllCategories();
+          this.getAllUnitats();
+          this.getAllTorns();
+          },
+        }));
+  }
+
+  comprovarValorSelect() {
+    const nomFormulari: any = document.getElementById(`formulariSelect`);
+    let formulari: any = new FormData(nomFormulari);
+    if (formulari.get('esquema') == "") {
+      this.mostrarAfegir = false;
+    }else {
+      this.mostrarAfegir = true;
+    }
   }
 
   modificarEsquema(id: string) {
@@ -106,8 +190,6 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
         }));
   }
 
-
-
   afegirRowEsquema() {
     const nomFormulari: any = document.getElementById(`formulariAfegir`);
     const selectFormulari: any = document.getElementById(`selectFormulari`);
@@ -144,60 +226,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
       this.errorAfegir = "Falten camps per emplenar!";
     }
   }
-
-  obtenirEsquemaSelect() {
-    const nomFormulari: any = document.getElementById(`formulariSelect`);
-    let formulari: any = new FormData(nomFormulari);
-
-    this.subscription.push(this.httpClient.getEsquemaByIdTreballadorAndName(this.idTreballador, formulari.get('esquema')).
-      pipe(take(1), catchError((err: any) => {
-        return throwError(() => new Error("Error d'API"));
-      }))
-      .subscribe(
-        {
-          next: (response) => {
-            this.guardiesEsquema = response.esquema;
-          },
-          //per veure l'error que retorna de l'api
-          error: (err: any) => {
-            this.errorAfegir = err.error;
-          },
-          complete: () => {
-          this.comprovarValorSelect();
-          this.getAllCategories();
-          this.getAllUnitats();
-          this.getAllTorns();
-          },
-        }));
-  }
   
-  comprovarValorSelect() {
-    const nomFormulari: any = document.getElementById(`formulariSelect`);
-    let formulari: any = new FormData(nomFormulari);
-    if (formulari.get('esquema') == "") {
-      this.mostrarAfegir = false;
-    }else {
-      this.mostrarAfegir = true;
-    }
-  }
-
-  getNomsEsquemaByIdTreballador() {
-    this.subscription.push(this.httpClient.getNomsEsquemaByIdTreballador(this.idTreballador).
-      subscribe(
-        {
-          next: (response) => {
-            this.esquemes = response.esquema;
-          },
-          //per veure l'error que retorna de l'api
-          error: () => {
-
-          },
-          complete: () => {
-
-          },
-        }));
-  }
-
   getAllCategories() {
     this.subscription.push(this.httpClient.getAllCategories().
       subscribe(
@@ -247,40 +276,5 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
           },
         }));
-  }
-
-
-
-  afegirEsquema() {
-    const nomFormulari: any = document.getElementById(`formulariSelect`);
-    let formulari: any = new FormData(nomFormulari);
-    if(formulari.get('nomEsquema') != ''){
-      
-      let creacioEsquema = new GuardiaModelTreballador('', this.idTreballador, formulari.get('nomEsquema'));
-      this.subscription.push(this.httpClient.insertNomEsquemaByIdTreballador(creacioEsquema).
-        pipe(take(1), catchError((err: any) => {
-          if(err.error.error.code == 'ER_DUP_ENTRY'){
-            return throwError(() => new Error("Ja existeix aquest nom d'esquema"));
-          }
-          return throwError(() =>
-          
-          new Error("Error d'API"));
-        }))
-        .subscribe(
-          {
-            next: (response) => {
-              this.validCrear = response.message;
-            },
-            //per veure l'error que retorna de l'api
-            error: (err: any) => {
-              this.errorCrear = err;
-            },
-            complete: () => {
-              this.getNomsEsquemaByIdTreballador();
-            },
-          }));
-    } else {
-      this.errorCrear = "Falten camps per emplenar!";
-    }
   }
 }
