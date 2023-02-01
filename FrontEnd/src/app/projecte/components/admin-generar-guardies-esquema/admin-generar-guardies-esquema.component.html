@@ -9,7 +9,13 @@
             <label><b>Dia Fi:</b></label>
             <input type="date" formControlName="diaFi">
         </div>        
-            
+        <div class="input-container">
+            <label><b>Els meus Esquemes:</b></label>
+            <select id="selectFormulari" formControlName="nomEsquema">
+                <option selected></option>
+                <option *ngFor="let esquema of esquemes" id="{{esquema.id}}" value="{{esquema.nomEsquema}}">{{esquema.nomEsquema}}</option>
+            </select>
+        </div>
         <div class="send-container">
             <button type="button" [disabled]="!this.generarGuardiesForm.valid" (click)="generarGuardiesEsquema()"
                 >Generar</button>
