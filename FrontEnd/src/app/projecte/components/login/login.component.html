@@ -1,11 +1,11 @@
-<div>
+<div class="body" >
   <div class="wrapper">
     <main>
       <section>
         <div class="face">
           <div class="bm_container" id="icon-container-female_nurse"></div>
-          <!-- <img src="assets/loginImage.png"> -->
-          <h1>IMATGE HOSPIOLOT</h1>
+          <img src="assets/loginImage.png">
+         
         </div>
         <div class="">
           <div class="email-login">
@@ -13,17 +13,18 @@
             <form (ngSubmit)="onSubmit()" #usuariForm="ngForm">
               <mat-form-field>
               <div class="form-group">
-                <label for="dni" class="form-label">Dni</label>
+               
                   <input matInput id="dni" class="form-control" type="text" [(ngModel)]="treballador.dni" type="text" autocomplete="on" name="dni" required>
               </div>
             </mat-form-field>
+          
           <mat-form-field>
-              
-            <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"[(ngModel)]="treballador.password" name="password" required>
+            
+            <input matInput placeholder="Password" class="form-control form-group" [type]="hide ? 'password' : 'text'"[(ngModel)]="treballador.password" name="password" required>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </mat-form-field>
-              {{treballador.dni}}
-              
+           
+          </mat-form-field>
+         
 
 
               <button [disabled]="!usuariForm.form.valid" type="submit" class="btn btn-green">Iniciar sessió</button>
@@ -33,14 +34,7 @@
 
 
       </section>
-      <div class="vector-1">
-      </div>
-
-      <div class="vector-2">
-      </div>
-
-      <div class="vector-3"></div>
-
+    
     </main>
 
   </div>

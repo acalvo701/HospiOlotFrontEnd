@@ -14,11 +14,6 @@ export class AdminApiService {
   constructor(private http: HttpClient) {
   }
 
-  getGuardiesEsquema(): Observable<any> {
-    const requestOptions = this.createHeader();
-    return this.http.get(`http://${environment.ip}:4000/guardiaModel/getEsquema`, requestOptions);
-  }
-
   getNomsEsquemaByIdTreballador(idTreballador: string): Observable<any>{
     const requestOptions = this.createHeader();
     return this.http.get(`http://${environment.ip}:4000/guardiaModelTreballador/getNomsEsquemaByIdTreballador?idTreballador=` + idTreballador, requestOptions);
@@ -51,7 +46,7 @@ export class AdminApiService {
 
   getGuardiesByDayAdmin(data: Date, idTreballador: string): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${environment.ip}:4000/guardia/getGuardiesByDayAdmin?data=` + data+  `&idTreballador=` + idTreballador, requestOptions);
+    return this.http.get(`http://${environment.ip}:4000/guardiaAdmin/getGuardiesByDayAdmin?data=` + data+  `&idTreballador=` + idTreballador, requestOptions);
   }
 
   insertNomEsquemaByIdTreballador(nomEsquema: GuardiaModelTreballador): Observable<any> {
@@ -74,7 +69,7 @@ export class AdminApiService {
     const requestOptions = this.createHeader();
     const guardiaJSON = JSON.stringify(guardia);
 
-    return this.http.post(`http://${environment.ip}:4000/guardia/insertGuardia`, guardiaJSON, requestOptions);
+    return this.http.post(`http://${environment.ip}:4000/guardiaAdmin/insertGuardia`, guardiaJSON, requestOptions);
   }
 
   insertEsquemaRow(guardiaModel: GuardiaModel): Observable<any> {
@@ -90,7 +85,7 @@ export class AdminApiService {
     const requestOptions = this.createHeader();
     const guardiaJSON = JSON.stringify(guardia);
 
-    return this.http.post(`http://${environment.ip}:4000/guardia/updateEstatGuardiaAdmin`, guardiaJSON, requestOptions);
+    return this.http.post(`http://${environment.ip}:4000/guardiaAdmin/updateEstatGuardiaAdmin`, guardiaJSON, requestOptions);
   }
 
   updateEsquemaRow(guardiaModel: GuardiaModel): Observable<any> {
@@ -101,10 +96,11 @@ export class AdminApiService {
     return this.http.post(`http://${environment.ip}:4000/guardiaModel/updateEsquemaRow`, guardiaModelJSON, requestOptions);
   }
 
-  generarGuardies(diaInici:Date, diaFi: Date){
-    let Json = {diaInici: diaInici, diaFi: diaFi}
+  generarGuardiesEsquema(diaInici:Date, diaFi: Date, idGMT: string){
+    let esquemaJSON = {diaInici: diaInici, diaFi: diaFi, idGuardiaModelTreballador: idGMT}
     const requestOptions = this.createHeader();
-    return this.http.post(`http://${environment.ip}:4000/guardiaModel/generarGuardiesEsquema`, Json, requestOptions);
+
+    return this.http.post(`http://${environment.ip}:4000/guardiaModel/generarGuardiesEsquema`, esquemaJSON, requestOptions);
   }
 
 
