@@ -183,3 +183,10 @@ form {
         display: none;
     }
 }
+@media only screen and (max-width: 890px) {
+    .crearEsquema {
+        display: flex;
+    
+        flex-direction: column;
+    }
+}
