@@ -1,15 +1,22 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  
+
 }
-mat-form-field{
-  border:100
+.body{
+  background-color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
 .mdi-icon {
   position: absolute;
   right: 2px;
   top: 60px;
- background-color: white;
+ background-color: transparent;
 
 
 }
@@ -21,6 +28,7 @@ mat-form-field{
   display: flex;
   flex-direction: column;
   justify-content: center;
+ 
 }
 
 main {
@@ -85,14 +93,13 @@ section {
 }
 
 .email-login a {
-  color: blue;
+  color: green;
   text-decoration: none;
 }
 
 .email-login a:hover {
-  border-bottom: 1px solid blue;
+  border-bottom: 1px solid green;
 }
-
 .login-h-container {
   margin-bottom: 20px;
 }
@@ -108,7 +115,7 @@ form {
 }
 
 input:focus {
-  outline: 1px solid #ffc85c;
+  outline: 1px solid green;
   transform: scale(1.005);
 }
 
@@ -432,6 +439,7 @@ body {
   border-radius: 100%;
   background-color: #ff4d4d;
 }
+
 
 .heart::after {
   bottom: 34px;
