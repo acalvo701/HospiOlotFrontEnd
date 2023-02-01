@@ -27,29 +27,29 @@ export class GuardiaApiService {
     return this.http.get(`http://${environment.ip}:4000/guardia/getMonthGuardiesByDate?data=${data}`, requestOptions);
   }
 
-  getAllGuardiesFromTreballador(idTreballador:string = "8"){
+  getAllGuardiesFromTreballador(){
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${environment.ip}:4000/guardia/getAllGuardiesFromTreballador?idTreballador=${idTreballador}`, requestOptions);
+    return this.http.get(`http://${environment.ip}:4000/guardia/getAllGuardiesFromTreballador`, requestOptions);
   }
 
-  getMonthGuardiesByDateFromTreballador(data:string, idTreballador:string = "8"){
+  getMonthGuardiesByDateFromTreballador(data:string){
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${environment.ip}:4000/guardia/getMonthGuardiesByDateFromTreballador?data=${data}&idTreballador=${idTreballador}`, requestOptions);
+    return this.http.get(`http://${environment.ip}:4000/guardia/getMonthGuardiesByDateFromTreballador?data=${data}`, requestOptions);
   }
 
-  reservarGuardia(idGuardia: string, idTreballador: string = "8"): Observable<any> {
+  reservarGuardia(idGuardia: string): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.post(`http://${environment.ip}:4000/guardiatreballador/bookGuardia?idGuardia=${idGuardia}&idTreballador=${idTreballador}`, requestOptions);
+    return this.http.post(`http://${environment.ip}:4000/guardiatreballador/bookGuardia?idGuardia=${idGuardia}`, requestOptions);
   }
 
-  getGuardiesByDayFromTreballador(dia: string, idTreballador: string = "8"): Observable<any> {
+  getGuardiesByDayFromTreballador(dia: string): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${environment.ip}:4000/guardiatreballador/getGuardiesByDayFromTreballador?dia=${dia}&idTreballador=${idTreballador}`, requestOptions);
+    return this.http.get(`http://${environment.ip}:4000/guardiatreballador/getGuardiesByDayFromTreballador?dia=${dia}`, requestOptions);
   }
 
-  cancelarGuardia(idGuardia: string, idTreballador: string = "8"): Observable<any> {
+  cancelarGuardia(idGuardia: string): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.post(`http://${environment.ip}:4000/guardiatreballador/cancelGuardia?idGuardia=${idGuardia}&idTreballador=${idTreballador}`, requestOptions);
+    return this.http.post(`http://${environment.ip}:4000/guardiatreballador/cancelGuardia?idGuardia=${idGuardia}`, requestOptions);
   }
 
   private createHeader() {
