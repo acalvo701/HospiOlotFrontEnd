@@ -16,7 +16,7 @@ form {
         padding: 10px;
         background: white;
         border-radius: 15px;
-        max-height: 52vh;
+        max-height: 56vh;
 
         .input-container {
             label {
@@ -108,5 +108,14 @@ form {
                 width: 100%;
             }
         }
+    }
+}
+
+button:disabled {
+    opacity: 0.3;
+    cursor: default !important;
+    
+    &:hover {
+        background-color: #a5d051 !important;
     }
 }

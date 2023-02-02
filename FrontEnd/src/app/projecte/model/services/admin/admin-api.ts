@@ -103,13 +103,19 @@ export class AdminApiService {
     return this.http.post(`http://${environment.ip}:4000/guardiaModel/generarGuardiesEsquema`, esquemaJSON, requestOptions);
   }
 
+  estatEliminatNomEsquema(id: string): Observable<any> {
+    let idEsquemaJSON = {id: id}
+    const requestOptions = this.createHeader();
 
-  deleteEsquemaRow(guardiaModel: GuardiaModel): Observable<any> {
+    return this.http.post(`http://${environment.ip}:4000/guardiaModelTreballador/estatEliminatNomEsquema`, idEsquemaJSON, requestOptions);
+  }
+
+  estatEliminatEsquemaRow(guardiaModel: GuardiaModel): Observable<any> {
 
     const requestOptions = this.createHeader();
     const guardiaModelJSON = JSON.stringify(guardiaModel);
 
-    return this.http.post(`http://${environment.ip}:4000/guardiaModel/deleteEsquemaRow`, guardiaModelJSON, requestOptions);
+    return this.http.post(`http://${environment.ip}:4000/guardiaModel/estatEliminatEsquemaRow`, guardiaModelJSON, requestOptions);
   }
 
 
