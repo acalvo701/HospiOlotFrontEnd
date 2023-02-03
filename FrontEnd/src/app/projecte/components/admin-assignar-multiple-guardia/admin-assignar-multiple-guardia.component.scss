@@ -10,7 +10,9 @@
 }
 
 form {
-    padding: 0 10%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 
     section {
         padding: 10px;
@@ -40,6 +42,7 @@ form {
                 font-size: 16px;
                 color: black;
                 font-weight: bold;
+                text-align: center;
 
                 &:focus {
                     outline: none;
@@ -118,5 +121,16 @@ button:disabled {
     
     &:hover {
         background-color: #a5d051 !important;
+    }
+}
+
+.encapsulamentFormularis {
+    padding: 10px;
+    background: white;
+    border-radius: 15px;
+    max-height: 52vh;
+
+    ::-webkit-scrollbar {
+        display: none;
     }
 }

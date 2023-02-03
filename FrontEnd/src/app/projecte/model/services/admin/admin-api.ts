@@ -49,6 +49,11 @@ export class AdminApiService {
     return this.http.get(`http://${environment.ip}:4000/guardiaAdmin/getGuardiesByDayAdmin?data=` + data+  `&idTreballador=` + idTreballador, requestOptions);
   }
 
+  getTreballadorsFromGuardiaAdmin(idGuardia: string): Observable<any> {
+    const requestOptions = this.createHeader();
+    return this.http.get(`http://${environment.ip}:4000/guardiaAdmin/getTreballadorsFromGuardiaAdmin?idGuardia=` + idGuardia, requestOptions);
+  }
+
   insertNomEsquemaByIdTreballador(nomEsquema: GuardiaModelTreballador): Observable<any> {
     const requestOptions = this.createHeader();
     const nomEsquemaJSON = JSON.stringify(nomEsquema);

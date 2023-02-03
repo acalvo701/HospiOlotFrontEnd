@@ -28,9 +28,10 @@ import { HeaderComponent } from './projecte/components/header/header.component';
 import { LogoutComponent } from './projecte/components/logout/logout.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AdminAssignarMultipleGuardiaComponent } from './projecte/components/admin-assignar-multiple-guardia/admin-assignar-multiple-guardia.component';
 
 @NgModule({
-  declarations: [AppComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent, AdminGenerarGuardiesEsquemaComponent, HeaderComponent, LogoutComponent],
+  declarations: [AppComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent, AdminGenerarGuardiesEsquemaComponent, HeaderComponent, LogoutComponent, AdminAssignarMultipleGuardiaComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
