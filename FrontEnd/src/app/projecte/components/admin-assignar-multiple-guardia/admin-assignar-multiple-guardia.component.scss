@@ -1,18 +1,12 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
 }
 
 .centre {
     text-align: center;
     padding-top: 20px;
-}
-
-::selection {
-    color: white;
-    background: #a5d051;
 }
 
 form {
@@ -25,10 +19,6 @@ form {
         background: white;
         border-radius: 15px;
         max-height: 52vh;
-
-        ::-webkit-scrollbar {
-            display: none;
-        }
 
         .input-container {
             label {
@@ -43,6 +33,7 @@ form {
             input,
             textarea,
             select {
+                width: 100%;
                 padding: 5px 10px;
                 height: 40px;
                 border-radius: 10px;
@@ -51,6 +42,7 @@ form {
                 font-size: 16px;
                 color: black;
                 font-weight: bold;
+                text-align: center;
 
                 &:focus {
                     outline: none;
@@ -68,47 +60,23 @@ form {
         }
     }
 
-    .button-container {
+    .send-container {
         width: 100%;
         text-align: center;
 
-        .editar {
-            background: rgb(151, 151, 151);
-            border: 4px solid rgb(107, 107, 107);
+        button {
+            background: #a5d051;
+            border: 4px solid #7bb902;
             color: white;
-            padding: 5px 20px;
+            padding: 10px 30px;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
             font-weight: bold;
-            margin-right: 10px;
-        }
-        .eliminar {
-            background: #d05151;
-            border: 4px solid #b90202;
-            color: white;
-            padding: 5px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
+            margin-bottom: 10px;
 
             &:hover {
-                background: #b90202;
-            }
-        }
-        .afegir {
-            background: #5197d0;
-            border: 4px solid #0270b9;
-            color: white;
-            padding: 5px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-
-            &:hover {
-                background: #0270b9;
+                background: #7bb902;
             }
         }
     }
@@ -119,25 +87,16 @@ form {
         clear: both;
     }
 
-    .crearEsquema {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-
     @media(max-width:992px) {
-        padding: 0 1.5%;
-        
+        padding: 0 5%;
     }
 
     @media(max-width:768px) {
         margin-bottom: 50px;
 
         section {
-            //width: 100%;
+            width: 100%;
             margin: 0;
-            max-height: 55vh;
-            overflow-y: scroll;
 
             &.left {
                 margin-bottom: -30px;
@@ -146,27 +105,23 @@ form {
 
         .send-container {
             margin-right: 0;
+            margin-top: 10px;
             padding: 10px;
 
             input {
                 width: 100%;
             }
         }
-        //.crearEsquema {
-        //}
     }
 }
 
-#places {
-    width: 80px;
-}
-
-#msg {
-    background-color: #a5d051;
-    border: 4px solid #7bb902;
-    font-weight: bold;
-    padding: 4px;
-    white-space: nowrap;
+button:disabled {
+    opacity: 0.3;
+    cursor: default !important;
+    
+    &:hover {
+        background-color: #a5d051 !important;
+    }
 }
 
 .encapsulamentFormularis {
@@ -177,12 +132,5 @@ form {
 
     ::-webkit-scrollbar {
         display: none;
-    }
-}
-@media only screen and (max-width: 890px) {
-    .crearEsquema {
-        display: flex;
-    
-        flex-direction: column;
     }
 }

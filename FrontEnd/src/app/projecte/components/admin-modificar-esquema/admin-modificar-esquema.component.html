@@ -21,9 +21,12 @@
                     <option *ngFor="let esquema of esquemes" id="{{esquema.id}}" value="{{esquema.nomEsquema}}">{{esquema.nomEsquema}}</option>
                 </select>
             </div>
+            <div class="button-container" *ngIf="mostrarAfegir">
+                <button class="eliminar" type="button" (click)="estatEliminatNomEsquema()">Eliminar</button>
+            </div>
         </section>
     </form>
-    <form *ngFor="let guardia of guardiesEsquema" id="formulari_{{guardia.id}}">
+    <form *ngFor="let guardia of guardiesEsquema" id="formulari_{{guardia.id}}" (change)="this.canviarColorButton(guardia.id)">
         <section class="left">
             <table>
                 <thead>
@@ -77,13 +80,13 @@
                         </td>
                         <td>
                             <div class="button-container">
-                                <button class="editar" type="button" (click)="modificarEsquema(guardia.id)"
-                                    value="{{guardia.id}}">Editar</button>
+                                <button class="editar editar_{{guardia.id}}" type="button" (click)="modificarEsquema(guardia.id)"
+                                    value="{{guardia.id}}" disabled>Editar</button>
                             </div>
                         </td>
                         <td>
                             <div class="button-container">
-                                <button class="eliminar" type="button" (click)="eliminarEsquema(guardia.id)"
+                                <button class="eliminar" type="button" (click)="estatEliminatEsquemaRow(guardia.id)"
                                     value="{{guardia.id}}">Eliminar</button>
                             </div>
                         </td>
@@ -149,7 +152,7 @@
                         </td>
                         <td>
                             <div class="button-container">
-                                <button class="afegir" type="button" (click)="afegirRowEsquema()">Afegir</button>
+                                <button class="afegir" type="button" (click)="insertEsquemaRow()">Afegir</button>
                             </div>
                         </td>
                     </tr>

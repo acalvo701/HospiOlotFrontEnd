@@ -1,0 +1,59 @@
+<h2 class="centre">Assignar Guàrdia</h2>
+<section class="encapsulamentFormularis">
+<form [formGroup]="this.assignarGuardiaForm">
+    <section class="left">
+        <div class="input-container">
+            <label><b>Data:</b></label>
+            <input type="date" formControlName="dataGuardia" (change)="getDataEntrada()">
+        </div>
+    </section>
+</form>
+<form *ngFor="let guardia of guardies" id="formulari_{{guardia.id}}">
+    <section class="left" *ngIf="ocult === false">
+        <table>
+            <thead>
+                <th>Categoria</th>
+                <th>Unitat</th>
+                <th>Torn</th>
+                <th>Número Places</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="input-container">
+                            <input type="text" [value]="guardia.categoria"
+                                readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <input type="text" [value]="guardia.unitat"
+                                readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <input type="text" [value]="guardia.torn"
+                                readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <input type="number" [value]="guardia.numeroPlaces"
+                                readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <input type="text" *ngFor="let treballador of getTreballadorsFromGuardiaAdmin(guardia.id) | async" [value]="treballador.nom">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <span id="msg" *ngIf="guardarId == guardia.id">
+                {{valid ? valid : error}}
+            </span>
+        </table>
+    </section>
+</form>
+</section>

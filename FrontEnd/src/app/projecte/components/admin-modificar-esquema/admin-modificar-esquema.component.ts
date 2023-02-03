@@ -37,9 +37,6 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     this.subscription = new Array<Subscription>();
     this.idTreballador = uInfo.user.id;
     this.getNomsEsquemaByIdTreballador();
-    this.getAllCategories();
-    this.getAllUnitats();
-    this.getAllTorns();
   }
 
   ngOnDestroy(): void {
@@ -48,20 +45,32 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     });
   }
 
+  canviarColorButton(num: string, vista: string = 'enabled', colorBackground: string = '#a5d051', colorBorder: string = '#7bb902') {
+    let classEditar = document.getElementsByClassName(`editar_${num}`) as HTMLCollectionOf<HTMLElement>;
+
+    Array.from(classEditar).forEach(i => {
+      i.style.backgroundColor = colorBackground;
+      i.style.borderColor = colorBorder;
+      if (vista == 'enabled') {
+        i.removeAttribute('disabled');
+      }
+    })
+  }
+
   afegirEsquema() {
     const nomFormulari: any = document.getElementById(`formulariSelect`);
     let formulari: any = new FormData(nomFormulari);
-    if(formulari.get('nomEsquema') != ''){
-      
+    if (formulari.get('nomEsquema') != '') {
+
       let creacioEsquema = new GuardiaModelTreballador('', this.idTreballador, formulari.get('nomEsquema'));
       this.subscription.push(this.httpClient.insertNomEsquemaByIdTreballador(creacioEsquema).
         pipe(take(1), catchError((err: any) => {
-          if(err.error.error.code == 'ER_DUP_ENTRY'){
+          if (err.error.error.code == 'ER_DUP_ENTRY') {
             return throwError(() => new Error("Ja existeix aquest nom d'esquema"));
           }
           return throwError(() =>
-          
-          new Error("Error d'API"));
+
+            new Error("Error d'API"));
         }))
         .subscribe(
           {
@@ -116,10 +125,12 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
             this.errorAfegir = err.error;
           },
           complete: () => {
-          this.comprovarValorSelect();
-          this.getAllCategories();
-          this.getAllUnitats();
-          this.getAllTorns();
+            this.comprovarValorSelect();
+            this.getAllCategories();
+            this.getAllUnitats();
+            this.getAllTorns();
+            this.error = "";
+            this.valid = "";
           },
         }));
   }
@@ -129,7 +140,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     let formulari: any = new FormData(nomFormulari);
     if (formulari.get('esquema') == "") {
       this.mostrarAfegir = false;
-    }else {
+    } else {
       this.mostrarAfegir = true;
     }
   }
@@ -156,19 +167,19 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
             this.error = err.error;
           },
           complete: () => {
-
+            this.canviarColorButton(id, 'disabled', 'rgb(151, 151, 151)', 'rgb(107, 107, 107)');
           },
         }));
   }
 
-  eliminarEsquema(id: string) {
+  estatEliminatEsquemaRow(id: string) {
     const nomFormulari: any = document.getElementById(`formulari_${id}`);
 
     let formulari: any = new FormData(nomFormulari);
 
     let creacioGuardia = new GuardiaModel(id, formulari.get('categoria'), formulari.get('unitat'), formulari.get('torn'), formulari.get('numeroPlaces'), formulari.get('estat'), '');
 
-    this.subscription.push(this.httpClient.deleteEsquemaRow(creacioGuardia).
+    this.subscription.push(this.httpClient.estatEliminatEsquemaRow(creacioGuardia).
       pipe(take(1), catchError((err: any) => {
         return throwError(() => new Error("Error d'API"));
       }))
@@ -183,14 +194,35 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
           },
           complete: () => {
             this.obtenirEsquemaSelect();
-            this.getAllCategories();
-            this.getAllUnitats();
-            this.getAllTorns();
           },
         }));
   }
 
-  afegirRowEsquema() {
+  estatEliminatNomEsquema() {
+    const selectFormulari: any = document.getElementById(`selectFormulari`);
+    let idEsquema = selectFormulari.options[selectFormulari.selectedIndex].id;
+
+    this.subscription.push(this.httpClient.estatEliminatNomEsquema(idEsquema).
+      pipe(take(1), catchError((err: any) => {
+        return throwError(() => new Error("Error d'API"));
+      }))
+      .subscribe(
+        {
+          next: () => {
+
+          },
+          //per veure l'error que retorna de l'api
+          error: (err: any) => {
+            this.error = err.error;
+          },
+          complete: () => {
+            this.getNomsEsquemaByIdTreballador();
+            this.mostrarAfegir = false;
+          },
+        }));
+  }
+
+  insertEsquemaRow() {
     const nomFormulari: any = document.getElementById(`formulariAfegir`);
     const selectFormulari: any = document.getElementById(`selectFormulari`);
 
@@ -216,9 +248,6 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
             },
             complete: () => {
               this.obtenirEsquemaSelect();
-              this.getAllCategories();
-              this.getAllUnitats();
-              this.getAllTorns();
               nomFormulari.reset();
             },
           }));
@@ -226,7 +255,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
       this.errorAfegir = "Falten camps per emplenar!";
     }
   }
-  
+
   getAllCategories() {
     this.subscription.push(this.httpClient.getAllCategories().
       subscribe(
@@ -278,3 +307,4 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
         }));
   }
 }
+
