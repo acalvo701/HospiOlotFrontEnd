@@ -25,7 +25,7 @@ export class AdminEstatGuardiaComponent implements OnInit, OnDestroy {
 
   constructor(private httpClient: AdminApiService, private fb: FormBuilder, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
-    this.idTreballador = uInfo.user.id;
+    this.idTreballador = uInfo.getUser().id
   }
 
   ngOnInit(): void {

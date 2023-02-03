@@ -28,7 +28,7 @@ export class LoginComponent {
   }
 
   onSubmit() { 
-    
+   
     this.authService.login(this.treballador.dni,this.treballador.password).pipe(
       map(token => 
         //jwt_decode(token);

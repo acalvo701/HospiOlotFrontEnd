@@ -10,11 +10,20 @@ export class userInfoService {
   token: string;
   isAdmin: boolean;
   constructor(private jwtHelper: JwtHelperService) {
-    console.log(this.jwtHelper.decodeToken(localStorage.getItem('SGaccessToken')!));
-    let info = this.jwtHelper.decodeToken(localStorage.getItem('SGaccessToken')!);
-    this.user = new User(info);
-    this.token = localStorage.getItem('SGaccessToken')!;
-    this.isAdmin = info.isAdmin;
   }
+
+  getUser(){
+    let info = this.jwtHelper.decodeToken(localStorage.getItem('SGaccessToken')!);
+    return new User(info);
+  }
+  getToken(){
+    let info = this.jwtHelper.decodeToken(localStorage.getItem('SGaccessToken')!);
+    return localStorage.getItem('SGaccessToken')!;
+  }
+  getIsAdmin(){
+    let info = this.jwtHelper.decodeToken(localStorage.getItem('SGaccessToken')!);
+    return info.isAdmin;
+  }
+ 
 
 }

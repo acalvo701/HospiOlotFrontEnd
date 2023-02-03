@@ -5,7 +5,6 @@
 
 .body {
   background-color: #a0ce4e;
-  height: 100vh;
 }
 
 .cosCalendar {
@@ -77,4 +76,15 @@ svg:hover {
 app-reservar {
   width: 100%;
   max-width: 500px
+}
+
+.mat-calendar-body-selected{
+  background-color: #a0ce4e;
+}
+.mat-calendar-body-cell{
+  border-radius: 999px;
+}
+
+.mat-calendar-body-cell-content {
+font-weight: 600;
 }

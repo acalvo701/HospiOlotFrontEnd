@@ -18,7 +18,10 @@ export class AuthGuard implements CanActivate {
     if(this.auth.isAuthenticated()){
       return true;
     }
-
+    if(this.auth.isRefreshExpired()){
+      this.router.navigate(['login']);
+      return false;
+    }
     const isRefreshSuccess = await this.refreshingTokens(accessToken);
     
     if(!isRefreshSuccess){
@@ -36,6 +39,10 @@ export class AuthGuard implements CanActivate {
     if (!accessToken || !refreshToken) {
       return false;
     }
+
+    
+
+
 
     const tokenModel = { accessToken: accessToken, refreshToken: refreshToken };
     

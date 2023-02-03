@@ -16,7 +16,7 @@ export class AuthenticationService {
   
     let userData = { dni: dni, password: password }
     return this.http.post<any>(`http://${environment.ip}:4000/token/login`, userData).pipe(
-    map((response) =>{
+    map((response) =>{  
       console.log(response);
       localStorage.setItem('SGaccessToken', response.accessToken);
       localStorage.setItem('SGrefreshToken', response.refreshToken);
@@ -36,12 +36,17 @@ export class AuthenticationService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
+  isRefreshExpired():boolean{
+    const token = localStorage.getItem('SGrefreshToken');
+    return this.jwtHelper.isTokenExpired(token);
+  }
+
   refreshToken(tokenModel: any) {
     return this.http.post(`http://${environment.ip}:4000/token/refreshToken`, tokenModel, this.createHeader());
   }
 
   private createHeader() {
-    const token = localStorage.getItem('SGrefreshToken');
+    const token = localStorage.getItem('SGaccessToken');
     
     const header = {
       'Access-Control-Allow-Origin': '*',

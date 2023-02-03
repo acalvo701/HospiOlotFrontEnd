@@ -24,9 +24,9 @@ export const MY_FORMATS = {
 
 class PickDateAdapter extends NativeDateAdapter {
   override format(date: Date, displayFormat: Object): string {
-    
-      return formatDate(date, 'yyyy-MM-dd', 'ca-CA');;
-    
+
+    return formatDate(date, 'yyyy-MM-dd', 'ca-CA');;
+
   }
   override getFirstDayOfWeek(): number {
     return 1;
@@ -47,7 +47,7 @@ class PickDateAdapter extends NativeDateAdapter {
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class CalendariComponent implements OnInit{
+export class CalendariComponent implements OnInit {
   selected: Date | null = new Date();
   @ViewChild(ReservarComponent) child: ReservarComponent;
   guardiesMes: Map<string, Array<string>>;
@@ -61,7 +61,7 @@ export class CalendariComponent implements OnInit{
     this.child.initialize();
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.getAllGuardies();
   }
   ngAfterViewInit() {
@@ -69,16 +69,16 @@ export class CalendariComponent implements OnInit{
     const calendarControls = document.querySelectorAll('.mat-calendar-controls');
     let elements = Array.from(calendarControls);
     elements.forEach((button) => {
-      button.addEventListener('click',() =>{
-          this.pintar();
-        } );
+      button.addEventListener('click', () => {
+        this.pintar();
       });
-    }
-  
+    });
+  }
+
   getAllGuardies() {
     this.httpClient.getAllGuardiesFromTreballador().subscribe(
       response => {
-
+        console.log(response);
         let dies = new Map<string, Array<string>>;
 
         Object.values(response)[0].forEach((guardia: any) => {
@@ -105,19 +105,21 @@ export class CalendariComponent implements OnInit{
 
         this.selected!.setHours(0, 0, 0, 0);
         let dataFormated = formatDate(data, 'yyyy-MM-dd', 'ca-CA');
-  
-        let estatsDelDia = this.guardiesMes.get(dataFormated);
-        if(estatsDelDia){
+        if (this.guardiesMes) {
+          let estatsDelDia = this.guardiesMes.get(dataFormated);
+
           cela.classList.remove('pendent-date');
           cela.classList.remove('assignada-date');
           if (estatsDelDia != null && estatsDelDia.includes('PENDENT')) {
-         
+
             cela.classList.add('pendent-date');
-          } else if (estatsDelDia != null && estatsDelDia.includes('ASSIGNADA')) {
+          } 
+          
+          if (estatsDelDia != null && estatsDelDia.includes('ASSIGNADA')) {
             cela.classList.add('assignada-date');
           }
+
         }
-        
       }
     })
 

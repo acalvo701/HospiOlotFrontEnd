@@ -21,38 +21,39 @@ export class JwtInterceptor implements HttpInterceptor {
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthenticationService
   ) { }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    let authReq = request;
-    const token = localStorage.getItem('SGaccessToken');
-
-    if (token) {
-      authReq = request.clone(
+    let authReq = req;
+    const accessToken = localStorage.getItem('SGaccessToken');
+    if (accessToken) {
+      authReq = req.clone(
         {
           setHeaders: {
-            authorization: `Bearer ${token}`
+            authorization: `Bearer ${accessToken}`
           }
         });
     }
-    console.log("PRIMERA");
+
     return next.handle(authReq).pipe(catchError((err: HttpErrorResponse) => {
 
-      if (err.status == 401 || err.status == 403 || err.status == 400) {//Fem retry
-        console.log("hey");
-        this.handleTokenError(authReq, next);
+      if (err.status == 403 || err.status == 400) {//Fem retry
+        return this.handleTokenError(authReq, next);
       }
-      return throwError(err);
+      if(err.status == 401){
+        this.router.navigate(['login']);
+        return throwError(err);
+      }
 
+      return throwError(err);
     })
     )
+
   }
 
   private handleTokenError(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
-
       const accessToken = localStorage.getItem('SGaccessToken');
       const refreshToken = localStorage.getItem('SGrefreshToken');
       const tokenModel = { accessToken: accessToken, refreshToken: refreshToken };
@@ -60,8 +61,7 @@ export class JwtInterceptor implements HttpInterceptor {
         return this.authService.refreshToken(tokenModel).pipe(
           switchMap((token: any) => {
             this.isRefreshing = false;
-            console.log("hey");
-            localStorage.setItem("SGaccessToken", token.accessTokennewToken);
+            localStorage.setItem("SGaccessToken", token.accessToken);
             localStorage.setItem("SGrefreshToken", token.refreshToken);
 
             this.refreshTokenSubject.next(token.accessToken);
@@ -97,7 +97,3 @@ export class JwtInterceptor implements HttpInterceptor {
 
 
 }
-
-export const authInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
-];

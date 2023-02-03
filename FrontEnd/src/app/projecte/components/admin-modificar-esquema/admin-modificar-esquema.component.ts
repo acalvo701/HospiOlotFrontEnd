@@ -35,7 +35,7 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
 
   constructor(private httpClient: AdminApiService, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
-    this.idTreballador = uInfo.user.id;
+    this.idTreballador = uInfo.getUser().id;
     this.getNomsEsquemaByIdTreballador();
   }
 

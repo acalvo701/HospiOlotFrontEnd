@@ -44,8 +44,11 @@
                         </div>
                     </td>
                     <td>
-                        <div class="input-container">
-                            <input type="text" *ngFor="let treballador of getTreballadorsFromGuardiaAdmin(guardia.id) | async" [value]="treballador.nom">
+                        <div class="input-container" *ngFor="let treballador of getTreballadorsFromGuardiaAdmin(guardia.id)">
+                            {{treballador.idTreballador}}
+                            {{treballador.estatTreballador}}
+                            
+                            <!-- <input type="text" *ngFor="let treballador of getTreballadorsFromGuardiaAdmin(guardia.id)" [value]="treballador.nom"> -->
                         </div>
                     </td>
                 </tr>

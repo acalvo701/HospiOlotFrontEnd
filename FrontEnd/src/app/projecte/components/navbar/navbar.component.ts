@@ -10,7 +10,7 @@ export class NavbarComponent {
 
   isAdmin: boolean = false;
   constructor(private userInfo: userInfoService){
-    this.isAdmin = userInfo.isAdmin;
+    this.isAdmin = userInfo.getIsAdmin();
   }
 
 }

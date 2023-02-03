@@ -33,11 +33,13 @@ export class ReservarComponent {
   }
 
   getLesMevesGuardies() {
+
+
     let dia = (moment(this.dia)).format('YYYY-MM-DD')
     this.httpClient.getGuardiesByDayFromTreballador(dia).subscribe(
       response => {
         this.lesMevesGuardies = (response.guardies);
-
+        console.log(this.lesMevesGuardies)
       }
     )
   }

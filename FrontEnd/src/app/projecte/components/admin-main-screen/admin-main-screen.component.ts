@@ -15,7 +15,7 @@ export class AdminMainScreenComponent {
 
   constructor(uInfo: userInfoService) {
 
-    this.rol = uInfo.user.categoria;
+    this.rol = uInfo.getUser().categoria;
   }
 
 }

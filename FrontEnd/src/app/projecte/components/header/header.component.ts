@@ -11,8 +11,12 @@ export class HeaderComponent {
   categoria:string;
   isAdmin:boolean;
   constructor(userInfo: userInfoService) {
-    this.nom = userInfo.user.nom;
-    this.categoria = userInfo.user.categoria;
-    this.isAdmin = userInfo.isAdmin;
+    this.nom = userInfo.getUser().nom
+    this.categoria = userInfo.getUser().categoria
+    this.isAdmin = userInfo.getIsAdmin();
+  }
+
+  ngOnInit(){
+
   }
 }

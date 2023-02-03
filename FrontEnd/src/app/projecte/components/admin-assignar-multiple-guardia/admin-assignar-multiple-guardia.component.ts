@@ -13,11 +13,12 @@ import { userInfoService } from '../../model/services/userInfo/userInfo';
   styleUrls: ['./admin-assignar-multiple-guardia.component.scss']
 })
 
-export class AdminAssignarMultipleGuardiaComponent implements OnInit,OnDestroy {
+export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy {
   assignarGuardiaForm: FormGroup;
 
   treballadors: Array<Treballador> = [];
   guardies: Array<Guardia> = [];
+  guardiesReformed: Map<string, infoGuardia>;
 
   dataGuardia: Date;
   ocult: boolean = true;
@@ -30,7 +31,7 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit,OnDestroy {
 
   constructor(private httpClient: AdminApiService, private fb: FormBuilder, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
-    this.idTreballador = uInfo.user.id;
+    this.idTreballador = uInfo.getUser().id;
     //this.getTreballadorsFromGuardiaAdmin('471');
   }
   ngOnInit(): void {
@@ -50,43 +51,74 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit,OnDestroy {
     this.selectGuardies();
   }
 
-  async getTreballadorsFromGuardiaAdmin(idGuardia: string) {
-    let prova:any = await (this.httpClient.getTreballadorsFromGuardiaAdmin(idGuardia).
-    subscribe(
-      {
-        next: (response) => {
-          prova = response.treballadors;
-          console.log(this.treballadors);
-          return prova;
-        },
-        //per veure l'error que retorna de l'api
-        error: () => {
-
-        },
-        complete: () => {
-        },
-      }));
-      return prova;
+  getTreballadorsFromGuardiaAdmin(idGuardia: string) {
+    return this.guardiesReformed.get(idGuardia)?.treballadors;
   }
 
   selectGuardies() {
-    this.subscription.push(this.httpClient.getGuardiesByDayAdmin(this.dataGuardia, this.idTreballador).
-      subscribe(
-        {
-          next: (response) => {
-            this.guardies = response.guardies;
-            this.ocult = true;
-            if (this.guardies.length != 0) {
-              this.ocult = false;
-            }
-          },
-          //per veure l'error que retorna de l'api
-          error: () => {
+    this.httpClient.getGuardiesByDayAdmin(this.dataGuardia, this.idTreballador).
+      subscribe(response => {
+        this.guardies = response.guardies;
+        this.guardiesReformed = this.reformarGuardies();
+        this.guardies = this.eliminarDuplicatsGuardies();
+        console.log(this.guardiesReformed);
+        this.ocult = true;
+        if (this.guardies.length != 0) {
+          this.ocult = false;
+        }
 
-          },
-          complete: () => {
-
-          },
-        }));
+      });
   }
+
+  eliminarDuplicatsGuardies(){
+    return this.guardies.filter((value, index, self) => 
+    self.findIndex(v => v.id === value.id) === index
+  );
+  }
+
+
+  reformarGuardies() {
+    let guardiesNormals = this.guardies;
+    let reforming = new Map<string, infoGuardia>;
+    Object.values(guardiesNormals).forEach((guardia: any) => {
+
+      if (reforming.has(guardia.id)) {
+        let valors: any = reforming.get(guardia.id);
+        let treballadorNou = { idGuardia: guardia.idGuardia, idTreballador: guardia.idTreballador, estatTreballador: guardia.estatTreballador }
+        valors!.treballadors.push(treballadorNou);
+        reforming.set(guardia.id, valors);
+      } else {
+        let valors = {
+          id: guardia.id, categoria: guardia.categoria, unitat: guardia.unitat, torn: guardia.torn, dia: guardia.dia, numeroPlaces: guardia.numeroPlaces,
+          treballadors: new Array<treballadorMinified>(
+            {
+              idGuardia: guardia.idGuardia,
+              idTreballador: guardia.idTreballador,
+              estatTreballador: guardia.estatTreballador
+            }
+
+          )};
+          reforming.set(guardia.id, valors);
+
+        }
+      });
+
+    return reforming;
+  }
+}
+
+export type infoGuardia = {
+    id: any;
+    categoria: any;
+    unitat: any;
+    torn: any;
+    dia: any;
+    numeroPlaces: any;
+    treballadors: treballadorMinified[];
+}
+
+export type treballadorMinified = {
+  idGuardia: string;
+  idTreballador: string,
+  estatTreballador: string
 }
