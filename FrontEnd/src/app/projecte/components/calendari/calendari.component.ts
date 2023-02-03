@@ -65,12 +65,9 @@ export class CalendariComponent implements OnInit{
     this.getAllGuardies();
   }
   ngAfterViewInit() {
-    const monthPrevBtn = document.querySelectorAll(
-      '.mat-calendar-previous-button'
-    );
-    const monthNextBtn = document.querySelectorAll('.mat-calendar-next-button');
-    let elements = Array.from(monthPrevBtn).concat(Array.from(monthNextBtn));
-    console.log(elements);
+
+    const calendarControls = document.querySelectorAll('.mat-calendar-controls');
+    let elements = Array.from(calendarControls);
     elements.forEach((button) => {
       button.addEventListener('click',() =>{
           this.pintar();
@@ -110,12 +107,17 @@ export class CalendariComponent implements OnInit{
         let dataFormated = formatDate(data, 'yyyy-MM-dd', 'ca-CA');
   
         let estatsDelDia = this.guardiesMes.get(dataFormated);
-  
-        if (estatsDelDia != null && estatsDelDia.includes('PENDENT')) {
-          cela.classList.add('pendent-date');
-        } else if (estatsDelDia != null && estatsDelDia.includes('ASSIGNADA')) {
-          cela.classList.add('assignada-date');
+        if(estatsDelDia){
+          cela.classList.remove('pendent-date');
+          cela.classList.remove('assignada-date');
+          if (estatsDelDia != null && estatsDelDia.includes('PENDENT')) {
+         
+            cela.classList.add('pendent-date');
+          } else if (estatsDelDia != null && estatsDelDia.includes('ASSIGNADA')) {
+            cela.classList.add('assignada-date');
+          }
         }
+        
       }
     })
 

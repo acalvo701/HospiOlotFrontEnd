@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 import moment from 'moment';
 import { Guardia } from '../../model/entitats/implementacions/Guardia';
 import { GuardiaApiService } from '../../model/services/guardia/guardia-api.service';
@@ -13,8 +13,7 @@ export class ReservarComponent {
   guardiesReformades: reformat = {};
   lesMevesGuardies: Array<Guardia> = [];
   @Input() dia: Date |null; // decorate the property with @Input()
-  
-
+  @Output("getAllGuardies") getAllGuardies: EventEmitter<any> = new EventEmitter();
 
   constructor(private httpClient: GuardiaApiService) {
     this.initialize();
@@ -38,8 +37,7 @@ export class ReservarComponent {
     this.httpClient.getGuardiesByDayFromTreballador(dia).subscribe(
       response => {
         this.lesMevesGuardies = (response.guardies);
-        
-        console.log(this.guardies);
+
       }
     )
   }
@@ -77,7 +75,7 @@ export class ReservarComponent {
   reservarGuardia(idGuardia: string) {
     this.httpClient.reservarGuardia(idGuardia).subscribe(
       response => {
-        console.log(response);
+
         this.guardies = response.guardies;
 
         if (this.guardies && this.guardies.length > 0) {
@@ -85,9 +83,10 @@ export class ReservarComponent {
           this.guardiesReformades = this.tractarGuardies();
         }
         this.getLesMevesGuardies();
+        this.getAllGuardies.emit();
       }
     )
-
+      
   }
 
   guardiaReservada(idGuardia:string){
@@ -110,12 +109,12 @@ export class ReservarComponent {
   cancelarGuardia(idGuardia: string) {
     this.httpClient.cancelarGuardia(idGuardia).subscribe(
       response => {
-        console.log(response);
         
         this.getLesMevesGuardies();
+        this.getAllGuardies.emit();
       }
     )
-
+    
   
   }
 

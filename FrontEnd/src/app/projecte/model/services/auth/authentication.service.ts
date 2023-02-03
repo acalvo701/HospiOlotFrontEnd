@@ -36,4 +36,21 @@ export class AuthenticationService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
+  refreshToken(tokenModel: any) {
+    return this.http.post(`http://${environment.ip}:4000/token/refreshToken`, tokenModel, this.createHeader());
+  }
+
+  private createHeader() {
+    const token = localStorage.getItem('SGrefreshToken');
+    
+    const header = {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Accept-Control-Allow-Headers': 'Origin,Content-Type,Accept,Authorization',
+      'Authorization': `Bearer ${token}`
+    }
+    return { headers: new HttpHeaders(header) }
+  }
+
 }

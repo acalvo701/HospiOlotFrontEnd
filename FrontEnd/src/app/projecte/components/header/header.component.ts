@@ -9,10 +9,10 @@ import { userInfoService } from '../../model/services/userInfo/userInfo';
 export class HeaderComponent {
   nom:string;
   categoria:string;
-
+  isAdmin:boolean;
   constructor(userInfo: userInfoService) {
-    console.log(userInfo);
     this.nom = userInfo.user.nom;
     this.categoria = userInfo.user.categoria;
+    this.isAdmin = userInfo.isAdmin;
   }
 }

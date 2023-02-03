@@ -8,7 +8,7 @@
         <div class="mat-calendar-content llegendaCalendar"> <span><span class="assignada-date-circle">⬤</span>Assignades</span>  <span><span class="pendent-date-circle">⬤</span>Pendents</span></div>
         </mat-card>
 
-        <app-reservar [dia]="selected"></app-reservar>
+        <app-reservar (getAllGuardies)="getAllGuardies()" [dia]="selected"></app-reservar>
     </div>
     </div>
 

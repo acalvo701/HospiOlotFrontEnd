@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { userInfoService } from '../../model/services/userInfo/userInfo';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+
+  isAdmin: boolean = false;
+  constructor(private userInfo: userInfoService){
+    this.isAdmin = userInfo.isAdmin;
+  }
 
 }
