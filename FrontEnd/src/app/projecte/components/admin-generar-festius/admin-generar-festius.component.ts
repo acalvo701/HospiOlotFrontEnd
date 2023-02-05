@@ -32,12 +32,12 @@ export class AdminGenerarFestiusComponent {
         next: (result): void => {
           this.csvRecords = this.transformarResultat(result);
           if (this.csvRecords == null) {
-            console.log('Error');
+
           }
-          console.log(this.csvRecords);
+
         },
         error: (error: NgxCSVParserError): void => {
-          console.log('Error', error);
+         
         }
       });
   }
@@ -46,7 +46,7 @@ export class AdminGenerarFestiusComponent {
 
     let dates = new Array<string>();
     try {
-      console.log(result[0]);
+
       result[0].forEach((element: any) => {
         var dateMomentObject = moment(element, "DD-MM-YYYY");
         var dateObject = dateMomentObject.toDate();

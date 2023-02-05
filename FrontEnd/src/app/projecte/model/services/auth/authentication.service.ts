@@ -17,7 +17,6 @@ export class AuthenticationService {
     let userData = { dni: dni, password: password }
     return this.http.post<any>(`http://${environment.ip}:4000/token/login`, userData).pipe(
     map((response) =>{  
-      console.log(response);
       localStorage.setItem('SGaccessToken', response.accessToken);
       localStorage.setItem('SGrefreshToken', response.refreshToken);
           return response;

@@ -1,25 +1,18 @@
-<h1>NgxCSVParser by <a href="https://DevelopersHive.com">Developers Hive</a></h1>
 
-<button (click)="download_example_csv()">CSV d'exemple</button>
+<p>Insereix un excel(CSV) separat per ; amb les dates que vols que es generin les guàrdies, pots descarregar-te un <b>
+<a (click)="download_example_csv()">CSV d'exemple</a></b></p>
 <form [formGroup]="this.generarGuardiesForm">
 <div class="csv-file-chooser-section">
-    <p>CSV:</p>
+    <span>CSV per generar guàrdies:</span>
   <input type="file" #fileImportInput name="File Upload" id="csvFileUpload" formControlName="csvFitxer" (change)="fileChangeListener($event)" accept=".csv" />
 </div>
 
 <div class="csv-result-table">
-
+    Les dates del CSV:
   <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Dies</th>
-      </tr>
-    </thead>
     <tbody>
       <tr *ngFor="let csvData of csvRecords;let i = index;">
 
-        <td>{{i+1}}</td>
         <td>
           <span>{{csvData}}</span>
         </td>

@@ -46,7 +46,7 @@ export class ReservarComponent {
     this.httpClient.getGuardiesByDayFromTreballador(dia).subscribe(
       response => {
         this.lesMevesGuardies = (response.guardies);
-        console.log(this.lesMevesGuardies)
+
       }
     )
 
@@ -111,7 +111,6 @@ export class ReservarComponent {
   }
 
   getPersonesApuntades(idGuardia: string) {
-console.log(this.guardies);
     let guardiaTrobada = this.guardies.find(guardia => guardia.id === idGuardia);
     if (guardiaTrobada != undefined) {
 
@@ -137,7 +136,6 @@ console.log(this.guardies);
 
 
   log(variable: any) {
-    console.log(variable);
   }
 }
 

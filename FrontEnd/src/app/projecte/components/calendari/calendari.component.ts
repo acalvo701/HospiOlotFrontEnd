@@ -48,6 +48,8 @@ class PickDateAdapter extends NativeDateAdapter {
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendariComponent implements OnInit {
+  minDate: Date = new Date();
+
   selected: Date | null = new Date();
   @ViewChild(ReservarComponent) child: ReservarComponent;
   guardiesMes: Map<string, Array<string>>;
@@ -57,6 +59,7 @@ export class CalendariComponent implements OnInit {
   }
 
   initialize() {
+    this.minDate.setDate(this.minDate.getDate() - 1);
     this.child.dia = this.selected;
     this.child.initialize();
   }
@@ -81,7 +84,7 @@ export class CalendariComponent implements OnInit {
   getAllGuardies() {
     this.httpClient.getAllGuardiesFromTreballador().subscribe(
       response => {
-        console.log(response);
+
         let dies = new Map<string, Array<string>>;
 
         Object.values(response)[0].forEach((guardia: any) => {
