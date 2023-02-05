@@ -70,7 +70,6 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy 
         this.guardies = response.guardies;
         this.guardiesReformed = this.reformarGuardies();
         this.guardies = this.eliminarDuplicatsGuardies();
-        console.log(this.guardiesReformed);
         this.ocult = true;
         if (this.guardies.length != 0) {
           this.ocult = false;

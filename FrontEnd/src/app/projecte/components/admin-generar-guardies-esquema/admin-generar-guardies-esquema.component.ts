@@ -49,8 +49,6 @@ export class AdminGenerarGuardiesEsquemaComponent {
       subscribe(
         {
           next: (response) => {
-            console.log(response);
-            console.log(this.idTreballador);
             this.esquemes = response.esquema;
           },
           //per veure l'error que retorna de l'api
@@ -66,7 +64,7 @@ export class AdminGenerarGuardiesEsquemaComponent {
   generarGuardiesEsquema() {
     const selectFormulari: any = document.getElementById(`selectFormulari`);
     let idGMT = selectFormulari.options[selectFormulari.selectedIndex].id;
-    console.log(idGMT);
+
     this.httpClient.generarGuardiesEsquema(this.generarGuardiesForm.get("diaInici")?.value, this.generarGuardiesForm.get("diaFi")?.value, idGMT).
       subscribe(
         {

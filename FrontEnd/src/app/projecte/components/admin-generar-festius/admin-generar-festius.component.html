@@ -1,0 +1,40 @@
+
+<p>Insereix un excel(CSV) separat per ; amb les dates que vols que es generin les guàrdies, pots descarregar-te un <b>
+<a (click)="download_example_csv()">CSV d'exemple</a></b></p>
+<form [formGroup]="this.generarGuardiesForm">
+<div class="csv-file-chooser-section">
+    <span>CSV per generar guàrdies:</span>
+  <input type="file" #fileImportInput name="File Upload" id="csvFileUpload" formControlName="csvFitxer" (change)="fileChangeListener($event)" accept=".csv" />
+</div>
+
+<div class="csv-result-table">
+    Les dates del CSV:
+  <table>
+    <tbody>
+      <tr *ngFor="let csvData of csvRecords;let i = index;">
+
+        <td>
+          <span>{{csvData}}</span>
+        </td>
+       
+
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div class="input-container">
+    <label><b>Els meus Esquemes:</b></label>
+    <select id="selectFormulari" formControlName="nomEsquema">
+        <option selected></option>
+        <option *ngFor="let esquema of esquemes" id="{{esquema.id}}" value="{{esquema.nomEsquema}}">{{esquema.nomEsquema}}</option>
+    </select>
+</div>
+<div class="send-container">
+    <button type="button" [disabled]="!this.generarGuardiesForm.valid" (click)="generarGuardiesCSV()"
+        >Generar</button>
+    <br>
+        {{ valid ? valid : error }}
+</div>
+</form>

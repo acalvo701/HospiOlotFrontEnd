@@ -14,6 +14,13 @@ export class AdminApiService {
   constructor(private http: HttpClient) {
   }
 
+
+  generarGuardiesCSV(idEsquema:String,arrayDates:Array<string>): Observable<any>{
+    const requestOptions = this.createHeader();
+    let csvJSON = {idEsquema:idEsquema,arrayDates:arrayDates};
+    return this.http.post(`http://${environment.ip}:4000/guardiaModel/generarGuardiesCSV`, csvJSON, requestOptions);
+  }
+
   getNomsEsquemaByIdTreballador(idTreballador: string): Observable<any> {
     const requestOptions = this.createHeader();
     return this.http.get(`http://${environment.ip}:4000/guardiaModelTreballador/getNomsEsquemaByIdTreballador?idTreballador=` + idTreballador, requestOptions);

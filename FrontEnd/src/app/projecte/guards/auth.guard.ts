@@ -53,7 +53,6 @@ export class AuthGuard implements CanActivate {
       const newRefreshToken = (<any>response).refreshToken;
       localStorage.setItem("SGaccessToken", newToken);
       localStorage.setItem("SGrefreshToken", newRefreshToken);
-      console.log("Token renewed successfully", "Success");
       isRefreshSuccess = true;
     }
     catch (ex) {

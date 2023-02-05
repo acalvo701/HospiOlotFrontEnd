@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import moment from 'moment';
 import { Guardia } from '../../model/entitats/implementacions/Guardia';
 import { GuardiaApiService } from '../../model/services/guardia/guardia-api.service';
@@ -12,24 +12,31 @@ export class ReservarComponent {
   guardies: Array<Guardia> = [];
   guardiesReformades: reformat = {};
   lesMevesGuardies: Array<Guardia> = [];
-  @Input() dia: Date |null; // decorate the property with @Input()
+  @Input() dia: Date | null; // decorate the property with @Input()
   @Output("getAllGuardies") getAllGuardies: EventEmitter<any> = new EventEmitter();
-
+  @Output() newItemEvent = new EventEmitter<string>();
   constructor(private httpClient: GuardiaApiService) {
     this.initialize();
   }
 
 
-  initialize(){
+  initialize() {
     let dia = (moment(this.dia)).format('YYYY-MM-DD');
     this.httpClient.getGuardiesByDay(dia).subscribe(
       response => {
         this.guardies = response.guardies;
         this.guardiesReformades = this.tractarGuardies();
+        this.getAllGuardies.emit();
+        if(this.guardies.length > 0){
+          (document.getElementsByTagName("app-reservar") as HTMLCollectionOf<HTMLElement>)[0].style.display = "block";
+        }else{
+          (document.getElementsByTagName("app-reservar") as HTMLCollectionOf<HTMLElement>)[0].style.display = "none";
+        }
+
         this.getLesMevesGuardies();
       }
     )
-   
+
   }
 
   getLesMevesGuardies() {
@@ -39,12 +46,19 @@ export class ReservarComponent {
     this.httpClient.getGuardiesByDayFromTreballador(dia).subscribe(
       response => {
         this.lesMevesGuardies = (response.guardies);
-        console.log(this.lesMevesGuardies)
+
       }
     )
+
+    this.httpClient.getGuardiesByDay(dia).subscribe(
+      response => {
+        this.guardies = response.guardies;
+      }
+    )
+
   }
 
- 
+
   tractarGuardies() {
 
     let reformado = {} as reformat;
@@ -88,17 +102,17 @@ export class ReservarComponent {
         this.getAllGuardies.emit();
       }
     )
-      
+
   }
 
-  guardiaReservada(idGuardia:string){
+  guardiaReservada(idGuardia: string) {
     return this.lesMevesGuardies.find(guardia => guardia.id === idGuardia) != undefined;
 
   }
 
-  getPersonesApuntades(idGuardia:string){
-    let guardiaTrobada = this.lesMevesGuardies.find(guardia => guardia.id === idGuardia);
-    if(guardiaTrobada != undefined){
+  getPersonesApuntades(idGuardia: string) {
+    let guardiaTrobada = this.guardies.find(guardia => guardia.id === idGuardia);
+    if (guardiaTrobada != undefined) {
 
       return guardiaTrobada.personesApuntades;
     }
@@ -111,18 +125,17 @@ export class ReservarComponent {
   cancelarGuardia(idGuardia: string) {
     this.httpClient.cancelarGuardia(idGuardia).subscribe(
       response => {
-        
+
         this.getLesMevesGuardies();
         this.getAllGuardies.emit();
       }
     )
-    
-  
+
+
   }
 
 
   log(variable: any) {
-    console.log(variable);
   }
 }
 

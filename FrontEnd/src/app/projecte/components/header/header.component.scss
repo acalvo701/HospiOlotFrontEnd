@@ -5,15 +5,37 @@
     align-items: flex-end;
 }
 
-.header {
-    background-color: #7bb902;
-    height: 8%;
-    border-bottom: 2vh solid white;
-}
 
 label {
     color:white;
     font-weight: bold;
     font-size: 18px;
     padding-right: 12px;
+}
+
+.header {
+    border-bottom: 2vh solid white;
+    z-index: 99999;
+    position: sticky;
+    left: 0;
+    top: 0;
+    background-color: #7bb902;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 0px;
+}
+
+svg {
+    fill: white;
+}
+
+svg:hover {
+    fill: #616161;
+}
+
+.active{
+    fill: #616161;
 }

@@ -4,7 +4,7 @@
         <h1 class="titol">CALENDARI</h1>
         <div class="calendariDiv">
         <mat-card class="calendariCard">
-            <mat-calendar [(selected)]="selected" (selectedChange)=initialize() (monthSelected)="this.getAllGuardies()"></mat-calendar>
+            <mat-calendar [minDate]="minDate" [(selected)]="selected" (selectedChange)=initialize() (monthSelected)="this.getAllGuardies()"></mat-calendar>
         <div class="mat-calendar-content llegendaCalendar"> <span><span class="assignada-date-circle">⬤</span>Assignades</span>  <span><span class="pendent-date-circle">⬤</span>Pendents</span></div>
         </mat-card>
 
@@ -12,5 +12,4 @@
     </div>
     </div>
 
-    <app-navbar></app-navbar>
 </div>
