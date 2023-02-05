@@ -1,0 +1,47 @@
+<h1>NgxCSVParser by <a href="https://DevelopersHive.com">Developers Hive</a></h1>
+
+<button (click)="download_example_csv()">CSV d'exemple</button>
+<form [formGroup]="this.generarGuardiesForm">
+<div class="csv-file-chooser-section">
+    <p>CSV:</p>
+  <input type="file" #fileImportInput name="File Upload" id="csvFileUpload" formControlName="csvFitxer" (change)="fileChangeListener($event)" accept=".csv" />
+</div>
+
+<div class="csv-result-table">
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Dies</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let csvData of csvRecords;let i = index;">
+
+        <td>{{i+1}}</td>
+        <td>
+          <span>{{csvData}}</span>
+        </td>
+       
+
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div class="input-container">
+    <label><b>Els meus Esquemes:</b></label>
+    <select id="selectFormulari" formControlName="nomEsquema">
+        <option selected></option>
+        <option *ngFor="let esquema of esquemes" id="{{esquema.id}}" value="{{esquema.nomEsquema}}">{{esquema.nomEsquema}}</option>
+    </select>
+</div>
+<div class="send-container">
+    <button type="button" [disabled]="!this.generarGuardiesForm.valid" (click)="generarGuardiesCSV()"
+        >Generar</button>
+    <br>
+        {{ valid ? valid : error }}
+</div>
+</form>

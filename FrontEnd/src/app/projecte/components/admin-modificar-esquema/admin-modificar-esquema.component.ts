@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import $ from 'jquery';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { catchError, Subscription, take, throwError } from 'rxjs';
 import { Categoria } from '../../model/entitats/implementacions/Categoria';
 import { GuardiaModel } from '../../model/entitats/implementacions/GuardiaModel';
@@ -37,6 +38,9 @@ export class AdminModificarEsquemaComponent implements OnDestroy {
     this.subscription = new Array<Subscription>();
     this.idTreballador = uInfo.getUser().id;
     this.getNomsEsquemaByIdTreballador();
+  }
+
+  ngOnInit(){
   }
 
   ngOnDestroy(): void {

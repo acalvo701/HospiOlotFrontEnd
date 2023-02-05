@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { CalendariComponent } from './projecte/components/calendari/calendari.component';
 import { HistorialComponent } from './projecte/components/historial/historial.component';
 import { ReservarComponent } from './projecte/components/reservar/reservar.component';
-import { NavbarComponent } from './projecte/components/navbar/navbar.component';
 import { AdminAssignarGuardiaComponent } from './projecte/components/admin-assignar-guardia/admin-assignar-guardia.component';
 import { AdminCrearGuardiaComponent } from './projecte/components/admin-crear-guardia/admin-crear-guardia.component';
 import { AdminEstatGuardiaComponent } from './projecte/components/admin-estat-guardia/admin-estat-guardia.component';
@@ -29,9 +28,12 @@ import { LogoutComponent } from './projecte/components/logout/logout.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AdminAssignarMultipleGuardiaComponent } from './projecte/components/admin-assignar-multiple-guardia/admin-assignar-multiple-guardia.component';
+import { AdminGenerarFestiusComponent } from './projecte/components/admin-generar-festius/admin-generar-festius.component';
+import { NgxCsvParserModule } from 'ngx-csv-parser'
+
 
 @NgModule({
-  declarations: [AppComponent, CalendariComponent, HistorialComponent, ReservarComponent, NavbarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent, AdminGenerarGuardiesEsquemaComponent, HeaderComponent, LogoutComponent, AdminAssignarMultipleGuardiaComponent],
+  declarations: [AppComponent, CalendariComponent, HistorialComponent, ReservarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent, AdminGenerarGuardiesEsquemaComponent, HeaderComponent, LogoutComponent, AdminAssignarMultipleGuardiaComponent, AdminGenerarFestiusComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -43,6 +45,7 @@ import { AdminAssignarMultipleGuardiaComponent } from './projecte/components/adm
     AppRoutingModule,
     MatFormFieldModule,
     MatInputModule,
+    NgxCsvParserModule,
     
   ],
   providers: [

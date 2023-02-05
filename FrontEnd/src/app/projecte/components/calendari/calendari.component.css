@@ -14,6 +14,8 @@
   flex-direction: column;
 }
 
+
+
 .titol {
   display: flex;
   justify-content: center;
@@ -38,7 +40,9 @@ h2 {
 ::-webkit-scrollbar {
   display: none;
 }
-
+app-reservar{
+  display: none;
+}
 h1 {
   font-size: 20px;
 }
@@ -62,10 +66,18 @@ svg:hover {
 
 .calendariDiv{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  margin: 2%;
+  gap: 20px;
 }
+@media (max-width:700px){
+  .calendariDiv{
+    flex-direction: column;
+  }
 
+}
 .llegendaCalendar{
 
   display: flex;
@@ -79,7 +91,7 @@ app-reservar {
 }
 
 .mat-calendar-body-selected{
-  background-color: #a0ce4e;
+  background-color: #398d7f;
 }
 .mat-calendar-body-cell{
   border-radius: 999px;

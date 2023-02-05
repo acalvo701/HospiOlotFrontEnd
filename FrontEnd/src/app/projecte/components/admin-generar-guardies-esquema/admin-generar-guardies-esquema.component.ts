@@ -49,8 +49,6 @@ export class AdminGenerarGuardiesEsquemaComponent {
       subscribe(
         {
           next: (response) => {
-            console.log(response);
-            console.log(this.idTreballador);
             this.esquemes = response.esquema;
           },
           //per veure l'error que retorna de l'api

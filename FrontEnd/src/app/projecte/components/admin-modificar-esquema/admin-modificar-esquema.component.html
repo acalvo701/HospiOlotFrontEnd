@@ -41,7 +41,7 @@
                     <tr>
                         <td>
                             <div class="input-container">
-                                <select name="categoria">
+                                <select name="categoria" (change)="modificarEsquema(guardia.id)">
                                     <option *ngFor="let categoria of categories"
                                         [selected]="guardia.categoria == categoria.nom">{{categoria.nom}}</option>
                                 </select>
@@ -49,7 +49,7 @@
                         </td>
                         <td>
                             <div class="input-container">
-                                <select name="unitat">
+                                <select name="unitat" (change)="modificarEsquema(guardia.id)">
                                     <option *ngFor="let unitat of unitats" [selected]="guardia.unitat == unitat.nom">
                                         {{unitat.nom}}</option>
                                 </select>
@@ -57,7 +57,7 @@
                         </td>
                         <td>
                             <div class="input-container">
-                                <select name="torn">
+                                <select name="torn" (change)="modificarEsquema(guardia.id)">
                                     <option *ngFor="let torn of torns" [selected]="guardia.torn == torn.nom">
                                         {{torn.nom}}
                                     </option>
@@ -66,22 +66,16 @@
                         </td>
                         <td>
                             <div class="input-container">
-                                <input type="number" id="places" name="numeroPlaces" min="0"
+                                <input (change)="modificarEsquema(guardia.id)" type="number" id="places" name="numeroPlaces" min="0"
                                     value="{{guardia.numeroPlaces}}">
                             </div>
                         </td>
                         <td>
                             <div class="input-container">
-                                <select name="estat">
+                                <select name="estat" (change)="modificarEsquema(guardia.id)">
                                     <option [selected]="guardia.estat == 'ACTIU'">ACTIU</option>
                                     <option [selected]="guardia.estat == 'INACTIU'">INACTIU</option>
                                 </select>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="button-container">
-                                <button class="editar editar_{{guardia.id}}" type="button" (click)="modificarEsquema(guardia.id)"
-                                    value="{{guardia.id}}" disabled>Editar</button>
                             </div>
                         </td>
                         <td>
