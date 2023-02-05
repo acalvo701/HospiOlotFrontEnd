@@ -37,7 +37,7 @@ form {
                 padding: 5px 10px;
                 height: 40px;
                 border-radius: 10px;
-                border: 4px solid #a5d051;
+                border: 4px solid #b1b3ad;
                 font-family: 'Quicksand', sans-serif;
                 font-size: 16px;
                 color: black;
@@ -118,7 +118,7 @@ form {
 button:disabled {
     opacity: 0.3;
     cursor: default !important;
-    
+
     &:hover {
         background-color: #a5d051 !important;
     }
@@ -132,5 +132,37 @@ button:disabled {
 
     ::-webkit-scrollbar {
         display: none;
+    }
+}
+
+.borderVerd {
+    border: 4px solid #7bb902 !important;
+}
+
+#msg {
+    background-color: #a5d051;
+    border: 4px solid #7bb902;
+    font-weight: bold;
+    padding: 4px;
+    white-space: nowrap;
+}
+
+.button-container {
+    width: 100%;
+    text-align: center;
+
+    .afegirTreballador {
+        background: #5197d0;
+        border: 4px solid #0270b9;
+        color: white;
+        padding: 5px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+
+        &:hover {
+            background: #0270b9;
+        }
     }
 }

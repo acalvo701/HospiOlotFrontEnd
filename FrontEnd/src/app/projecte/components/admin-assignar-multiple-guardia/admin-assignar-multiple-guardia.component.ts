@@ -14,7 +14,9 @@ import { userInfoService } from '../../model/services/userInfo/userInfo';
 })
 
 export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy {
-  assignarGuardiaForm: FormGroup;
+
+  assignarMultipleGuardiaDataForm: FormGroup;
+  assignarMultipleGuardiaForm: FormGroup;
 
   treballadors: Array<Treballador> = [];
   guardies: Array<Guardia> = [];
@@ -27,16 +29,22 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy 
   error: string;
   valid: string;
   idTreballador: string;
+
   guardarId: string;
+  innerId: string;
 
   constructor(private httpClient: AdminApiService, private fb: FormBuilder, uInfo: userInfoService) {
     this.subscription = new Array<Subscription>();
     this.idTreballador = uInfo.getUser().id;
-    //this.getTreballadorsFromGuardiaAdmin('471');
   }
+
   ngOnInit(): void {
-    this.assignarGuardiaForm = this.fb.group({
+    this.assignarMultipleGuardiaDataForm = this.fb.group({
       dataGuardia: ['', Validators.required]
+    })
+
+    this.assignarMultipleGuardiaForm = this.fb.group({
+      estatGuardia: ['', Validators.required]
     })
   }
 
@@ -47,11 +55,12 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy 
   }
 
   getDataEntrada() {
-    this.dataGuardia = this.assignarGuardiaForm.get("dataGuardia")?.value;
+    this.dataGuardia = this.assignarMultipleGuardiaDataForm.get("dataGuardia")?.value;
     this.selectGuardies();
   }
 
   getTreballadorsFromGuardiaAdmin(idGuardia: string) {
+
     return this.guardiesReformed.get(idGuardia)?.treballadors;
   }
 
@@ -70,10 +79,10 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy 
       });
   }
 
-  eliminarDuplicatsGuardies(){
-    return this.guardies.filter((value, index, self) => 
-    self.findIndex(v => v.id === value.id) === index
-  );
+  eliminarDuplicatsGuardies() {
+    return this.guardies.filter((value, index, self) =>
+      self.findIndex(v => v.id === value.id) === index
+    );
   }
 
 
@@ -84,41 +93,82 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy 
 
       if (reforming.has(guardia.id)) {
         let valors: any = reforming.get(guardia.id);
-        let treballadorNou = { idGuardia: guardia.idGuardia, idTreballador: guardia.idTreballador, estatTreballador: guardia.estatTreballador }
+        let treballadorNou = { idGuardia: guardia.idGuardia, idTreballador: guardia.idTreballador, estatTreballador: guardia.estatTreballador, nomTreballador: guardia.nom }
         valors!.treballadors.push(treballadorNou);
         reforming.set(guardia.id, valors);
       } else {
-        let valors = {
-          id: guardia.id, categoria: guardia.categoria, unitat: guardia.unitat, torn: guardia.torn, dia: guardia.dia, numeroPlaces: guardia.numeroPlaces,
-          treballadors: new Array<treballadorMinified>(
+        let array: Array<treballadorMinified>;
+        if (guardia.estatTreballador == null) {
+          array = []
+        } else {
+          array = new Array<treballadorMinified>(
             {
               idGuardia: guardia.idGuardia,
               idTreballador: guardia.idTreballador,
-              estatTreballador: guardia.estatTreballador
-            }
-
-          )};
-          reforming.set(guardia.id, valors);
-
+              estatTreballador: guardia.estatTreballador,
+              nomTreballador: guardia.nom,
+            });
         }
-      });
+
+        let valors = {
+          id: guardia.id, categoria: guardia.categoria, unitat: guardia.unitat, torn: guardia.torn, dia: guardia.dia, numeroPlaces: guardia.numeroPlaces,
+          treballadors: array
+
+
+        };
+        reforming.set(guardia.id, valors);
+
+      }
+    });
 
     return reforming;
   }
+
+
+  canviarEstatGuardiaTreballador(idTreballador: string, idGuardia: string) {
+
+    this.guardarId = idGuardia;
+    let estatGuardia = new GuardiaTreballador(idTreballador, idGuardia, this.assignarMultipleGuardiaForm.get("estatGuardia")?.value);
+
+    this.subscription.push(this.httpClient.updateEstatGuardiaTreballador(estatGuardia).
+      pipe(take(1), catchError((err: any) => {
+        return throwError(() => new Error("Error d'API"))
+      }))
+      .subscribe(
+        {
+          next: (response) => {
+            this.valid = response.message;
+          },
+          //per veure l'error que retorna de l'api
+          error: (err: any) => {
+            this.error = err.error;
+          },
+          complete: () => {
+            this.selectGuardies();
+          },
+        }));
+  }
+
+  tt(guardiaId: string) {
+    this.innerId = guardiaId;
+  }
+
 }
 
+
 export type infoGuardia = {
-    id: any;
-    categoria: any;
-    unitat: any;
-    torn: any;
-    dia: any;
-    numeroPlaces: any;
-    treballadors: treballadorMinified[];
+  id: any;
+  categoria: any;
+  unitat: any;
+  torn: any;
+  dia: any;
+  numeroPlaces: any;
+  treballadors: treballadorMinified[];
 }
 
 export type treballadorMinified = {
   idGuardia: string;
-  idTreballador: string,
-  estatTreballador: string
+  idTreballador: string;
+  estatTreballador: string;
+  nomTreballador: string;
 }

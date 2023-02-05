@@ -8,40 +8,55 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
-  
+  styleUrls: ['./login.component.css']
+
 })
 export class LoginComponent {
   treballador = {
-    dni:"",
-    password:"",
+    dni: "",
+    password: "",
   };
+  
   hide = true;
-  constructor(private router:Router, private http:HttpClient, private authService:AuthenticationService){
+
+  error: string;
+
+  constructor(private router: Router, private http: HttpClient, private authService: AuthenticationService) {
 
   }
+  
   submitted = false;
 
-  ngOnInit(){
-    if(this.authService.isAuthenticated())
+  ngOnInit() {
+    if (this.authService.isAuthenticated())
       this.router.navigate(['calendari']);
   }
 
-  onSubmit() { 
-   
-    this.authService.login(this.treballador.dni,this.treballador.password).pipe(
-      map(token => 
+  onSubmit() {
+
+    this.authService.login(this.treballador.dni, this.treballador.password).pipe(
+      map(token =>
         //jwt_decode(token);
         this.router.navigate(['calendari'])
+
+      )
+
+    ).subscribe(          {
+      next: () => {
         
-        )
-
-    ).subscribe();
-
-    }
+      },
+      //per veure l'error que retorna de l'api
+      error: (err: any) => {
+        this.error = err.error        
+      },
+      complete: () => {
+      },
+    });
 
   }
- 
+
+}
+
 
 
 

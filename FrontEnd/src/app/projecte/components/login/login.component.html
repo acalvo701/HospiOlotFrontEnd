@@ -1,4 +1,4 @@
-<div class="body" >
+<!--<div class="body" >
   <div class="wrapper">
     <main>
       <section>
@@ -37,5 +37,37 @@
     
     </main>
 
+  </div>
+</div>
+-->
+
+<div class="body">
+  <div class="login-box">
+    <img src="assets/loginImage.png">
+    <hr>
+    <br>
+    <h2>Hospital d'Olot</h2>
+    <p>Entra les teves credencials</p>
+
+    <form (ngSubmit)="onSubmit()" #usuariForm="ngForm">
+      <div class="form-group">
+        <label for="email">DNI</label>
+        <i class="fa-solid fa-address-card"></i>
+        <input type="text" [(ngModel)]="treballador.dni" name="dni" autocomplete="on"  placeholder="DNI" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Contrasenya</label>
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" placeholder="La teva contrasenya" [type]="hide ? 'password' : 'text'" [(ngModel)]="treballador.password" name="password" required>
+        <mat-icon id="ull" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </div>
+
+      <div class="centre">
+        <button [disabled]="!usuariForm.form.valid" type="submit" class="btn">Iniciar sessió</button>
+      </div>
+      <div *ngIf="error">
+        <p id="error">{{ error ? error : null }}</p>
+      </div>
+    </form>
   </div>
 </div>

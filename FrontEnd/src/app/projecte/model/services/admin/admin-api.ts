@@ -14,12 +14,12 @@ export class AdminApiService {
   constructor(private http: HttpClient) {
   }
 
-  getNomsEsquemaByIdTreballador(idTreballador: string): Observable<any>{
+  getNomsEsquemaByIdTreballador(idTreballador: string): Observable<any> {
     const requestOptions = this.createHeader();
     return this.http.get(`http://${environment.ip}:4000/guardiaModelTreballador/getNomsEsquemaByIdTreballador?idTreballador=` + idTreballador, requestOptions);
   }
 
-  getEsquemaByIdTreballadorAndName(idTreballador: string, nomEsquema: string): Observable<any>{
+  getEsquemaByIdTreballadorAndName(idTreballador: string, nomEsquema: string): Observable<any> {
     const requestOptions = this.createHeader();
     return this.http.get(`http://${environment.ip}:4000/guardiaModel/getEsquemaByIdTreballadorAndName?idTreballador=` + idTreballador + `&nomEsquema=` + nomEsquema, requestOptions);
   }
@@ -36,7 +36,7 @@ export class AdminApiService {
 
   getUnitatsByIdTreballador(idTreballador: string): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${environment.ip}:4000/unitat/getUnitatsByIdTreballador?idTreballador=`+ idTreballador, requestOptions);
+    return this.http.get(`http://${environment.ip}:4000/unitat/getUnitatsByIdTreballador?idTreballador=` + idTreballador, requestOptions);
   }
 
   getAllTorns(): Observable<any> {
@@ -46,7 +46,7 @@ export class AdminApiService {
 
   getGuardiesByDayAdmin(data: Date, idTreballador: string): Observable<any> {
     const requestOptions = this.createHeader();
-    return this.http.get(`http://${environment.ip}:4000/guardiaAdmin/getGuardiesByDayAdmin?data=` + data+  `&idTreballador=` + idTreballador, requestOptions);
+    return this.http.get(`http://${environment.ip}:4000/guardiaAdmin/getGuardiesByDayAdmin?data=` + data + `&idTreballador=` + idTreballador, requestOptions);
   }
 
   getTreballadorsFromGuardiaAdmin(idGuardia: string): Observable<any> {
@@ -58,7 +58,7 @@ export class AdminApiService {
     const requestOptions = this.createHeader();
     const nomEsquemaJSON = JSON.stringify(nomEsquema);
 
-    return this.http.post(`http://${environment.ip}:4000/guardiaModelTreballador/insertNomEsquemaByIdTreballador`, nomEsquemaJSON, requestOptions); 
+    return this.http.post(`http://${environment.ip}:4000/guardiaModelTreballador/insertNomEsquemaByIdTreballador`, nomEsquemaJSON, requestOptions);
   }
 
   insertarGuardiaTreballadorAdmin(guardia: GuardiaTreballador): Observable<any> {
@@ -101,15 +101,23 @@ export class AdminApiService {
     return this.http.post(`http://${environment.ip}:4000/guardiaModel/updateEsquemaRow`, guardiaModelJSON, requestOptions);
   }
 
-  generarGuardiesEsquema(diaInici:Date, diaFi: Date, idGMT: string){
-    let esquemaJSON = {diaInici: diaInici, diaFi: diaFi, idGuardiaModelTreballador: idGMT}
+  updateEstatGuardiaTreballador(guardiaTreballador: GuardiaTreballador): Observable<any> {
+
+    const requestOptions = this.createHeader();
+    let guardiaTreballadorJSON = JSON.stringify(guardiaTreballador);
+
+    return this.http.post(`http://${environment.ip}:4000/guardiaAdminTreballador/updateEstat`, guardiaTreballadorJSON, requestOptions);
+  }
+
+  generarGuardiesEsquema(diaInici: Date, diaFi: Date, idGMT: string): Observable<any> {
+    let esquemaJSON = { diaInici: diaInici, diaFi: diaFi, idGuardiaModelTreballador: idGMT }
     const requestOptions = this.createHeader();
 
     return this.http.post(`http://${environment.ip}:4000/guardiaModel/generarGuardiesEsquema`, esquemaJSON, requestOptions);
   }
 
   estatEliminatNomEsquema(id: string): Observable<any> {
-    let idEsquemaJSON = {id: id}
+    let idEsquemaJSON = { id: id }
     const requestOptions = this.createHeader();
 
     return this.http.post(`http://${environment.ip}:4000/guardiaModelTreballador/estatEliminatNomEsquema`, idEsquemaJSON, requestOptions);
