@@ -20,6 +20,10 @@ form {
         border-radius: 15px;
         max-height: 52vh;
 
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
         .input-container {
             label {
                 display: block;
@@ -42,7 +46,7 @@ form {
                 font-size: 16px;
                 color: black;
                 font-weight: bold;
-                text-align: center;
+               // text-align: center;
 
                 &:focus {
                     outline: none;
@@ -88,15 +92,36 @@ form {
     }
 
     @media(max-width:992px) {
-        padding: 0 5%;
+        padding: 0 1.5%;
     }
 
     @media(max-width:768px) {
         margin-bottom: 50px;
 
+        input,
+        textarea,
+        select {
+            width: unset !important;
+            padding: 5px 10px;
+            height: 40px;
+            border-radius: 10px;
+            border: 4px solid #b1b3ad;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            color: black;
+            font-weight: bold;
+
+            &:focus {
+                outline: none;
+                background: white;
+            }
+        }
+
         section {
-            width: 100%;
+            //width: 100%;
             margin: 0;
+            max-height: 55vh;
+            overflow-y: scroll;
 
             &.left {
                 margin-bottom: -30px;

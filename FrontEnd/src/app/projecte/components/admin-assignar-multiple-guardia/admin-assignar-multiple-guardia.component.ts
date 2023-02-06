@@ -21,6 +21,7 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy 
   treballadors: Array<Treballador> = [];
   guardies: Array<Guardia> = [];
   guardiesReformed: Map<string, infoGuardia>;
+  nomTreballadorsNotInGuardia: Array<Treballador>;
 
   dataGuardia: Date;
   ocult: boolean = true;
@@ -44,7 +45,9 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy 
     })
 
     this.assignarMultipleGuardiaForm = this.fb.group({
-      estatGuardia: ['', Validators.required]
+      estatGuardia: ['', Validators.required],
+      nomTreballador: ['', Validators.required],
+      estatGuardiaTreballador: ['', Validators.required]
     })
   }
 
@@ -136,7 +139,7 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy 
       .subscribe(
         {
           next: (response) => {
-            this.valid = response.message;
+            this.nomTreballadorsNotInGuardia = response.message;
           },
           //per veure l'error que retorna de l'api
           error: (err: any) => {
@@ -148,8 +151,56 @@ export class AdminAssignarMultipleGuardiaComponent implements OnInit, OnDestroy 
         }));
   }
 
-  tt(guardiaId: string) {
+  getNomsTreballadorsNotInGuardia(idGuardia: string) {
+
+    this.subscription.push(this.httpClient.getNomsTreballadorsNotInGuardia(idGuardia).
+      pipe(take(1), catchError((err: any) => {
+        return throwError(() => new Error("Error d'API"))
+      }))
+      .subscribe(
+        {
+          next: (response) => {
+            this.nomTreballadorsNotInGuardia = response.noms;
+          },
+          //per veure l'error que retorna de l'api
+          error: () => {
+          },
+          complete: () => {
+          },
+        }));
+  }
+
+  guardarGuardiaId(guardiaId: string) {
     this.innerId = guardiaId;
+  }
+
+  validarTreballador(idGuardia:string) {
+    let idTreballador = this.assignarMultipleGuardiaForm.get("nomTreballador")?.value;
+    let estatGuardiaTreballador = this.assignarMultipleGuardiaForm.get("estatGuardiaTreballador")?.value;
+
+    if(idTreballador != "" && estatGuardiaTreballador != "") {
+
+      let guardia:GuardiaTreballador = new GuardiaTreballador(idTreballador, idGuardia, estatGuardiaTreballador) 
+
+      this.subscription.push(this.httpClient.insertarGuardiaTreballadorAdmin(guardia).
+      pipe(take(1), catchError((err: any) => {
+        return throwError(() => new Error("Error d'API"))
+      }))
+      .subscribe(
+        {
+          next: (response) => {
+            console.log(response);
+          //  this.nomTreballadorsNotInGuardia = response.noms;
+          },
+          //per veure l'error que retorna de l'api
+          error: () => {
+          },
+          complete: () => {
+            this.selectGuardies();
+            this.getNomsTreballadorsNotInGuardia(this.innerId);
+          },
+        }));
+    }
   }
 
 }

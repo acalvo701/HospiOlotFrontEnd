@@ -61,16 +61,25 @@
                         <td></td>
                         <td>
                             <div class="input-container">
-                                <select class="borderVerd">
+                                <select class="borderVerd" formControlName="nomTreballador">
                                     <option selected disabled></option>
+                                    <option *ngFor="let treballador of nomTreballadorsNotInGuardia" [value]="treballador.id">{{ treballador.nom }}</option>
                                 </select>
                             </div>
                         </td>
                         <td>
                             <div class="input-container">
-                                <select class="borderVerd">
+                                <select class="borderVerd" formControlName="estatGuardiaTreballador">
                                     <option selected disabled></option>
+                                    <option>PENDENT</option>
+                                    <option>ASSIGNADA</option>
                                 </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button-container">
+                                <button class="guardarTreballador" type="button"
+                                    (click)="validarTreballador(guardia.id)">Guardar</button>
                             </div>
                         </td>
                     </tr>
@@ -78,7 +87,8 @@
                         <td></td>
                         <td colspan="2">
                             <div class="button-container">
-                                <button class="afegirTreballador" type="button" (click)="tt(guardia.id)">Afegir
+                                <button class="afegirTreballador" type="button"
+                                    (click)="guardarGuardiaId(guardia.id); getNomsTreballadorsNotInGuardia(guardia.id)">Afegir
                                     Treballador</button>
                             </div>
                         </td>

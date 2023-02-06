@@ -15,9 +15,9 @@ export class AdminApiService {
   }
 
 
-  generarGuardiesCSV(idEsquema:String,arrayDates:Array<string>): Observable<any>{
+  generarGuardiesCSV(idEsquema: String, arrayDates: Array<string>): Observable<any> {
     const requestOptions = this.createHeader();
-    let csvJSON = {idEsquema:idEsquema,arrayDates:arrayDates};
+    let csvJSON = { idEsquema: idEsquema, arrayDates: arrayDates };
     return this.http.post(`http://${environment.ip}:4000/guardiaModel/generarGuardiesCSV`, csvJSON, requestOptions);
   }
 
@@ -56,6 +56,11 @@ export class AdminApiService {
     return this.http.get(`http://${environment.ip}:4000/guardiaAdmin/getGuardiesByDayAdmin?data=` + data + `&idTreballador=` + idTreballador, requestOptions);
   }
 
+  getNomsTreballadorsNotInGuardia(idGuardia: string): Observable<any> {
+    const requestOptions = this.createHeader();
+    return this.http.get(`http://${environment.ip}:4000/guardiaAdminTreballador/getNomsTreballadorsNotInGuardia?idGuardia=` + idGuardia, requestOptions);
+  }
+
   getTreballadorsFromGuardiaAdmin(idGuardia: string): Observable<any> {
     const requestOptions = this.createHeader();
     return this.http.get(`http://${environment.ip}:4000/guardiaAdmin/getTreballadorsFromGuardiaAdmin?idGuardia=` + idGuardia, requestOptions);
@@ -73,7 +78,7 @@ export class AdminApiService {
     const requestOptions = this.createHeader();
     const guardiaJSON = JSON.stringify(guardia);
 
-    return this.http.post(`http://${environment.ip}:4000/guardiatreballador/insertarGuardiaTreballadorAdmin`, guardiaJSON, requestOptions);
+    return this.http.post(`http://${environment.ip}:4000/guardiaAdminTreballador/insertarGuardiaTreballadorAdmin`, guardiaJSON, requestOptions);
   }
 
   insertGuardia(guardia: Guardia): Observable<any> {
