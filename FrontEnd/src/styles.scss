@@ -13,6 +13,9 @@ body.mat-app-background{
     background-color: #1fa25a;
 }
 
+a{
+    cursor: pointer;
+}
 
 .special-date {
     background-color: red !important;
@@ -24,6 +27,10 @@ body.mat-app-background{
 
 .pendent-date {
     background-color: orange !important;
+}
+
+.mat-calendar-body-disabled{
+    background-color: lightgrey !important;
 }
 .pendent-date-circle {
     color: orange !important;

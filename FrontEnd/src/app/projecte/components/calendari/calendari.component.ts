@@ -25,7 +25,7 @@ export const MY_FORMATS = {
 class PickDateAdapter extends NativeDateAdapter {
   override format(date: Date, displayFormat: Object): string {
 
-    return formatDate(date, 'yyyy-MM-dd', 'ca-CA');;
+    return formatDate(date, 'dd-MM-yyyy', 'ca-CA');;
 
   }
   override getFirstDayOfWeek(): number {
@@ -59,12 +59,15 @@ export class CalendariComponent implements OnInit {
   }
 
   initialize() {
-    this.minDate.setDate(this.minDate.getDate() - 1);
+    
+    
     this.child.dia = this.selected;
     this.child.initialize();
   }
 
   ngOnInit() {
+    console.log(this.minDate);
+
     this.getAllGuardies();
   }
   ngAfterViewInit() {
