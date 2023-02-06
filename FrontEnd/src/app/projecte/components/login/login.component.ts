@@ -47,7 +47,8 @@ export class LoginComponent {
       },
       //per veure l'error que retorna de l'api
       error: (err: any) => {
-        this.error = err.error        
+        this.error = err.error
+        this.error = "El Servidor no funciona"        
       },
       complete: () => {
       },
