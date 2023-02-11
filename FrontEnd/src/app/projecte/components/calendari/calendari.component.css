@@ -23,6 +23,7 @@
   font-weight: bold;
   font-size: 26px;
   margin: 2%;
+  margin-bottom: 10px;
 }
 
 h1,
@@ -52,6 +53,7 @@ h1 {
 }
 
 .calendariCard {
+  margin-top: 30px;
   width: 100%;
   max-width: 500px;
 }
@@ -65,25 +67,26 @@ svg:hover {
 }
 
 .calendariDiv{
+  top: 50;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   margin: 2%;
   gap: 20px;
+  max-height: 70vh;
 }
 @media (max-width:700px){
   .calendariDiv{
     flex-direction: column;
+    max-height: 70vh;
+    overflow-y: scroll;
   }
 
 }
 .llegendaCalendar{
-
   display: flex;
   justify-content: space-evenly;
-
-
 }
 app-reservar {
   width: 100%;

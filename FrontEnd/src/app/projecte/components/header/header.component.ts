@@ -7,16 +7,12 @@ import { userInfoService } from '../../model/services/userInfo/userInfo';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  nom:string;
-  categoria:string;
+  // nom:string;
+  // categoria:string;
   isAdmin:boolean;
   constructor(userInfo: userInfoService) {
-    this.nom = userInfo.getUser().nom
-    this.categoria = userInfo.getUser().categoria
+    // this.nom = userInfo.getUser().nom
+    // this.categoria = userInfo.getUser().categoria
     this.isAdmin = userInfo.getIsAdmin();
-  }
-
-  ngOnInit(){
-
   }
 }

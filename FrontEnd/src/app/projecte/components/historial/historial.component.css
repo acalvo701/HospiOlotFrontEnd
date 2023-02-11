@@ -37,7 +37,7 @@ h2 {
     margin: 2%;
     border-radius: 15px;
     background-color: white;
-    max-height: 60vh;
+    max-height: 70vh;
     overflow-y: scroll;
 }
 ::-webkit-scrollbar {
@@ -212,9 +212,6 @@ h1 {
     opacity: 100;
 }
 @media(max-width:768px) {
-    .fons {
-        max-height: 70vh;
-    }
     .dades {
         grid-template-columns: 30% 28% 28%;
     }

@@ -1,10 +1,13 @@
-.infoHeader {
-    display: flex;
-    flex-direction: column;
-    //float: right;
-    align-items: flex-end;
+.logo {
+    display: none;
 }
 
+.infoHeader {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    //float: right;
+}
 
 label {
     color:white;
@@ -25,7 +28,7 @@ label {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 15px 0px;
+    padding: 5px 0px;
 }
 
 svg {
@@ -38,4 +41,13 @@ svg:hover {
 
 .active{
     fill: #616161;
+}
+@media(max-width:700px) {
+    .infoHeader {
+        display: none;
+    }
+
+    .logo {
+        display: flex;
+    }
 }

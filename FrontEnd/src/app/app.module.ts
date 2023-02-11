@@ -29,11 +29,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AdminAssignarMultipleGuardiaComponent } from './projecte/components/admin-assignar-multiple-guardia/admin-assignar-multiple-guardia.component';
 import { AdminGenerarFestiusComponent } from './projecte/components/admin-generar-festius/admin-generar-festius.component';
-import { NgxCsvParserModule } from 'ngx-csv-parser'
+import { NgxCsvParserModule } from 'ngx-csv-parser';
+import { FooterComponent } from './projecte/components/footer/footer.component'
 
 
 @NgModule({
-  declarations: [AppComponent, CalendariComponent, HistorialComponent, ReservarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent, AdminGenerarGuardiesEsquemaComponent, HeaderComponent, LogoutComponent, AdminAssignarMultipleGuardiaComponent, AdminGenerarFestiusComponent],
+  declarations: [AppComponent, CalendariComponent, HistorialComponent, ReservarComponent, AdminAssignarGuardiaComponent, AdminCrearGuardiaComponent, AdminEstatGuardiaComponent, AdminMainScreenComponent, LoginComponent, AdminModificarEsquemaComponent, AdminGenerarGuardiesEsquemaComponent, HeaderComponent, LogoutComponent, AdminAssignarMultipleGuardiaComponent, AdminGenerarFestiusComponent, FooterComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
