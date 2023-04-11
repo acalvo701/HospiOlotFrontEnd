@@ -25,7 +25,7 @@ export const MY_FORMATS = {
 class PickDateAdapter extends NativeDateAdapter {
   override format(date: Date, displayFormat: Object): string {
 
-    return formatDate(date, 'dd-MM-yyyy', 'ca-CA');;
+    return formatDate(date, 'yyyy-MM-dd', 'ca-CA');;
 
   }
   override getFirstDayOfWeek(): number {
